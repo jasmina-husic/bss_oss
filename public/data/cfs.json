@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "name": "Surveillance Streaming",
+    "category": "surveillance",
+    "lifecycleState": "active",
+    "version": "2.0",
+    "serviceSpecs": [
+      1,
+      2
+    ],
+    "characteristics": [
+      {
+        "name": "retentionDays",
+        "valueType": "number",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Provision storage",
+      "Deploy stream service",
+      "Return URL"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Secure Networking",
+    "category": "networking",
+    "lifecycleState": "active",
+    "version": "1.5",
+    "serviceSpecs": [
+      3
+    ],
+    "characteristics": [
+      {
+        "name": "vlanId",
+        "valueType": "number",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Create VLAN",
+      "Apply ACLs"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "AI Insight",
+    "category": "ai",
+    "lifecycleState": "active",
+    "version": "2.1",
+    "serviceSpecs": [
+      2
+    ],
+    "characteristics": [
+      {
+        "name": "language",
+        "valueType": "string",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Provision GPU slice",
+      "Deploy inference container"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "ITSM Support",
+    "category": "itsm",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "ticketsPerDay",
+        "valueType": "number",
+        "configurable": false
+      }
+    ],
+    "activationSequence": [
+      "Enable ticket queue"
+    ]
+  }
+]

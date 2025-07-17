@@ -1,0 +1,28 @@
+[
+  {
+    "cfsId": "CFS-SURV",
+    "rfsIds": [
+      "RFS-CAM-HW",
+      "RFS-EDGE-OS",
+      "RFS-CLOUD-STORAGE",
+      "RFS-AI-ENDPOINT"
+    ]
+  },
+  {
+    "cfsId": "CFS-NET",
+    "rfsIds": [
+      "RFS-TAP-HW",
+      "RFS-EDGE-OS",
+      "RFS-INTERNET-UPLINK"
+    ]
+  },
+  {
+    "cfsId": "CFS-SEC",
+    "rfsIds": [
+      "RFS-NET-SWITCH-PORTAL",
+      "RFS-CLOUD-FW",
+      "RFS-AI-ENDPOINT",
+      "RFS-CLOUD-STORAGE"
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "productId": "PROD-CAM-PACK",
+    "cfsIds": [
+      "CFS-SURV"
+    ]
+  },
+  {
+    "productId": "PROD-EDGE",
+    "cfsIds": [
+      "CFS-SURV",
+      "CFS-NET",
+      "CFS-SEC"
+    ]
+  },
+  {
+    "productId": "PROD-TAP",
+    "cfsIds": [
+      "CFS-NET"
+    ]
+  },
+  {
+    "productId": "PROD-INET-100",
+    "cfsIds": [
+      "CFS-NET"
+    ]
+  },
+  {
+    "productId": "PROD-AI-ASSIST",
+    "cfsIds": [
+      "CFS-SURV",
+      "CFS-SEC"
+    ]
+  },
+  {
+    "productId": "PROD-STORAGE-1TB",
+    "cfsIds": [
+      "CFS-SURV",
+      "CFS-SEC"
+    ]
+  },
+  {
+    "productId": "PROD-ITSM-5",
+    "cfsIds": [
+      "CFS-SURV",
+      "CFS-NET",
+      "CFS-SEC"
+    ]
+  },
+  {
+    "productId": "PROD-INSTALL",
+    "cfsIds": [
+      "CFS-SURV",
+      "CFS-NET",
+      "CFS-SEC"
+    ]
+  }
+]

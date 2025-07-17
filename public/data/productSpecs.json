@@ -1,0 +1,214 @@
+[
+    {
+      "id": 1,
+      "specId": "PS-ROUTER-1000",
+      "name": "Edge Router 1000",
+      "version": "1.0",
+      "description": "High-performance edge router.",
+      "lifecycleStatus": "Launched",
+      "brand": "NetPrime",
+      "category": "CPE",
+      "lastUpdate": "2025-05-28T11:00:00Z"
+    },
+    {
+      "id": 2,
+      "specId": "PS-IOT-CAM",
+      "name": "Smart Camera",
+      "version": "1.1",
+      "description": "4 K indoor/outdoor IP camera.",
+      "lifecycleStatus": "Launched",
+      "brand": "Visionary",
+      "category": "IoT Device",
+      "lastUpdate": "2025-05-28T11:10:00Z"
+    },
+    {
+      "id": 3,
+      "specId": "PS-INET-100M",
+      "name": "Internet Access – 100 Mbps",
+      "version": "2.0",
+      "description": "Business-grade Internet connectivity.",
+      "lifecycleStatus": "In Design",
+      "brand": "CoreNet",
+      "category": "Connectivity",
+      "lastUpdate": "2025-05-28T11:20:00Z"
+    },
+
+    {
+        "id": 4,
+        "specId": "PS-TAP-1G",
+        "name": "Network TAP 1 Gbps",
+        "version": "1.0",
+        "description": "Passive aggregation TAP.",
+        "lifecycleStatus": "Launched",
+        "brand": "PacketSight",
+        "category": "Network Device",
+        "cfsIds": ["CFS-TAP-MONITOR"]
+      },
+      {
+        "id": 5,
+        "specId": "PS-TAP-10G",
+        "name": "Network TAP 10 Gbps",
+        "version": "1.0",
+        "description": "Fiber TAP 10 G.",
+        "lifecycleStatus": "Launched",
+        "brand": "PacketSight",
+        "category": "Network Device",
+        "cfsIds": ["CFS-TAP-MONITOR"]
+      },
+      {
+        "id": 6,
+        "specId": "PS-EDGE-2000",
+        "name": "Edge Compute Appliance 2000",
+        "version": "1.0",
+        "description": "Router + compute.",
+        "lifecycleStatus": "Launched",
+        "brand": "EdgeBurst",
+        "category": "Edge Device",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 7,
+        "specId": "PS-EDGE-MOD-SFP",
+        "name": "SFP+ Module Kit",
+        "version": "1.0",
+        "description": "10 G optics.",
+        "lifecycleStatus": "Launched",
+        "brand": "EdgeBurst",
+        "category": "Add-on Module",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 8,
+        "specId": "PS-EDGE-MOD-WIFI6",
+        "name": "Wi-Fi 6 Radio Module",
+        "version": "1.0",
+        "description": "4×4 MU-MIMO card.",
+        "lifecycleStatus": "In Design",
+        "brand": "EdgeBurst",
+        "category": "Add-on Module",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 9,
+        "specId": "PS-CLOUD-VM-SMALL",
+        "name": "Cloud VM – Small",
+        "version": "1.0",
+        "description": "2 vCPU / 4 GB.",
+        "lifecycleStatus": "Launched",
+        "brand": "CloudX",
+        "category": "Cloud Resource",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 10,
+        "specId": "PS-CLOUD-VM-LARGE",
+        "name": "Cloud VM – Large",
+        "version": "1.0",
+        "description": "8 vCPU / 32 GB.",
+        "lifecycleStatus": "Launched",
+        "brand": "CloudX",
+        "category": "Cloud Resource",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 11,
+        "specId": "PS-ML-ANOMALY",
+        "name": "ML Module – Traffic Anomaly",
+        "version": "1.0",
+        "description": "Edge ML pack.",
+        "lifecycleStatus": "Launched",
+        "brand": "InsightAI",
+        "category": "AI/ML",
+        "cfsIds": ["CFS-ML-INSIGHTS"]
+      },
+      {
+        "id": 12,
+        "specId": "PS-ML-OPT-FACE",
+        "name": "ML Module – Face Rec.",
+        "version": "0.9",
+        "description": "Optimised model.",
+        "lifecycleStatus": "In Design",
+        "brand": "InsightAI",
+        "category": "AI/ML",
+        "cfsIds": ["CFS-ML-INSIGHTS"]
+      },
+      {
+        "id": 13,
+        "specId": "PS-SVC-VA-BASE",
+        "name": "Virtual Assistant – Base",
+        "version": "1.0",
+        "description": "Chat assistant.",
+        "lifecycleStatus": "Launched",
+        "brand": "ConverseCX",
+        "category": "Digital Service",
+        "cfsIds": ["CFS-AI-ASSISTANT"]
+      },
+      {
+        "id": 14,
+        "specId": "PS-STORAGE-1TB",
+        "name": "Object Storage 1 TB",
+        "version": "1.0",
+        "description": "S3 compatible.",
+        "lifecycleStatus": "Launched",
+        "brand": "CloudX",
+        "category": "Storage",
+        "cfsIds": ["CFS-CLOUD-STORAGE"]
+      },
+      {
+        "id": 15,
+        "specId": "PS-REPORT-NET",
+        "name": "Network Health Reports",
+        "version": "1.0",
+        "description": "Monthly KPI PDF.",
+        "lifecycleStatus": "Launched",
+        "brand": "InsightAI",
+        "category": "Reporting",
+        "cfsIds": ["CFS-ML-INSIGHTS"]
+      },
+      {
+        "id": 16,
+        "specId": "PS-REPORT-SEC",
+        "name": "Security Posture Reports",
+        "version": "1.0",
+        "description": "Quarterly bundle.",
+        "lifecycleStatus": "In Design",
+        "brand": "SecureScope",
+        "category": "Reporting",
+        "cfsIds": ["CFS-SEC-PORTAL"]
+      },
+      
+      {
+        "id": 101,
+        "specId": "PS-INSTALL-EDGE",
+        "name": "Installation Fee – Edge Site",
+        "version": "1.0",
+        "description": "On-site install (one-off).",
+        "lifecycleStatus": "Launched",
+        "brand": "EdgeBurst",
+        "category": "One-Time Charge",
+        "cfsIds": ["CFS-EDGE-COMPUTE"]
+      },
+      {
+        "id": 102,
+        "specId": "PS-INSTALL-CAMERA",
+        "name": "Installation Fee – Camera",
+        "version": "1.0",
+        "description": "Mounting & wiring.",
+        "lifecycleStatus": "Launched",
+        "brand": "PartnerX",
+        "category": "One-Time Charge",
+        "cfsIds": ["CFS-CAMERA-STREAM"]
+      },
+      {
+        "id": 103,
+        "specId": "PS-SUPPORT-EXTRA-HOUR",
+        "name": "Extra Support Hour",
+        "version": "1.0",
+        "description": "40 USD per hour beyond ITSM Pack.",
+        "lifecycleStatus": "Launched",
+        "brand": "SupportCo",
+        "category": "Usage Fee",
+        "cfsIds": ["CFS-ITSM-PACK1"]
+      }
+  ]
+  

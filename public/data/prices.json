@@ -1,0 +1,121 @@
+[
+  {
+    "priceId": 1,
+    "oneOff": 120,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 2,
+    "oneOff": 90,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 3,
+    "oneOff": 85,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 4,
+    "oneOff": 650,
+    "monthly": 15,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 5,
+    "oneOff": 440,
+    "monthly": 10,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 6,
+    "oneOff": 0,
+    "monthly": 40,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 7,
+    "oneOff": 0,
+    "monthly": 0,
+    "usage": 40,
+    "currency": "USD"
+  },
+  {
+    "priceId": 8,
+    "oneOff": 200,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 9,
+    "oneOff": 0,
+    "monthly": 25,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 10,
+    "oneOff": 0,
+    "monthly": 0,
+    "usage": 0.05,
+    "currency": "USD"
+  },
+  {
+    "priceId": 11,
+    "oneOff": 0,
+    "monthly": 35,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 12,
+    "oneOff": 59,
+    "monthly": 79,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 13,
+    "oneOff": 99,
+    "monthly": 149,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 14,
+    "oneOff": 149,
+    "monthly": 249,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 15,
+    "oneOff": 129,
+    "monthly": 109,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 16,
+    "oneOff": 199,
+    "monthly": 179,
+    "usage": 0,
+    "currency": "USD"
+  },
+  {
+    "priceId": 17,
+    "oneOff": 0,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  }
+]

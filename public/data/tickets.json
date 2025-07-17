@@ -1,0 +1,103 @@
+[
+    {
+      "id": 1,
+      "customerId": 1,
+      "title": "Router down in HQ",
+      "status": "Open",
+      "priority": "High",
+      "createdAt": "2025-05-28T10:00:00Z",
+      "lastModified": "2025-05-28T10:00:00Z",
+      "owner": "Network Ops"
+    },
+    {
+      "id": 2,
+      "customerId": 2,
+      "title": "Cannot access portal",
+      "status": "In Progress",
+      "priority": "Medium",
+      "createdAt": "2025-05-28T10:05:00Z",
+      "lastModified": "2025-05-28T10:15:00Z",
+      "owner": "Support"
+    },
+    {
+      "id": 3,
+      "customerId": 3,
+      "title": "Need invoice copy",
+      "status": "Closed",
+      "priority": "Low",
+      "createdAt": "2025-05-28T10:10:00Z",
+      "lastModified": "2025-05-28T10:20:00Z",
+      "owner": "Billing"
+    },
+    {
+      "id": 4,
+      "customerId": 4,
+      "title": "Bandwidth upgrade request",
+      "status": "Open",
+      "priority": "Low",
+      "createdAt": "2025-05-28T10:12:00Z",
+      "lastModified": "2025-05-28T10:12:00Z",
+      "owner": "Sales"
+    },
+    {
+      "id": 5,
+      "customerId": 5,
+      "title": "Frequent disconnects",
+      "status": "Open",
+      "priority": "High",
+      "createdAt": "2025-05-28T10:14:00Z",
+      "lastModified": "2025-05-28T10:14:00Z",
+      "owner": "Network Ops"
+    },
+    {
+      "id": 6,
+      "customerId": 1,
+      "title": "Add new site to MPLS",
+      "status": "In Progress",
+      "priority": "Medium",
+      "createdAt": "2025-05-28T10:20:00Z",
+      "lastModified": "2025-05-28T10:30:00Z",
+      "owner": "Provisioning"
+    },
+    {
+      "id": 7,
+      "customerId": 2,
+      "title": "Change billing address",
+      "status": "Closed",
+      "priority": "Low",
+      "createdAt": "2025-05-28T10:25:00Z",
+      "lastModified": "2025-05-28T10:40:00Z",
+      "owner": "Billing"
+    },
+    {
+      "id": 8,
+      "customerId": 3,
+      "title": "VPN not connecting",
+      "status": "Open",
+      "priority": "High",
+      "createdAt": "2025-05-28T10:30:00Z",
+      "lastModified": "2025-05-28T10:30:00Z",
+      "owner": "Support"
+    },
+    {
+      "id": 9,
+      "customerId": 4,
+      "title": "Request penetration test report",
+      "status": "In Progress",
+      "priority": "Medium",
+      "createdAt": "2025-05-28T10:35:00Z",
+      "lastModified": "2025-05-28T10:45:00Z",
+      "owner": "Security"
+    },
+    {
+      "id": 10,
+      "customerId": 5,
+      "title": "Camera stream quality low",
+      "status": "Open",
+      "priority": "Medium",
+      "createdAt": "2025-05-28T10:40:00Z",
+      "lastModified": "2025-05-28T10:40:00Z",
+      "owner": "IoT Ops"
+    }
+  ]
+  

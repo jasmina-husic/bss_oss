@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "sku": "CAM-4K-EXT",
+    "name": "4K Outdoor Camera",
+    "category": "surveillance",
+    "description": "4K Outdoor Camera product",
+    "priceId": 1,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [
+      1
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 2,
+    "sku": "CAM-2K-DOM",
+    "name": "2K Indoor Dome",
+    "category": "surveillance",
+    "description": "2K Indoor Dome product",
+    "priceId": 2,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [
+      1
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 3,
+    "sku": "TAP-1G",
+    "name": "1G Network Tap",
+    "category": "networking",
+    "description": "1G Network Tap product",
+    "priceId": 3,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [
+      2
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 4,
+    "sku": "EDGE-GW",
+    "name": "Edge Gateway",
+    "category": "networking",
+    "description": "Edge Gateway product",
+    "priceId": 4,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [
+      2
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 5,
+    "sku": "SW-SEC-24",
+    "name": "Secure Switch 24P",
+    "category": "security",
+    "description": "Secure Switch 24P product",
+    "priceId": 5,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [
+      2
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 6,
+    "sku": "ITSM-5-24",
+    "name": "ITSM 5 tickets",
+    "category": "itsm",
+    "description": "ITSM 5 tickets product",
+    "priceId": 6,
+    "sequence": [
+      "enable"
+    ],
+    "cfsIds": [
+      4
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 7,
+    "sku": "SUP-HOUR",
+    "name": "Support Hour",
+    "category": "itsm",
+    "description": "Support Hour product",
+    "priceId": 7,
+    "sequence": [
+      "enable"
+    ],
+    "cfsIds": [
+      4
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 8,
+    "sku": "INST-FEE",
+    "name": "Installation Fee",
+    "category": "service",
+    "description": "Installation Fee product",
+    "priceId": 8,
+    "sequence": [
+      "procure",
+      "install"
+    ],
+    "cfsIds": [],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 9,
+    "sku": "AI-LIC",
+    "name": "AI Assistant Base",
+    "category": "ai",
+    "description": "AI Assistant Base product",
+    "priceId": 9,
+    "sequence": [
+      "enable"
+    ],
+    "cfsIds": [
+      3
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 10,
+    "sku": "ML-ADD",
+    "name": "ML Analytics",
+    "category": "ai",
+    "description": "ML Analytics product",
+    "priceId": 10,
+    "sequence": [
+      "enable"
+    ],
+    "cfsIds": [
+      3
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 11,
+    "sku": "STO-1TB",
+    "name": "Cloud Storage 1TB",
+    "category": "ai",
+    "description": "Cloud Storage 1TB product",
+    "priceId": 11,
+    "sequence": [
+      "enable"
+    ],
+    "cfsIds": [
+      3
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  }
+]

@@ -1,0 +1,113 @@
+{
+    "cfs": [
+      {
+        "id": "CFS-CAMERA-STREAM",
+        "name": "Camera Streaming Service ❖",
+        "description": "Live HD/4K feed with cloud recording.",
+        "rfsIds": ["RFS-CAMERA-HW", "RFS-CLOUD-STORAGE"],
+        "activationSequence": [
+          { "step": 1, "task": "Procure camera HW",     "rfsId": "RFS-CAMERA-HW",    "billOnComplete": false },
+          { "step": 2, "task": "Install & cable camera","rfsId": "RFS-CAMERA-HW",    "billOnComplete": true  },
+          { "step": 3, "task": "Create cloud bucket",   "rfsId": "RFS-CLOUD-STORAGE","billOnComplete": true  },
+          { "step": 4, "task": "Activate video stream", "rfsId": null,               "billOnComplete": true  }
+        ]
+      },
+  
+      {
+        "id": "CFS-ITSM-PACK1",
+        "name": "ITSM Requests Pack ❖",
+        "description": "Up to 5 SLA incidents /24 h.",
+        "rfsIds": ["RFS-ITSM-PORTAL"],
+        "activationSequence": [
+          { "step": 1, "task": "Create ITSM SaaS tenant", "rfsId": "RFS-ITSM-PORTAL", "billOnComplete": true }
+        ]
+      },
+  
+      {
+        "id": "CFS-EDGE-COMPUTE",
+        "name": "Edge Compute Service ❖",
+        "description": "Secure routing + local processing.",
+        "rfsIds": ["RFS-EDGE-HW", "RFS-EDGE-OS"],
+        "activationSequence": [
+          { "step": 1, "task": "Procure edge appliance",     "rfsId": "RFS-EDGE-HW", "billOnComplete": false },
+          { "step": 2, "task": "Flash OS image",             "rfsId": "RFS-EDGE-OS", "billOnComplete": false },
+          { "step": 3, "task": "Ship & install on site",     "rfsId": "RFS-EDGE-HW", "billOnComplete": true  },
+          { "step": 4, "task": "WAN test & hand-over",       "rfsId": null,          "billOnComplete": true  }
+        ]
+      },
+  
+      {
+        "id": "CFS-TAP-MONITOR",
+        "name": "Network TAP Monitoring ❖",
+        "description": "Passive traffic copy.",
+        "rfsIds": ["RFS-TAP-HW"],
+        "activationSequence": [
+          { "step": 1, "task": "Install TAP in rack", "rfsId": "RFS-TAP-HW", "billOnComplete": true }
+        ]
+      },
+  
+      {
+        "id": "CFS-INTERNET-100M",
+        "name": "Internet Access 100 Mbps ❖",
+        "description": "Business SLA, /30 static.",
+        "rfsIds": ["RFS-NNI", "RFS-IPV4-BLOCK"],
+        "activationSequence": [
+          { "step": 1, "task": "Patch NNI port",          "rfsId": "RFS-NNI",        "billOnComplete": false },
+          { "step": 2, "task": "Allocate IPv4 /30 block", "rfsId": "RFS-IPV4-BLOCK", "billOnComplete": false },
+          { "step": 3, "task": "Activate BGP & test",     "rfsId": null,             "billOnComplete": true  }
+        ]
+      },
+  
+      {
+        "id": "CFS-NET-SECURITY",
+        "name": "Secure Network Portal ❖",
+        "description": "Customer security dashboard.",
+        "rfsIds": ["RFS-SEC-PORTAL", "RFS-LOG-BUCKET"],
+        "activationSequence": [
+          { "step": 1, "task": "Create portal tenant",  "rfsId": "RFS-SEC-PORTAL", "billOnComplete": false },
+          { "step": 2, "task": "Provision log bucket",  "rfsId": "RFS-LOG-BUCKET","billOnComplete": false },
+          { "step": 3, "task": "Send URL + creds",      "rfsId": null,            "billOnComplete": true  }
+        ]
+      },
+  
+      {
+        "id": "CFS-AI-ASSISTANT",
+        "name": "Virtual Assistant ❖",
+        "description": "Gen-AI chat assistant.",
+        "rfsIds": ["RFS-AI-CONTAINER", "RFS-LM-API"],
+        "activationSequence": [
+          { "step": 1, "task": "Deploy container",      "rfsId": "RFS-AI-CONTAINER", "billOnComplete": false },
+          { "step": 2, "task": "Issue LLM API key",     "rfsId": "RFS-LM-API",       "billOnComplete": true  }
+        ]
+      },
+  
+      {
+        "id": "CFS-ML-INSIGHTS",
+        "name": "ML Insights Engine ❖",
+        "description": "Pay-as-you-grow anomaly detection.",
+        "rfsIds": ["RFS-ML-MODEL", "RFS-ML-PIPELINE"],
+        "activationSequence": [
+          { "step": 1, "task": "Deploy ML model",       "rfsId": "RFS-ML-MODEL",    "billOnComplete": false },
+          { "step": 2, "task": "Create data pipeline",  "rfsId": "RFS-ML-PIPELINE", "billOnComplete": true  }
+        ]
+      }
+    ],
+  
+    "rfs": [
+      { "id": "RFS-CAMERA-HW",     "name": "IP Camera ⚙",              "spec": "HW-CAMERA" },
+      { "id": "RFS-CLOUD-STORAGE", "name": "Cloud Bucket 1 TB ⚙",      "spec": "STO-BUCKET" },
+      { "id": "RFS-ITSM-PORTAL",   "name": "ITSM SaaS Tenant ⚙",       "spec": "SAAS-JIRA" },
+      { "id": "RFS-EDGE-HW",       "name": "Edge Appliance ⚙",         "spec": "HW-EDGE" },
+      { "id": "RFS-EDGE-OS",       "name": "Edge OS Image ⚙",          "spec": "FIRM-EDGEOS" },
+      { "id": "RFS-TAP-HW",        "name": "Network TAP Unit ⚙",       "spec": "HW-TAP" },
+      { "id": "RFS-NNI",           "name": "NNI Ethernet UNI ⚙",       "spec": "PORT-NNI" },
+      { "id": "RFS-IPV4-BLOCK",    "name": "IPv4 /30 Block ⚙",         "spec": "IP-POOL" },
+      { "id": "RFS-SEC-PORTAL",    "name": "Security Portal Tenant ⚙", "spec": "SAAS-SEC" },
+      { "id": "RFS-LOG-BUCKET",    "name": "Log Bucket ⚙",             "spec": "STO-LOG" },
+      { "id": "RFS-AI-CONTAINER",  "name": "GPT-VA Container ⚙",       "spec": "CNT-GPTVA" },
+      { "id": "RFS-LM-API",        "name": "LLM API Key ⚙",            "spec": "API-GPT" },
+      { "id": "RFS-ML-MODEL",      "name": "Edge ML Model ⚙",          "spec": "ML-MODEL" },
+      { "id": "RFS-ML-PIPELINE",   "name": "ML Data Pipeline ⚙",       "spec": "ML-PIPE" }
+    ]
+  }
+  

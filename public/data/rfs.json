@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "name": "Object Storage",
+    "category": "ai",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "storage",
+    "provider": "AWS",
+    "unit": "GB-month",
+    "provisioning": {
+      "type": "REST",
+      "endpoint": "https://aws.api/bucket",
+      "httpMethod": "POST",
+      "payloadTemplate": {
+        "bucketName": "${tenant}-${rand}",
+        "sizeGB": "${size}"
+      }
+    },
+    "characteristics": [
+      {
+        "name": "sizeGB",
+        "valueType": "number",
+        "configurable": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "GPU Slice",
+    "category": "ai",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "compute",
+    "provider": "Azure",
+    "unit": "vGPU-hour",
+    "provisioning": {
+      "type": "REST",
+      "endpoint": "https://azure.api/gpu",
+      "httpMethod": "POST",
+      "payloadTemplate": {
+        "tenantId": "${tenant}",
+        "profile": "A100",
+        "qty": "${qty}"
+      }
+    },
+    "characteristics": [
+      {
+        "name": "profile",
+        "valueType": "string",
+        "configurable": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dedicated VLAN",
+    "category": "networking",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "network",
+    "provider": "OnPrem",
+    "unit": "VLAN",
+    "provisioning": {
+      "type": "CLI",
+      "endpoint": "ssh://net-controller",
+      "script": "create-vlan ${vlanId}"
+    },
+    "characteristics": [
+      {
+        "name": "vlanId",
+        "valueType": "number",
+        "configurable": true
+      }
+    ]
+  }
+]

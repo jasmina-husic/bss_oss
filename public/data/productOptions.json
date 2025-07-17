@@ -1,0 +1,32 @@
+{
+    "lifecycleStatus": [
+      "In Design",
+      "Launched",
+      "Retired"
+    ],
+    "brand": [
+      "NetPrime",
+      "Visionary",
+      "CoreNet",
+      "PacketSight",
+      "EdgeBurst",
+      "CloudX",
+      "InsightAI",
+      "ConverseCX",
+      "SecureScope"
+    ],
+    "category": [
+      "CPE",
+      "IoT Device",
+      "Connectivity",
+      "Network Device",
+      "Edge Device",
+      "Add-on Module",
+      "Cloud Resource",
+      "AI/ML",
+      "Digital Service",
+      "Storage",
+      "Reporting"
+    ]
+  }
+  

@@ -1,0 +1,4 @@
+id,name,email,phone,company,industry,website,address,city,country,accountManager,state
+101,"Nova Retail","sales@novaretail.com","+1 415-555-9001","Nova Retail","Retail","https://novaretail.com","77 Market St","San Francisco","USA","Alice Smith","active"
+102,"Helios Tech","info@helios-tech.io","+1 415-555-9002","Helios Tech","Technology","https://helios-tech.io","88 Howard St","San Francisco","USA","Bob Jones","validated"
+103,"Orion Foods","contact@orion-foods.org","+1 415-555-9003","Orion Foods","FMCG","https://orion-foods.org","55 Second St","San Francisco","USA","Dana White","prospect"

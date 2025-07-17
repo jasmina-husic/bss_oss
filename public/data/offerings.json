@@ -1,0 +1,531 @@
+[
+  {
+    "id": 1,
+    "name": "Surveillance Starter",
+    "status": "active",
+    "description": "4 outdoor cameras, AI & storage",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 4,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 6,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 99,
+      "monthlyFee": 149,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Ship cams",
+      "Install",
+      "Provision services",
+      "Handover"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 2,
+    "name": "Surveillance Pro 8",
+    "status": "active",
+    "description": "8 cams + ML analytics pay-as-you-go",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 8,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 10,
+        "qty": 1,
+        "billing": "usage"
+      },
+      {
+        "productId": 6,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 149,
+      "monthlyFee": 199,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Ship cams",
+      "On-site install",
+      "Enable ML",
+      "Go live"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 3,
+    "name": "Networking Edge",
+    "status": "active",
+    "description": "Edge gateway + tap + AI",
+    "components": [
+      {
+        "productId": 4,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 3,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 199,
+      "monthlyFee": 129,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Rack gateway",
+      "Install tap",
+      "Provision VLAN",
+      "Enable AI"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 4,
+    "name": "Secure Branch",
+    "status": "active",
+    "description": "Secure switch + portal + storage PAYG",
+    "components": [
+      {
+        "productId": 5,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 11,
+        "qty": 1,
+        "billing": "usage"
+      },
+      {
+        "productId": 12,
+        "qty": 1,
+        "billing": "monthly"
+      }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 249,
+      "monthlyFee": 159,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Deploy switch",
+      "Portal integration",
+      "Enable storage"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 5,
+    "name": "AI Boost",
+    "status": "active",
+    "description": "AI analytics only subscription",
+    "components": [
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 10,
+        "qty": 1,
+        "billing": "usage"
+      }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 0,
+      "monthlyFee": 89,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {},
+    "activationSequence": [
+      "Create AI tenant",
+      "Provision GPU"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 6,
+    "name": "Premium Bundle Discount",
+    "status": "active",
+    "description": "Cross-service discount when bundling >=2 offerings",
+    "components": [],
+    "pricePlan": null,
+    "discountRules": {
+      "bundleDiscount": {
+        "installationFee": 20,
+        "monthly": 10
+      }
+    },
+    "activationSequence": [
+      "Apply bundle discount"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 7,
+    "name": "Surveillance Small",
+    "status": "active",
+    "description": "2-cam starter",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 2,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 11,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 6,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      }
+    ],
+    "priceId": 12,
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Contract",
+      "Await inventory",
+      "Install cameras",
+      "Provision storage",
+      "Go live"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  },
+  {
+    "id": 8,
+    "name": "Surveillance Medium",
+    "status": "active",
+    "description": "6-cam package",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 4,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 2,
+        "qty": 2,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 11,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 6,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      }
+    ],
+    "priceId": 13,
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Contract",
+      "Ship cams",
+      "Enable AI",
+      "Provision storage",
+      "Go live"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  },
+  {
+    "id": 9,
+    "name": "Surveillance Large",
+    "status": "active",
+    "description": "12-cam enterprise",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 8,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 2,
+        "qty": 4,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 11,
+        "qty": 2,
+        "billing": "monthly"
+      },
+      {
+        "productId": 6,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 10,
+        "qty": 1,
+        "billing": "usage"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      }
+    ],
+    "priceId": 14,
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Contract",
+      "Bulk ship",
+      "Await inventory",
+      "Site install",
+      "Provision ML",
+      "Go live"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  },
+  {
+    "id": 10,
+    "name": "Hospitality WiFi Pack",
+    "status": "active",
+    "description": "Edge+3 switches for hotels",
+    "components": [
+      {
+        "productId": 4,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 5,
+        "qty": 3,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 3,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      }
+    ],
+    "priceId": 15,
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Contract",
+      "Stage hardware",
+      "Rack & config",
+      "Portal handover"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  },
+  {
+    "id": 11,
+    "name": "Security Combo",
+    "status": "active",
+    "description": "Switch+Tap security kit",
+    "components": [
+      {
+        "productId": 5,
+        "qty": 2,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 3,
+        "qty": 2,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      }
+    ],
+    "priceId": 16,
+    "discountRules": {
+      "contractMonths": {
+        "24": 20
+      },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Contract",
+      "Await switch inventory",
+      "Deploy",
+      "Security validation",
+      "Go live"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  },
+  {
+    "id": 12,
+    "name": "Spring Promo Bundle",
+    "status": "active",
+    "description": "30% discount bundle",
+    "components": [
+      {
+        "productId": 1,
+        "qty": 4,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 4,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 5,
+        "qty": 1,
+        "billing": "oneOff"
+      },
+      {
+        "productId": 9,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 11,
+        "qty": 1,
+        "billing": "monthly"
+      },
+      {
+        "productId": 8,
+        "qty": 1,
+        "billing": "oneOff"
+      }
+    ],
+    "priceId": 17,
+    "discountRules": {
+      "bundleDiscount": {
+        "installationFee": 30,
+        "monthly": 30
+      }
+    },
+    "activationSequence": [
+      "Promo order",
+      "Await inventory",
+      "Integrated deployment",
+      "Go live"
+    ],
+    "createdAt": "2025-05-30T06:38:04.085108Z",
+    "lastModified": "2025-05-30T06:38:04.085108Z"
+  }
+]
