@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addOrder } from "../services/orderService";
 import { fetchCustomersPage } from "../services/customerService";
-import {
-  fetchOfferingsPage,
-  getOfferingById,
-} from "../services/offeringService";
+import { fetchOfferingsPage, getOfferingById } from "../services/offeringService";
+import { initWizardForOrder } from "../services/orderWizardService";
 
 function contractNum() {
   return "ORD-" + Date.now().toString().slice(-6);
@@ -29,30 +27,34 @@ export default function OrderNew() {
 
   useEffect(() => {
     (async () => {
-      setCustomers((await fetchCustomersPage(0, 9999, "", [])).records);
-      setOfferings(
-        (await fetchOfferingsPage(0, 9999, "", [], "active")).records
-      );
+      const cust = await fetchCustomersPage(0, 9999, "", []);
+      setCustomers(cust.records);
+      const offers = await fetchOfferingsPage(0, 9999, "", [], "active");
+      setOfferings(offers.records);
     })();
   }, []);
 
   useEffect(() => {
-    setPreview(
-      form.offeringId ? getOfferingById(Number(form.offeringId)) : null
-    );
+    setPreview(form.offeringId ? getOfferingById(Number(form.offeringId)) : null);
   }, [form.offeringId]);
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const save = async (e) => {
     e.preventDefault();
-    await addOrder({
+    const newId = await addOrder({
       ...form,
       customerId: Number(form.customerId),
       offeringId: Number(form.offeringId),
       stage: "prospect",
     });
-    nav("/orders");
+    if (Number(form.offeringId) === 12) {
+      // initialise wizard data for this order
+      await initWizardForOrder(newId);
+      nav(`/orders/${newId}/setup`);
+    } else {
+      nav("/orders");
+    }
   };
 
   return (
@@ -141,8 +143,7 @@ export default function OrderNew() {
           <p>{preview.description}</p>
           {preview.pricePlan && (
             <p>
-              Setup {preview.pricePlan.setupFee} / Monthly{" "}
-              {preview.pricePlan.monthlyFee}
+              Setup {preview.pricePlan.setupFee} / Monthly {preview.pricePlan.monthlyFee}
             </p>
           )}
         </div>

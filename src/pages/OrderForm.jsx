@@ -1,304 +1,187 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  getOrderById,
-  updateOrder,
-  addComment,
-} from "../services/orderService";
-import { fetchOfferingsPage } from "../services/offeringService";
-import { fetchCustomersPage } from "../services/customerService";
-import { fetchProductsPage } from "../services/productService";
+import { useParams } from "react-router-dom";
+import { getOrderById, updateOrder } from "../services/orderService";
+import { getCurrentOrder, setCurrentOrderId, initWizardForOrder } from "../services/orderWizardService";
 
-const STAGES = [
-  "prospect",
-  "negotiation",
-  "contract",
-  "activation",
-  "delivery",
-  "closed",
-];
-
+/**
+ * OrderForm displays details for an existing order, including a summary of
+ * equipment, totals, project timeline, deployment locations and special
+ * requirements.  It also allows updating the order stage via a
+ * dropdown and editing comments (not persisted beyond session).
+ */
 export default function OrderForm() {
   const { id } = useParams();
-  const nav = useNavigate();
-
   const [order, setOrder] = useState(null);
-  const [off, setOff] = useState(null);
-  const [cust, setCust] = useState(null);
-  const [prodMap, setProdMap] = useState({});
+  const [wizard, setWizard] = useState(null);
+  const [stage, setStage] = useState("prospect");
   const [comment, setComment] = useState("");
 
-  /* ────────────────────────────────────────────────────────── */
   useEffect(() => {
-    (async () => {
-      const o = await getOrderById(Number(id));
-      if (!o) return nav("/orders");
-
-      const [custRes, offRes, prodRes] = await Promise.all([
-        fetchCustomersPage(0, 9999, "", []),
-        fetchOfferingsPage(0, 9999, "", [], ""),
-        fetchProductsPage(0, 9999, "", [], ""),
-      ]);
-
-      setOrder(o);
-      setCust(custRes.records.find((c) => c.id === o.customerId) || null);
-      setOff(offRes.records.find((v) => v.id === o.offeringId) || null);
-      setProdMap(
-        Object.fromEntries(prodRes.records.map((p) => [p.id, p.name]))
-      );
-    })();
-  }, [id, nav]);
-
-  if (!order || !off || !cust) return <div className="p-6">Loading…</div>;
-
-  /* helper: patch + reload */
-  const patch = (p) =>
-    updateOrder(order.id, p).then(async () =>
-      setOrder(await getOrderById(order.id))
-    );
-
-  /* next‑stage guard */
-  const nextStage = () => {
-    if (
-      order.stage === "activation" &&
-      order.activationIndex < off.activationSequence.length
-    ) {
-      alert("Finish all activation steps before moving to delivery.");
-      return;
+    async function load() {
+      // load order via order service (may return undefined if not found)
+      let ord;
+      try {
+        ord = await getOrderById(Number(id));
+      } catch (e) {}
+      if (ord) setOrder(ord);
+      // initialise and load wizard data for this order
+      await initWizardForOrder(id);
+      setCurrentOrderId(id);
+      const data = getCurrentOrder();
+      setWizard(data);
+      if (ord && ord.stage) setStage(ord.stage);
     }
-    const idx = STAGES.indexOf(order.stage);
-    if (idx < STAGES.length - 1) patch({ stage: STAGES[idx + 1] });
-  };
+    load();
+  }, [id]);
 
-  /* manual stage change */
-  const changeStage = (val) => {
-    if (
-      val === "delivery" &&
-      order.activationIndex < off.activationSequence.length
-    ) {
-      alert("Cannot enter delivery until activation steps complete.");
-      return;
+  // Compute totals from wizard data
+  const equipmentSubtotal = wizard?.equipmentBreakdown?.reduce((sum, i) => sum + i.total, 0) || 0;
+  const installationFee = wizard?.installationServices || 0;
+  const totalValue = wizard?.totalOrderValue || equipmentSubtotal + installationFee;
+
+  const stages = ["prospect", "negotiation", "contract", "activation", "delivery", "closed"];
+
+  const handleStageChange = async (e) => {
+    const newStage = e.target.value;
+    setStage(newStage);
+    if (order) {
+      // update order via service if available
+      if (typeof updateOrder === "function") {
+        try {
+          await updateOrder({ ...order, stage: newStage });
+        } catch (err) {
+          // fallback: update orders in localStorage
+          const stored = localStorage.getItem("orders");
+          if (stored) {
+            const arr = JSON.parse(stored);
+            const idx = arr.findIndex((o) => o.id === order.id);
+            if (idx >= 0) {
+              arr[idx].stage = newStage;
+              localStorage.setItem("orders", JSON.stringify(arr));
+            }
+          }
+        }
+      }
     }
-    patch({ stage: val });
   };
 
-  /* activation steps */
-  const toggleStep = (i) => {
-    if (order.stage !== "activation") return;
-    if (i >= order.activationIndex) patch({ activationIndex: i + 1 });
-  };
-
-  /* comments */
-  const submitComment = async (e) => {
-    e.preventDefault();
-    if (!comment.trim()) return;
-    await addComment(order.id, comment.trim(), order.stage);
-    setOrder(await getOrderById(order.id));
-    setComment("");
-  };
-
-  const allStepsDone = order.activationIndex >= off.activationSequence.length;
-
-  /* pricing helper (setup + monthly rows come from pricePlan) */
-  const unitFor = (comp) => {
-    // products may have their own price later – for now return 0
-    return 0;
-  };
+  if (!order || !wizard) {
+    return <div className="p-6">Loading order…</div>;
+  }
 
   return (
     <div className="p-6 space-y-6 max-w-3xl">
-      <h1 className="text-lg font-medium">
+      <h1 className="text-lg font-semibold">
         Order #{order.id} — {order.contractNumber}
       </h1>
-
-      {/* basic cards */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="border rounded p-3 text-sm">
-          <h2 className="font-medium mb-1">Customer</h2>
-          <p>{cust.name}</p>
+      {/* Customer and Offering summary */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="border rounded p-4 bg-gray-50">
+          <h2 className="font-semibold text-sm mb-2">Customer</h2>
+          <p>{order.customerName || order.customerId}</p>
         </div>
-        <div className="border rounded p-3 text-sm">
-          <h2 className="font-medium mb-1">Offering</h2>
-          <p>{off.name}</p>
-          <p className="text-xs text-gray-500">{off.description}</p>
+        <div className="border rounded p-4 bg-gray-50">
+          <h2 className="font-semibold text-sm mb-2">Offering</h2>
+          <p>{order.offeringName || order.offeringId}</p>
         </div>
       </div>
-
-      {/* financials */}
-      <div className="border rounded p-3 overflow-x-auto">
-        <h2 className="text-sm font-medium mb-2">Financials</h2>
-        <table className="min-w-full text-xs">
+      {/* Equipment breakdown */}
+      <div className="border rounded p-4">
+        <h3 className="font-semibold mb-2">Equipment Breakdown</h3>
+        <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="text-gray-500">
+            <tr className="bg-gray-100">
               <th className="px-2 py-1 text-left">Item</th>
-              <th className="px-2 py-1 text-left">Billing</th>
-              <th className="px-2 py-1">Qty</th>
-              <th className="px-2 py-1 text-right">Unit</th>
-              <th className="px-2 py-1 text-right">Subtotal</th>
+              <th className="px-2 py-1 text-left">SKU</th>
+              <th className="px-2 py-1 text-right">Qty</th>
+              <th className="px-2 py-1 text-right">Unit Price</th>
+              <th className="px-2 py-1 text-right">Total</th>
             </tr>
           </thead>
           <tbody>
-            {off.pricePlan && (
-              <>
-                <tr className="border-t">
-                  <td className="px-2 py-1">Setup fee</td>
-                  <td className="px-2 py-1">oneOff</td>
-                  <td className="px-2 py-1 text-center">1</td>
-                  <td className="px-2 py-1 text-right">
-                    {off.pricePlan.setupFee.toFixed(2)}
-                  </td>
-                  <td className="px-2 py-1 text-right">
-                    {off.pricePlan.setupFee.toFixed(2)}
-                  </td>
-                </tr>
-                <tr className="border-t">
-                  <td className="px-2 py-1">Monthly subscription</td>
-                  <td className="px-2 py-1">monthly</td>
-                  <td className="px-2 py-1 text-center">1</td>
-                  <td className="px-2 py-1 text-right">
-                    {off.pricePlan.monthlyFee.toFixed(2)}
-                  </td>
-                  <td className="px-2 py-1 text-right">
-                    {off.pricePlan.monthlyFee.toFixed(2)}
-                  </td>
-                </tr>
-              </>
-            )}
-            {off.components.map((c, i) => (
-              <tr key={`${c.productId}-${i}`} className="border-t">
-                <td className="px-2 py-1">
-                  {prodMap[c.productId] || `#${c.productId}`}
-                </td>
-                <td className="px-2 py-1 capitalize">{c.billing}</td>
-                <td className="px-2 py-1 text-center">{c.qty}</td>
-                <td className="px-2 py-1 text-right">
-                  {unitFor(c).toFixed(2)}
-                </td>
-                <td className="px-2 py-1 text-right">
-                  {(unitFor(c) * c.qty).toFixed(2)}
-                </td>
+            {wizard.equipmentBreakdown.map((row, idx) => (
+              <tr key={idx} className={idx % 2 ? "bg-gray-50" : ""}>
+                <td className="px-2 py-1">{row.item}</td>
+                <td className="px-2 py-1">{row.sku}</td>
+                <td className="px-2 py-1 text-right">{row.qty}</td>
+                <td className="px-2 py-1 text-right">${row.unitPrice.toFixed(2)}</td>
+                <td className="px-2 py-1 text-right">${row.total.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
-            <tr className="border-t text-xs font-medium">
-              <td colSpan={4} className="px-2 py-1 text-right">
-                One‑off total
-              </td>
-              <td className="px-2 py-1 text-right">
-                {(
-                  (off.pricePlan?.setupFee || 0) +
-                  off.components
-                    .filter((c) => c.billing === "oneOff")
-                    .reduce((s, c) => s + unitFor(c) * c.qty, 0)
-                ).toFixed(2)}
-              </td>
+            <tr>
+              <td colSpan="4" className="text-right font-medium pr-2">Subtotal</td>
+              <td className="text-right font-medium">${equipmentSubtotal.toFixed(2)}</td>
             </tr>
-            <tr className="text-xs font-medium">
-              <td colSpan={4} className="px-2 py-1 text-right">
-                Monthly MRR
-              </td>
-              <td className="px-2 py-1 text-right">
-                {(
-                  (off.pricePlan?.monthlyFee || 0) +
-                  off.components
-                    .filter((c) => c.billing === "monthly")
-                    .reduce((s, c) => s + unitFor(c) * c.qty, 0)
-                ).toFixed(2)}
-              </td>
+            <tr>
+              <td colSpan="4" className="text-right pr-2">Installation & Services</td>
+              <td className="text-right">${installationFee.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td colSpan="4" className="text-right font-semibold pr-2">Total</td>
+              <td className="text-right font-semibold">${totalValue.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>
       </div>
-
-      {/* stage */}
-      <div className="border rounded p-3">
-        <h2 className="text-sm font-medium mb-2">Stage</h2>
-        <div className="flex gap-1 flex-wrap">
-          {STAGES.map((s) => (
-            <span
-              key={s}
-              className={
-                "px-2 py-1 rounded text-xs " +
-                (s === order.stage ? "bg-black text-white" : "bg-gray-200")
-              }
-            >
-              {s}
-            </span>
-          ))}
+      {/* Project timeline and locations */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="border rounded p-4">
+          <h3 className="font-semibold mb-2">Project Timeline</h3>
+          <table className="w-full text-sm">
+            <tbody>
+              {Object.entries(wizard.projectTimeline).map(([k, v]) => (
+                <tr key={k}>
+                  <td className="pr-2 font-medium">{k}:</td>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="flex items-center gap-2 mt-2">
-          {order.stage !== "closed" && (
-            <button
-              onClick={nextStage}
-              className="px-3 py-1 bg-black text-white rounded text-xs"
-            >
-              Next Stage
-            </button>
+        <div className="border rounded p-4">
+          <h3 className="font-semibold mb-2">Deployment Locations</h3>
+          <table className="w-full text-sm">
+            <tbody>
+              {Object.entries(wizard.deploymentLocations).map(([k, v]) => (
+                <tr key={k}>
+                  <td className="pr-2 font-medium">{k}:</td>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {wizard.specialRequirements && (
+            <div className="mt-2 text-sm">
+              <h4 className="font-medium">Special Requirements</h4>
+              <ul className="list-disc list-inside">
+                {wizard.specialRequirements.map((req, idx) => (
+                  <li key={idx}>{req}</li>
+                ))}
+              </ul>
+            </div>
           )}
-          <select
-            value={order.stage}
-            onChange={(e) => changeStage(e.target.value)}
-            className="border rounded p-1 text-xs"
-          >
-            {STAGES.map((s) => (
-              <option key={s} disabled={s === "delivery" && !allStepsDone}>
-                {s}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
-
-      {/* activation steps */}
-      {order.stage !== "prospect" &&
-        order.stage !== "negotiation" &&
-        order.stage !== "contract" && (
-          <div className="border rounded p-3">
-            <h2 className="text-sm font-medium mb-2">
-              Activation ({order.activationIndex}/
-              {off.activationSequence.length})
-            </h2>
-            {off.activationSequence.map((step, i) => (
-              <label key={i} className="flex items-center gap-2 text-xs">
-                <input
-                  type="checkbox"
-                  checked={i < order.activationIndex}
-                  disabled={order.stage !== "activation"}
-                  onChange={() => toggleStep(i)}
-                />
-                {step}
-              </label>
-            ))}
-            {order.stage === "activation" && !allStepsDone && (
-              <p className="text-xs text-red-600 mt-1">
-                Complete all steps to finish activation.
-              </p>
-            )}
-          </div>
-        )}
-
-      {/* comments */}
-      <div className="border rounded p-3">
-        <h2 className="text-sm font-medium mb-2">Comments</h2>
-        <div className="space-y-1 max-h-48 overflow-y-auto mb-2 text-xs">
-          {order.comments?.map((c, i) => (
-            <div key={i}>
-              [{c.stage}] {c.text}
-            </div>
+      {/* Stage and comments */}
+      <div className="border rounded p-4 space-y-3">
+        <h3 className="font-semibold">Stage</h3>
+        <select value={stage} onChange={handleStageChange} className="border rounded p-2">
+          {stages.map((s) => (
+            <option key={s} value={s}>{s}</option>
           ))}
-        </div>
-        <form onSubmit={submitComment} className="flex gap-2">
-          <input
+        </select>
+        <div>
+          <h4 className="font-semibold mt-4">Comments</h4>
+          <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="border rounded p-1 flex-1 text-xs"
+            rows="3"
+            className="w-full border rounded p-2 mt-1"
             placeholder="Add comment…"
           />
-          <button className="px-2 py-1 bg-black text-white rounded text-xs">
-            Send
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

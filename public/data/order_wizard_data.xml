@@ -1,0 +1,27 @@
+<order>
+  <customer>
+    <company>ABC Healthcare Corp</company>
+    <industry>Healthcare</industry>
+    <contact>Dr. Sarah Johnson</contact>
+    <email>sarah.johnson@abchealthcare.com</email>
+    <phone>(555) 123-4567</phone>
+  </customer>
+  <items>
+    <item><name>FortiGate 100F</name><sku>FG-100F-BDL-950-12</sku><quantity>2</quantity><unitPrice>1850</unitPrice></item>
+    <item><name>FortiSwitch 124E-POE</name><sku>FS-124E-POE</sku><quantity>4</quantity><unitPrice>1200</unitPrice></item>
+    <item><name>FortiAP 321E</name><sku>FAP-321E-US</sku><quantity>8</quantity><unitPrice>420</unitPrice></item>
+    <item><name>UTM Bundle License</name><sku>FC-10-00100-950-02</sku><quantity>2</quantity><unitPrice>1650</unitPrice></item>
+    <item><name>FortiCare Support</name><sku>FC-10-FCARE-24X7</sku><quantity>14</quantity><unitPrice>180</unitPrice></item>
+  </items>
+  <projectTimeline>
+    <orderDate>June 1, 2025</orderDate>
+    <configDue>June 10, 2025</configDue>
+    <targetDeployment>June 15, 2025</targetDeployment>
+    <testingComplete>June 12, 2025</testingComplete>
+  </projectTimeline>
+  <specialRequirements>
+    <requirement>HIPAA Compliance Required</requirement>
+    <requirement>After-Hours Installation</requirement>
+    <requirement>Backup Systems Required</requirement>
+  </specialRequirements>
+</order>

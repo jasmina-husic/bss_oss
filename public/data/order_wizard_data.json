@@ -1,0 +1,208 @@
+{
+  "equipmentBreakdown": [
+    { "item": "FortiGate 100F", "sku": "FG-100F-BDL-950-12", "qty": 2, "unitPrice": 1850, "total": 3700 },
+    { "item": "FortiSwitch 124E-POE", "sku": "FS-124E-POE", "qty": 4, "unitPrice": 1200, "total": 4800 },
+    { "item": "FortiAP 321E", "sku": "FAP-321E-US", "qty": 8, "unitPrice": 420, "total": 3360 },
+    { "item": "UTM Bundle License", "sku": "FC-10-00100-950-02", "qty": 2, "unitPrice": 1650, "total": 3300 },
+    { "item": "FortiCare Support", "sku": "FC-10-FCARE-24X7", "qty": 14, "unitPrice": 180, "total": 2520 }
+  ],
+  "equipmentSubtotal": 17680,
+  "installationServices": 4850,
+  "totalOrderValue": 22530,
+  "customerInfo": {
+    "Company": "ABC Healthcare Corp",
+    "Industry": "Healthcare",
+    "Primary Contact": "Dr. Sarah Johnson",
+    "Title": "Chief Technology Officer",
+    "Email": "sarah.johnson@abchealthcare.com",
+    "Phone": "(555) 123-4567"
+  },
+  "deploymentLocations": {
+    "Headquarters": "123 Medical Center Dr Chicago, IL 60601",
+    "Branch Office": "456 Healthcare Way Naperville, IL 60540",
+    "Remote Sites": "2 satellite clinics"
+  },
+  "specialRequirements": [
+    "HIPAA Compliance Required",
+    "After-Hours Installation",
+    "Backup Systems Required"
+  ],
+  "projectTimeline": {
+    "Order Date": "June 1, 2025",
+    "Configuration Due": "June 10, 2025",
+    "Target Deployment": "June 15, 2025",
+    "Testing Complete": "June 12, 2025"
+  },
+  "requiredEquipment": [
+    { "name": "FortiGate 100F", "need": 2, "stock": 8, "status": "Available" },
+    { "name": "FortiSwitch 124E-POE", "need": 4, "stock": 6, "status": "Available" },
+    { "name": "FortiAP 321E", "need": 8, "stock": 12, "status": "Available" },
+    { "name": "FortiAnalyzer 200F", "need": 1, "stock": 3, "status": "Low Stock" }
+  ],
+  "allocatedEquipment": [
+    { "name": "FortiGate 100F", "status": "Allocated" },
+    { "name": "FortiSwitch 124E-POE", "status": "Allocated" },
+    { "name": "Remaining items pending allocation", "note": "6 devices still need to be assigned from inventory" }
+  ],
+  "allocationNotes": [
+    "All allocated devices will be reserved for this order",
+    "Serial numbers and MAC addresses will be automatically captured",
+    "Devices will be moved to staging area for configuration"
+  ],
+  "firewallTests": [
+    { "test": "Basic Connectivity", "status": "Passed" },
+    { "test": "Policy Validation", "status": "Passed" },
+    { "test": "HA Failover", "status": "Running" },
+    { "test": "VPN Tunnel", "status": "Pending" },
+    { "test": "UTM Features", "status": "Pending" }
+  ],
+  "networkTests": [
+    { "test": "Switch Discovery", "status": "Passed" },
+    { "test": "VLAN Configuration", "status": "Passed" },
+    { "test": "PoE Functionality", "status": "Running" },
+    { "test": "Port Security", "status": "Pending" },
+    { "test": "Link Aggregation", "status": "Pending" }
+  ],
+  "wirelessTests": [
+    { "test": "AP Discovery", "status": "Passed" },
+    { "test": "SSID Broadcast", "status": "Passed" },
+    { "test": "Client Authentication", "status": "Running" },
+    { "test": "Guest Network", "status": "Pending" },
+    { "test": "Performance Test", "status": "Pending" }
+  ],
+  "securityTests": [
+    { "test": "Antivirus Engine", "status": "Passed" },
+    { "test": "Web Filtering", "status": "Passed" },
+    { "test": "IPS Signatures", "status": "Failed" },
+    { "test": "Application Control", "status": "Pending" },
+    { "test": "SSL Inspection", "status": "Pending" }
+  ],
+  "testFailureNote": {
+    "message": "IPS Signatures test failed – outdated signature database",
+    "action": "Update & Retry"
+  },
+  "hardwareValidation": [
+    { "item": "All devices powered on and responding", "status": "Checked" },
+    { "item": "Physical connections verified", "status": "Checked" },
+    { "item": "LED status indicators normal", "status": "Checked" },
+    { "item": "Console access confirmed", "status": "Checked" },
+    { "item": "Firmware versions verified", "status": "Checked" }
+  ],
+  "configurationValidation": [
+    { "item": "Device names and IPs configured", "status": "Checked" },
+    { "item": "Network policies applied", "status": "Checked" },
+    { "item": "Security profiles activated", "status": "Checked" },
+    { "item": "HIPAA compliance settings verified", "status": "Checked" },
+    { "item": "Backup configurations saved", "status": "Checked" }
+  ],
+  "licenseValidation": [
+    { "item": "UTM licenses activated", "status": "Checked" },
+    { "item": "Support contracts registered", "status": "Checked" },
+    { "item": "Cloud management enabled", "status": "Checked" },
+    { "item": "License compliance verified", "status": "Checked" }
+  ],
+  "documentationChecks": [
+    { "item": "Configuration exported", "status": "Checked" },
+    { "item": "Network diagram updated", "status": "Checked" },
+    { "item": "Installation guide prepared", "status": "Checked" },
+    { "item": "Customer handover package ready", "status": "Checked" }
+  ],
+  "deploymentTimeline": [
+    {
+      "stage": "Pre-Configuration Complete",
+      "status": "Completed",
+      "description": "All devices configured and tested in staging environment",
+      "time": "June 8, 2025 – 3:30 PM"
+    },
+    {
+      "stage": "Equipment Staging",
+      "status": "Completed",
+      "description": "Devices packaged and labeled for site deployment",
+      "time": "June 9, 2025 – 10:00 AM"
+    },
+    {
+      "stage": "Equipment Transport",
+      "status": "In Progress",
+      "description": "Devices en route to customer site with installation team",
+      "time": "June 14, 2025 – 5:00 PM"
+    },
+    {
+      "stage": "On-Site Installation",
+      "status": "Scheduled",
+      "description": "Physical installation and network cutover",
+      "time": "June 15, 2025 – 8:00 AM"
+    },
+    {
+      "stage": "Go-Live Testing",
+      "status": "Scheduled",
+      "description": "Final connectivity and performance validation",
+      "time": "June 15, 2025 – 8:00 AM"
+    },
+    {
+      "stage": "Customer Handover",
+      "status": "Scheduled",
+      "description": "Training and documentation transfer",
+      "time": "June 15, 2025 – 10:00 AM"
+    }
+  ],
+  "installationTeam": {
+    "Lead Technician": "Mike Rodriguez",
+    "Network Engineer": "Sarah Chen",
+    "Project Manager": "Alex Thompson",
+    "Contact Number": "(555) 987-6543"
+  },
+  "deploymentKit": [
+    "Pre-configured devices (14 units)",
+    "Installation cables & accessories",
+    "Configuration backup files",
+    "Documentation package",
+    "Customer training materials"
+  ],
+  "preDeploymentChecklist": [
+    "Customer notification sent (June 10)",
+    "Site survey completed",
+    "After-hours access arranged",
+    "Backup connectivity plan confirmed",
+    "Rollback procedures documented"
+  ],
+  "deploymentSummary": {
+    "Installation Date": "June 15, 2025",
+    "Go-Live Time": "8:47 AM",
+    "Devices Deployed": "14 units",
+    "Network Uptime": "100% (2 hours)",
+    "Users Connected": "127 active"
+  },
+  "goLiveValidation": [
+    { "item": "All devices online and responding", "status": "Checked" },
+    { "item": "Internet connectivity verified", "status": "Checked" },
+    { "item": "VPN tunnels established", "status": "Checked" },
+    { "item": "Security policies active", "status": "Checked" },
+    { "item": "Monitoring systems operational", "status": "Checked" }
+  ],
+  "customerHandoverCompleted": [
+    "Documentation delivered",
+    "Network topology diagram",
+    "Device configuration exports",
+    "Administrator credentials",
+    "Troubleshooting guide",
+    "Contact information"
+  ],
+  "trainingCompleted": [
+    "FortiGate management basics",
+    "User account management",
+    "Policy modifications",
+    "Monitoring & reporting",
+    "Support procedures"
+  ],
+  "supportActivated": [
+    "24/7 monitoring enabled",
+    "Ticket system access",
+    "Emergency contact list",
+    "Maintenance schedule",
+    "SLA agreement active"
+  ],
+  "customerSatisfactionSurvey": {
+    "rating": 5,
+    "comment": "Excellent service! The team was professional, the installation was seamless, and the network performance exceeds our expectations. Very happy with the HIPAA compliance features."
+  }
+}

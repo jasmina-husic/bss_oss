@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -10,7 +9,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CRM from "./pages/CRM";
 import CustomerForm from "./pages/CustomerForm";
-import CustomerDashboard from "./pages/CustomerDashboard";   // NEW
+import CustomerDashboard from "./pages/CustomerDashboard";
 import Tickets from "./pages/Tickets";
 import TicketForm from "./pages/TicketForm";
 import CatalogProducts from "./pages/CatalogProducts";
@@ -28,6 +27,9 @@ import OrderNew from "./pages/OrderNew";
 import OrderForm from "./pages/OrderForm";
 import Billing from "./pages/Billing";
 import Portal from "./pages/Portal";
+
+// NEW: import the wizard for Spring Promo Bundle setup
+import Wizard from "./pages/wizard/Wizard";
 
 /* ─── private route helper ─── */
 function PrivateRoute({ roles = [], children }) {
@@ -128,6 +130,16 @@ export default function App() {
             }
           />
 
+          {/* NEW: Wizard for Spring Promo Bundle */}
+          <Route
+            path="/orders/:id/setup"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <Wizard />
+              </PrivateRoute>
+            }
+          />
+
           {/* Ticketing */}
           <Route
             path="/ticketing"
@@ -203,7 +215,6 @@ export default function App() {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/catalog/offerings"
             element={
