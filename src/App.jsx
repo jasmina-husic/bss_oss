@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CRM from "./pages/CRM";
 import CustomerForm from "./pages/CustomerForm";
+import CustomerDashboard from "./pages/CustomerDashboard";   // NEW
 import Tickets from "./pages/Tickets";
 import TicketForm from "./pages/TicketForm";
 import CatalogProducts from "./pages/CatalogProducts";
@@ -72,6 +74,17 @@ export default function App() {
               </PrivateRoute>
             }
           />
+
+          {/* NEW: Customer detailed dashboard */}
+          <Route
+            path="/crm/:id"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <CustomerDashboard />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/crm/customers/new"
             element={
@@ -170,7 +183,7 @@ export default function App() {
             path="/catalog/rfs"
             element={
               <PrivateRoute roles={["admin"]}>
-                <RfsCatalog /> {/* NEW list page */}
+                <RfsCatalog />
               </PrivateRoute>
             }
           />
@@ -178,7 +191,7 @@ export default function App() {
             path="/catalog/rfs/new"
             element={
               <PrivateRoute roles={["admin"]}>
-                <RfsSpecForm /> {/* NEW form page */}
+                <RfsSpecForm />
               </PrivateRoute>
             }
           />
@@ -186,7 +199,7 @@ export default function App() {
             path="/catalog/rfs/:id"
             element={
               <PrivateRoute roles={["admin"]}>
-                <RfsSpecForm /> {/* NEW form page */}
+                <RfsSpecForm />
               </PrivateRoute>
             }
           />
@@ -275,6 +288,7 @@ export default function App() {
               </PrivateRoute>
             }
           />
+
           {/* fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

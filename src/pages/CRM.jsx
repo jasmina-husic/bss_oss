@@ -1,4 +1,4 @@
-/* src/pages/CRM.jsx */
+
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -28,7 +28,6 @@ const col = createColumnHelper();
 export default function CRM() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
-
   const [tableState, setTableState] = useState({
     pagination: { pageIndex: 0, pageSize: 5 },
     sorting: [{ id: "id", desc: true }],
@@ -45,10 +44,22 @@ export default function CRM() {
         header: "",
         cell: ({ row }) => (
           <Link
-            to={`/crm/customers/${row.original.id}`}
-            className="text-blue-600 text-xs"
+            to={"/crm/customers/" + row.original.id}
+            className="text-blue-600 hover:underline"
           >
             Edit
+          </Link>
+        ),
+      }),
+      col.display({
+        id: "details",
+        header: "",
+        cell: ({ row }) => (
+          <Link
+            to={"/crm/" + row.original.id}
+            className="text-green-600 hover:underline"
+          >
+            Details
           </Link>
         ),
       }),
@@ -79,6 +90,7 @@ export default function CRM() {
 
   useEffect(() => {
     load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tableState]);
 
   function handleDelete(idx) {
@@ -98,7 +110,6 @@ export default function CRM() {
           alert("CSV parse error – check delimiter & header row");
           return;
         }
-
         const bad = [];
         const ok = [];
         const seenIds = new Set();
@@ -155,34 +166,33 @@ export default function CRM() {
 
   /* ───────── UI ───────── */
   return (
-    <div className="p-6">
-      <div className="flex flex-wrap gap-2 justify-between items-center mb-4">
-        <h1 className="text-lg font-medium">Accounts</h1>
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-semibold">Accounts</h1>
 
-        <div className="flex gap-2">
-          <button
-            onClick={() => fileRef.current.click()}
-            className="px-3 py-1 border rounded text-sm hover:bg-gray-50"
-          >
-            Import CSV
-          </button>
-          <input
-            ref={fileRef}
-            type="file"
-            accept=".csv"
-            className="hidden"
-            onChange={handleFile}
-          />
-
-          <Link
-            to="/crm/customers/new"
-            className="px-3 py-1 bg-black text-white rounded text-sm"
-          >
-            + New Account
-          </Link>
-        </div>
+      {/* Toolbar */}
+      <div className="flex items-center space-x-2 mb-2">
+        <button
+          onClick={() => fileRef.current && fileRef.current.click()}
+          className="px-3 py-1 border rounded text-sm hover:bg-gray-50"
+        >
+          Import CSV
+        </button>
+        <Link
+          to="/crm/customers/new"
+          className="px-3 py-1 border rounded text-sm bg-blue-600 text-white hover:bg-blue-700"
+        >
+          + New Account
+        </Link>
+        <input
+          type="file"
+          accept=".csv,text/csv"
+          ref={fileRef}
+          onChange={handleFile}
+          className="hidden"
+        />
       </div>
 
+      {/* Table */}
       <DataTable
         columns={columns}
         data={data}

@@ -1,121 +1,90 @@
-/* Customer service with resilient, column-agnostic sorting */
 
-const LS = "bss_customers";
-let cache = null;
-let nextId = 1;
+const STORAGE_KEY = 'bss_customers';
 
-/* ───────── helpers ───────── */
-const uuid  = () => "ACC-" + ("" + Date.now()).slice(-6);
-
-const norm = (r) => ({
-  id: r.id ?? nextId++,
-  crmId: r.crmId ?? uuid(),
-  name: r.name ?? "",
-  email: r.email ?? "",
-  company: r.company ?? "",
-  type: r.type ?? "",
-  industry: r.industry ?? "",
-  annualRevenue: r.annualRevenue ?? 0,
-  phone: r.phone ?? "",
-  fax: r.fax ?? "",
-  website: r.website ?? "",
-  billingStreet: r.billingStreet ?? "",
-  billingCity: r.billingCity ?? "",
-  billingState: r.billingState ?? "",
-  billingPostalCode: r.billingPostalCode ?? "",
-  billingCountry: r.billingCountry ?? "",
-  shippingStreet: r.shippingStreet ?? "",
-  shippingCity: r.shippingCity ?? "",
-  shippingState: r.shippingState ?? "",
-  shippingPostalCode: r.shippingPostalCode ?? "",
-  shippingCountry: r.shippingCountry ?? "",
-  numberOfEmployees: r.numberOfEmployees ?? 0,
-  rating: r.rating ?? "",
-  accountManager: r.accountManager ?? "",
-  state: r.state ?? "prospect",
-  createdAt: r.createdAt ?? new Date().toISOString(),
-  lastModified: r.lastModified ?? new Date().toISOString(),
-});
-
-const save = () => localStorage.setItem(LS, JSON.stringify(cache));
-
-async function load() {
-  if (cache) return cache;
-  const stored = localStorage.getItem(LS);
-  cache = stored
-    ? JSON.parse(stored).map(norm)
-    : (await (await fetch("/data/customers.json")).json()).map(norm);
-
-  nextId = Math.max(0, ...cache.map((c) => c.id)) + 1;
-  save();
-  return cache;
+/* ─── helpers ─────────────────── */
+function load() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch {
+    return [];
+  }
 }
 
-/* generic, null-safe sorter */
-function applySort(data, sorting = []) {
-  if (!Array.isArray(sorting) || !sorting.length) return data;
+function save(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
 
-  const first = sorting[0];
-  const key   = first.id ?? first.columnId;
-  const desc  = !!first.desc;
+function nextId(data) {
+  return data.length ? Math.max(...data.map((c) => c.id || 0)) + 1 : 1;
+}
 
-  return [...data].sort((a, b) => {
-    const av = (a[key] ?? "").toString();
-    const bv = (b[key] ?? "").toString();
-    const cmp = av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" });
-    return desc ? -cmp : cmp;
+/* ─── CRUD ────────────────────── */
+export function getAll() {
+  return load();
+}
+
+export function getCustomerById(id) {
+  return load().find((c) => c.id === Number(id));
+}
+
+export function addCustomer(record) {
+  const data = load();
+  record.id = record.id ? Number(record.id) : nextId(data);
+  data.push(record);
+  save(data);
+  return record;
+}
+
+export function updateCustomer(id, patch) {
+  const data = load();
+  const idx = data.findIndex((c) => c.id === Number(id));
+  if (idx !== -1) {
+    data[idx] = { ...data[idx], ...patch, id: Number(id) };
+    save(data);
+  }
+}
+
+export function deleteCustomer(id) {
+  const data = load().filter((c) => c.id !== Number(id));
+  save(data);
+}
+
+/* ─── Paging, search & sort ───── */
+function applyGlobalFilter(records, filter = '') {
+  if (!filter.trim()) return records;
+  const q = filter.toLowerCase();
+  return records.filter((r) =>
+    ['name', 'email', 'company', 'phone', 'industry', 'accountManager', 'state']
+      .some((k) => (r[k] || '').toString().toLowerCase().includes(q))
+  );
+}
+
+function applySorting(records, sorting = []) {
+  if (!sorting.length) return records;
+  const [{ id, desc }] = sorting;
+  return [...records].sort((a, b) => {
+    const av = (a[id] ?? '').toString().toLowerCase();
+    const bv = (b[id] ?? '').toString().toLowerCase();
+    if (av < bv) return desc ? 1 : -1;
+    if (av > bv) return desc ? -1 : 1;
+    return 0;
   });
 }
 
-/* ───────── paged list ───────── */
-export async function fetchCustomersPage(
-  pageIndex    = 0,
-  pageSize     = 10,
-  globalFilter = "",
-  sorting      = []     // default prevents undefined
-) {
-  let data = await load();
-
-  if (globalFilter) {
-    const f = globalFilter.toLowerCase();
-    data = data.filter((c) =>
-      Object.values(c).some((v) =>
-        v.toString().toLowerCase().includes(f)
-      )
-    );
-  }
-
-  data = applySort(data, sorting);
-
-  const total = data.length;
+/**
+ * fetchCustomersPage
+ * @param {number} pageIndex 0‑based page
+ * @param {number} pageSize  items per page
+ * @param {string} globalFilter free‑text search
+ * @param {Array<{id:string,desc:boolean}>} sorting
+ * @returns {{records:Array, total:number}}
+ */
+export function fetchCustomersPage(pageIndex, pageSize, globalFilter = '', sorting = []) {
+  let records = load();
+  records = applyGlobalFilter(records, globalFilter);
+  records = applySorting(records, sorting);
+  const total = records.length;
   const start = pageIndex * pageSize;
-  return { records: data.slice(start, start + pageSize), total };
-}
-
-/* ───────── CRUD helpers ───────── */
-export function getCustomerById(id) {
-  return cache?.find((c) => c.id === id) || null;
-}
-
-export async function addCustomer(rec) {
-  await load();
-  cache.push(norm(rec));
-  save();
-}
-
-export async function updateCustomer(id, rec) {
-  await load();
-  const i = cache.findIndex((c) => c.id === id);
-  if (i > -1) {
-    cache[i] = { ...cache[i], ...rec, id, lastModified: new Date().toISOString() };
-    save();
-  }
-}
-export async function deleteCustomer(id) {
-  await load();
-  const index = cache.findIndex((c) => c.id === id);
-  if (index > -1) {
-    cache.splice(index, 1);
-    save();
-  }
+  const sliced = records.slice(start, start + pageSize);
+  return { records: sliced, total };
 }

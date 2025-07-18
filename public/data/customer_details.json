@@ -1,0 +1,227 @@
+{
+  "1": {
+    "name": "ABC Healthcare Corp",
+    "kpis": [
+      {
+        "label": "Network Uptime",
+        "value": "99.8%",
+        "indicator": "green"
+      },
+      {
+        "label": "Monthly Recurring",
+        "value": "$8,450",
+        "indicator": "green"
+      },
+      {
+        "label": "Active Devices",
+        "value": "47",
+        "indicator": "green"
+      },
+      {
+        "label": "Open Tickets",
+        "value": "2",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "1",
+        "indicator": "red"
+      }
+    ],
+    "accountInfo": {
+      "Primary Contact": "Dr. Sarah Johnson, CTO",
+      "Phone": "(555) 123\u20114567",
+      "Email": "sarah.johnson@abchealthcare.com",
+      "Contract type": "3\u2011Year Premium Support"
+    },
+    "sla": {
+      "Response time": "< 2 hours",
+      "Uptime guarantee": "99.9%",
+      "Next review": "July 15, 2025",
+      "Renewal date": "March 12, 2026"
+    },
+    "infrastructure": [
+      {
+        "sectionTitle": "Security Appliances",
+        "items": [
+          {
+            "name": "FortiGate\u2011100F\u2011HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
+            ]
+          },
+          {
+            "name": "FortiGate\u201180F\u2011Branch",
+            "subtitle": "",
+            "status": "High CPU",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Network Infrastructure",
+        "items": [
+          {
+            "name": "FortiSwitch\u2011124E\u2011HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45\u202fdays"
+              }
+            ]
+          },
+          {
+            "name": "FortiSwitch\u201148E\u2011Floor2",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23\u202fdays"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Wireless Access Points",
+        "items": [
+          {
+            "name": "FortiAP\u2011231E\u2011Lobby",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36\u00a0(5\u202fGHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42\u202fdBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45\u202fMbps"
+              }
+            ]
+          },
+          {
+            "name": "FortiAP\u2011231G\u2011Floor1",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11\u00a0(2.4\u202fGHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38\u202fdBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32\u202fMbps"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Management & Monitoring",
+        "items": [
+          {
+            "name": "FortiAnalyzer\u2011200F",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2\u202fM"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
