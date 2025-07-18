@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -94,6 +93,7 @@ export default function CRM() {
   }, [tableState]);
 
   function handleDelete(idx) {
+    // deleteCustomer() returns a Promise, so chain load() when it resolves
     deleteCustomer(idx).then(load);
   }
 
