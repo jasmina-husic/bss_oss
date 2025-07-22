@@ -1,24 +1,44 @@
 {
   "1": {
-    "name": "ABC Healthcare Corp",
+    "name": "Acme Inc.",
     "kpis": [
-      { "label": "Network Uptime", "value": "99.8%", "indicator": "green" },
-      { "label": "Monthly Recurring", "value": "$8,450", "indicator": "green" },
-      { "label": "Active Devices", "value": "47", "indicator": "green" },
-      { "label": "Open Tickets", "value": "2", "indicator": "yellow" },
-      { "label": "Critical Alerts", "value": "1", "indicator": "red" }
+      {
+        "label": "Network Uptime",
+        "value": "99.9%",
+        "indicator": "green"
+      },
+      {
+        "label": "Monthly Recurring",
+        "value": "$4,350",
+        "indicator": "green"
+      },
+      {
+        "label": "Active Devices",
+        "value": "12",
+        "indicator": "green"
+      },
+      {
+        "label": "Open Tickets",
+        "value": "0",
+        "indicator": "green"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "0",
+        "indicator": "green"
+      }
     ],
     "accountInfo": {
-      "Primary Contact": "Dr. Sarah Johnson, CTO",
-      "Phone": "(555) 123-4567",
-      "Email": "sarah.johnson@abchealthcare.com",
-      "Contract type": "3-Year Premium Support"
+      "primary contact": "John Doe, CTO",
+      "phone": "(555) 123-0001",
+      "email": "john.doe@acme.com",
+      "contract type": "3-Year Premium Support"
     },
     "sla": {
-      "Response time": "< 2 hours",
-      "Uptime guarantee": "99.9%",
-      "Next review": "July 15, 2025",
-      "Renewal date": "March 12, 2026"
+      "response time": "< 4 hours",
+      "uptime guarantee": "99.5%",
+      "next review": "June 30, 2026",
+      "renewal date": "Dec 01, 2027"
     },
     "infrastructure": [
       {
@@ -29,10 +49,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "IP", "value": "192.168.1.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "45%" },
-              { "label": "Memory", "value": "68%" }
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
             ]
           },
           {
@@ -40,10 +72,22 @@
             "subtitle": "",
             "status": "High CPU",
             "meta": [
-              { "label": "IP", "value": "192.168.2.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "89%" },
-              { "label": "Memory", "value": "72%" }
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
             ]
           }
         ]
@@ -56,10 +100,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Port used", "value": "18/24" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "67%" },
-              { "label": "Uptime", "value": "45 days" }
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45 days"
+              }
             ]
           },
           {
@@ -67,10 +123,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Port used", "value": "32/48" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "54%" },
-              { "label": "Uptime", "value": "23 days" }
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23 days"
+              }
             ]
           }
         ]
@@ -83,10 +151,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Clients", "value": "23" },
-              { "label": "Channel", "value": "36 (5 GHz)" },
-              { "label": "Signal", "value": "-42 dBm" },
-              { "label": "Bandwidth", "value": "45 Mbps" }
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36 (5 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45 Mbps"
+              }
             ]
           },
           {
@@ -94,10 +174,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Clients", "value": "18" },
-              { "label": "Channel", "value": "11 (2.4 GHz)" },
-              { "label": "Signal", "value": "-38 dBm" },
-              { "label": "Bandwidth", "value": "32 Mbps" }
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11 (2.4 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32 Mbps"
+              }
             ]
           }
         ]
@@ -110,10 +202,22 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Log storage", "value": "18/24" },
-              { "label": "Retention", "value": "7.2.3" },
-              { "label": "Daily logs", "value": "8.2 M" },
-              { "label": "Last backup", "value": "Today" }
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2M"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
             ]
           }
         ]
@@ -121,234 +225,45 @@
     ]
   },
   "2": {
-    "name": "XYZ Finance Group",
+    "name": "TechStartup Inc.",
     "kpis": [
-      { "label": "Network Uptime", "value": "99.5%", "indicator": "green" },
-      { "label": "Monthly Recurring", "value": "$12,300", "indicator": "green" },
-      { "label": "Active Devices", "value": "65", "indicator": "green" },
-      { "label": "Open Tickets", "value": "1", "indicator": "yellow" },
-      { "label": "Critical Alerts", "value": "2", "indicator": "red" }
-    ],
-    "accountInfo": {
-      "Primary Contact": "Mr. David Lee, CIO",
-      "Phone": "(555) 987-6543",
-      "Email": "david.lee@xyzfinance.com",
-      "Contract type": "3-Year Enterprise Support"
-    },
-    "sla": {
-      "Response time": "< 1 hour",
-      "Uptime guarantee": "99.99%",
-      "Next review": "August 20, 2025",
-      "Renewal date": "April 1, 2026"
-    },
-    "infrastructure": [
       {
-        "sectionTitle": "Security Appliances",
-        "items": [
-          {
-            "name": "FortiGate-200F-HQ",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "IP", "value": "10.0.0.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "55%" },
-              { "label": "Memory", "value": "62%" }
-            ]
-          },
-          {
-            "name": "FortiGate-100F-DR",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "IP", "value": "10.0.1.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "75%" },
-              { "label": "Memory", "value": "80%" }
-            ]
-          }
-        ]
+        "label": "Network Uptime",
+        "value": "99.7%",
+        "indicator": "green"
       },
       {
-        "sectionTitle": "Network Infrastructure",
-        "items": [
-          {
-            "name": "FortiSwitch-548E-Core",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Port used", "value": "40/48" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "70%" },
-              { "label": "Uptime", "value": "120 days" }
-            ]
-          },
-          {
-            "name": "FortiSwitch-224E-Floor7",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Port used", "value": "20/24" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "30%" },
-              { "label": "Uptime", "value": "17 days" }
-            ]
-          }
-        ]
+        "label": "Monthly Recurring",
+        "value": "$3,500",
+        "indicator": "green"
       },
       {
-        "sectionTitle": "Wireless Access Points",
-        "items": [
-          {
-            "name": "FortiAP-431F-Lobby",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Clients", "value": "32" },
-              { "label": "Channel", "value": "149 (5 GHz)" },
-              { "label": "Signal", "value": "-40 dBm" },
-              { "label": "Bandwidth", "value": "150 Mbps" }
-            ]
-          },
-          {
-            "name": "FortiAP-231G-DR",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Clients", "value": "12" },
-              { "label": "Channel", "value": "6 (2.4 GHz)" },
-              { "label": "Signal", "value": "-50 dBm" },
-              { "label": "Bandwidth", "value": "25 Mbps" }
-            ]
-          }
-        ]
+        "label": "Active Devices",
+        "value": "9",
+        "indicator": "green"
       },
       {
-        "sectionTitle": "Management & Monitoring",
-        "items": [
-          {
-            "name": "FortiAnalyzer-400F",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Log storage", "value": "22/32" },
-              { "label": "Retention", "value": "7.2.3" },
-              { "label": "Daily logs", "value": "9.8 M" },
-              { "label": "Last backup", "value": "Yesterday" }
-            ]
-          }
-        ]
+        "label": "Open Tickets",
+        "value": "1",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "0",
+        "indicator": "green"
       }
-    ]
-  },
-  "3": {
-    "name": "Global Retail Co",
-    "kpis": [
-      { "label": "Network Uptime", "value": "99.9%", "indicator": "green" },
-      { "label": "Monthly Recurring", "value": "$5,750", "indicator": "green" },
-      { "label": "Active Devices", "value": "30", "indicator": "green" },
-      { "label": "Open Tickets", "value": "0", "indicator": "green" },
-      { "label": "Critical Alerts", "value": "0", "indicator": "green" }
     ],
     "accountInfo": {
-      "Primary Contact": "Ms. Laura Smith, IT Director",
-      "Phone": "(555) 246-8100",
-      "Email": "laura.smith@globalretailco.com",
-      "Contract type": "2-Year Standard Support"
+      "primary contact": "Jane Smith, CEO",
+      "phone": "(555) 123-0002",
+      "email": "jane.smith@techstartup.com",
+      "contract type": "2-Year Standard Support"
     },
     "sla": {
-      "Response time": "< 4 hours",
-      "Uptime guarantee": "99.8%",
-      "Next review": "September 1, 2025",
-      "Renewal date": "January 5, 2026"
-    },
-    "infrastructure": [
-      {
-        "sectionTitle": "Security Appliances",
-        "items": [
-          {
-            "name": "FortiGate-60F-HQ",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "IP", "value": "172.16.0.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "35%" },
-              { "label": "Memory", "value": "40%" }
-            ]
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Network Infrastructure",
-        "items": [
-          {
-            "name": "FortiSwitch-124E-HQ",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Port used", "value": "12/24" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "20%" },
-              { "label": "Uptime", "value": "90 days" }
-            ]
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Wireless Access Points",
-        "items": [
-          {
-            "name": "FortiAP-321C-Store1",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Clients", "value": "5" },
-              { "label": "Channel", "value": "11 (2.4 GHz)" },
-              { "label": "Signal", "value": "-60 dBm" },
-              { "label": "Bandwidth", "value": "15 Mbps" }
-            ]
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Management & Monitoring",
-        "items": [
-          {
-            "name": "FortiAnalyzer-100F",
-            "subtitle": "",
-            "status": "Online",
-            "meta": [
-              { "label": "Log storage", "value": "5/10" },
-              { "label": "Retention", "value": "7.2.3" },
-              { "label": "Daily logs", "value": "2.1 M" },
-              { "label": "Last backup", "value": "Today" }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-   "4": {
-    "name": "Tech Innovators Inc",
-    "kpis": [
-      { "label": "Network Uptime", "value": "99.7%", "indicator": "green" },
-      { "label": "Monthly Recurring", "value": "$9,200", "indicator": "green" },
-      { "label": "Active Devices", "value": "55", "indicator": "green" },
-      { "label": "Open Tickets", "value": "3", "indicator": "yellow" },
-      { "label": "Critical Alerts", "value": "0", "indicator": "green" }
-    ],
-    "accountInfo": {
-      "Primary Contact": "Mr. John Doe, Network Manager",
-      "Phone": "(555) 321-4321",
-      "Email": "john.doe@techinnovators.com",
-      "Contract type": "2-Year Premium Support"
-    },
-    "sla": {
-      "Response time": "< 3 hours",
-      "Uptime guarantee": "99.9%",
-      "Next review": "October 10, 2025",
-      "Renewal date": "February 15, 2026"
+      "response time": "< 6 hours",
+      "uptime guarantee": "99.0%",
+      "next review": "May 15, 2026",
+      "renewal date": "Jan 01, 2027"
     },
     "infrastructure": [
       {
@@ -359,10 +274,45 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "IP", "value": "192.168.1.1" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "30%" },
-              { "label": "Memory", "value": "40%" }
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
+            ]
+          },
+          {
+            "name": "FortiGate-80F-Branch",
+            "subtitle": "",
+            "status": "High CPU",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
             ]
           }
         ]
@@ -375,10 +325,45 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Port used", "value": "12/24" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "20%" },
-              { "label": "Uptime", "value": "90 days" }
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45 days"
+              }
+            ]
+          },
+          {
+            "name": "FortiSwitch-48E-Floor2",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23 days"
+              }
             ]
           }
         ]
@@ -387,14 +372,49 @@
         "sectionTitle": "Wireless Access Points",
         "items": [
           {
-            "name": "FortiAP-321C-Store1",
+            "name": "FortiAP-231E-Lobby",
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Clients", "value": "5" },
-              { "label": "Channel", "value": "11 (2.4 GHz)" },
-              { "label": "Signal", "value": "-60 dBm" },
-              { "label": "Bandwidth", "value": "15 Mbps" }
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36 (5 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45 Mbps"
+              }
+            ]
+          },
+          {
+            "name": "FortiAP-231G-Floor1",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11 (2.4 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32 Mbps"
+              }
             ]
           }
         ]
@@ -403,54 +423,121 @@
         "sectionTitle": "Management & Monitoring",
         "items": [
           {
-            "name": "FortiAnalyzer-100F",
+            "name": "FortiAnalyzer-200F",
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Log storage", "value": "5/10" },
-              { "label": "Retention", "value": "7.2.3" },
-              { "label": "Daily logs", "value": "2.1 M" },
-              { "label": "Last backup", "value": "Today" }
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2M"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
             ]
           }
         ]
       }
     ]
   },
-   "5": {
-    "name": "Healthcare Solutions Ltd",
+  "3": {
+    "name": "Manufacturing Plus",
     "kpis": [
-      { "label": "Network Uptime", "value": "99.6%", "indicator": "green" },
-      { "label": "Monthly Recurring", "value": "$7,800", "indicator": "green" },
-      { "label": "Active Devices", "value": "40", "indicator": "green" },
-      { "label": "Open Tickets", "value": "4", "indicator": "yellow" },
-      { "label": "Critical Alerts", "value": "1", "indicator": "red" }
+      {
+        "label": "Network Uptime",
+        "value": "99.6%",
+        "indicator": "green"
+      },
+      {
+        "label": "Monthly Recurring",
+        "value": "$8,945",
+        "indicator": "green"
+      },
+      {
+        "label": "Active Devices",
+        "value": "35",
+        "indicator": "green"
+      },
+      {
+        "label": "Open Tickets",
+        "value": "2",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "1",
+        "indicator": "red"
+      }
     ],
     "accountInfo": {
-      "Primary Contact": "Ms. Emily White, IT Coordinator",
-      "Phone": "(555) 654-3210",
-      "Email": "emily.white@healthcaresolutions.com",
-      "Contract type": "1-Year Standard Support"
+      "primary contact": "Mike Chen, CIO",
+      "phone": "(555) 123-0003",
+      "email": "mike.chen@manuplus.com",
+      "contract type": "5-Year Premium Support"
     },
     "sla": {
-      "Response time": "< 6 hours",
-      "Uptime guarantee": "99.7%",
-      "Next review": "November 5, 2025",
-      "Renewal date": "March 20, 2026"
+      "response time": "< 3 hours",
+      "uptime guarantee": "99.9%",
+      "next review": "Aug 30, 2026",
+      "renewal date": "Feb 15, 2028"
     },
     "infrastructure": [
       {
         "sectionTitle": "Security Appliances",
         "items": [
           {
-            "name": "FortiGate-60F-HQ",
+            "name": "FortiGate-100F-HQ",
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "IP", "value": "192.168.1.2" },
-              { "label": "Firmware", "value": "7.4.1" },
-              { "label": "CPU", "value": "25%" },
-              { "label": "Memory", "value": "35%" }
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
+            ]
+          },
+          {
+            "name": "FortiGate-80F-Branch",
+            "subtitle": "",
+            "status": "High CPU",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
             ]
           }
         ]
@@ -463,10 +550,45 @@
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Port used", "value": "12/24" },
-              { "label": "Firmware", "value": "7.2.3" },
-              { "label": "PoE load", "value": "20%" },
-              { "label": "Uptime", "value": "90 days" }
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45 days"
+              }
+            ]
+          },
+          {
+            "name": "FortiSwitch-48E-Floor2",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23 days"
+              }
             ]
           }
         ]
@@ -475,14 +597,49 @@
         "sectionTitle": "Wireless Access Points",
         "items": [
           {
-            "name": "FortiAP-321C-Store1",
+            "name": "FortiAP-231E-Lobby",
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Clients", "value": "5" },
-              { "label": "Channel", "value": "11 (2.4 GHz)" },
-              { "label": "Signal", "value": "-60 dBm" },
-              { "label": "Bandwidth", "value": "15 Mbps" }
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36 (5 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45 Mbps"
+              }
+            ]
+          },
+          {
+            "name": "FortiAP-231G-Floor1",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11 (2.4 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32 Mbps"
+              }
             ]
           }
         ]
@@ -491,14 +648,476 @@
         "sectionTitle": "Management & Monitoring",
         "items": [
           {
-            "name": "FortiAnalyzer-100F",
+            "name": "FortiAnalyzer-200F",
             "subtitle": "",
             "status": "Online",
             "meta": [
-              { "label": "Log storage", "value": "5/10" },
-              { "label": "Retention", "value": "7.2.3" },
-              { "label": "Daily logs", "value": "2.1 M" },
-              { "label": "Last backup", "value": "Today" }
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2M"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "4": {
+    "name": "RetailChain Solutions",
+    "kpis": [
+      {
+        "label": "Network Uptime",
+        "value": "99.2%",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Monthly Recurring",
+        "value": "$3,429",
+        "indicator": "green"
+      },
+      {
+        "label": "Active Devices",
+        "value": "17",
+        "indicator": "green"
+      },
+      {
+        "label": "Open Tickets",
+        "value": "3",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "0",
+        "indicator": "green"
+      }
+    ],
+    "accountInfo": {
+      "primary contact": "Emily Jones, IT Director",
+      "phone": "(555) 123-0004",
+      "email": "emily.jones@retailchain.com",
+      "contract type": "3-Year Standard Support"
+    },
+    "sla": {
+      "response time": "< 8 hours",
+      "uptime guarantee": "98.5%",
+      "next review": "Sept 10, 2026",
+      "renewal date": "Mar 01, 2027"
+    },
+    "infrastructure": [
+      {
+        "sectionTitle": "Security Appliances",
+        "items": [
+          {
+            "name": "FortiGate-100F-HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
+            ]
+          },
+          {
+            "name": "FortiGate-80F-Branch",
+            "subtitle": "",
+            "status": "High CPU",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Network Infrastructure",
+        "items": [
+          {
+            "name": "FortiSwitch-124E-HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45 days"
+              }
+            ]
+          },
+          {
+            "name": "FortiSwitch-48E-Floor2",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23 days"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Wireless Access Points",
+        "items": [
+          {
+            "name": "FortiAP-231E-Lobby",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36 (5 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45 Mbps"
+              }
+            ]
+          },
+          {
+            "name": "FortiAP-231G-Floor1",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11 (2.4 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32 Mbps"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Management & Monitoring",
+        "items": [
+          {
+            "name": "FortiAnalyzer-200F",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2M"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "5": {
+    "name": "Legal Partners LLC",
+    "kpis": [
+      {
+        "label": "Network Uptime",
+        "value": "98.9%",
+        "indicator": "yellow"
+      },
+      {
+        "label": "Monthly Recurring",
+        "value": "$2,875",
+        "indicator": "green"
+      },
+      {
+        "label": "Active Devices",
+        "value": "10",
+        "indicator": "green"
+      },
+      {
+        "label": "Open Tickets",
+        "value": "0",
+        "indicator": "green"
+      },
+      {
+        "label": "Critical Alerts",
+        "value": "0",
+        "indicator": "green"
+      }
+    ],
+    "accountInfo": {
+      "primary contact": "Sarah Johnson, Managing Partner",
+      "phone": "(555) 123-0005",
+      "email": "sarah.johnson@legalpartners.com",
+      "contract type": "3-Year Premium Support"
+    },
+    "sla": {
+      "response time": "< 12 hours",
+      "uptime guarantee": "97.5%",
+      "next review": "Oct 05, 2026",
+      "renewal date": "Dec 31, 2027"
+    },
+    "infrastructure": [
+      {
+        "sectionTitle": "Security Appliances",
+        "items": [
+          {
+            "name": "FortiGate-100F-HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.1.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "45%"
+              },
+              {
+                "label": "Memory",
+                "value": "68%"
+              }
+            ]
+          },
+          {
+            "name": "FortiGate-80F-Branch",
+            "subtitle": "",
+            "status": "High CPU",
+            "meta": [
+              {
+                "label": "IP",
+                "value": "192.168.2.1"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.4.1"
+              },
+              {
+                "label": "CPU",
+                "value": "89%"
+              },
+              {
+                "label": "Memory",
+                "value": "72%"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Network Infrastructure",
+        "items": [
+          {
+            "name": "FortiSwitch-124E-HQ",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "18/24"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "67%"
+              },
+              {
+                "label": "Uptime",
+                "value": "45 days"
+              }
+            ]
+          },
+          {
+            "name": "FortiSwitch-48E-Floor2",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Port used",
+                "value": "32/48"
+              },
+              {
+                "label": "Firmware",
+                "value": "7.2.3"
+              },
+              {
+                "label": "PoE load",
+                "value": "54%"
+              },
+              {
+                "label": "Uptime",
+                "value": "23 days"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Wireless Access Points",
+        "items": [
+          {
+            "name": "FortiAP-231E-Lobby",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "23"
+              },
+              {
+                "label": "Channel",
+                "value": "36 (5 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-42 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "45 Mbps"
+              }
+            ]
+          },
+          {
+            "name": "FortiAP-231G-Floor1",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Clients",
+                "value": "18"
+              },
+              {
+                "label": "Channel",
+                "value": "11 (2.4 GHz)"
+              },
+              {
+                "label": "Signal",
+                "value": "-38 dBm"
+              },
+              {
+                "label": "Bandwidth",
+                "value": "32 Mbps"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Management & Monitoring",
+        "items": [
+          {
+            "name": "FortiAnalyzer-200F",
+            "subtitle": "",
+            "status": "Online",
+            "meta": [
+              {
+                "label": "Log storage",
+                "value": "18/24"
+              },
+              {
+                "label": "Retention",
+                "value": "7.2.3"
+              },
+              {
+                "label": "Daily logs",
+                "value": "8.2M"
+              },
+              {
+                "label": "Last backup",
+                "value": "Today"
+              }
             ]
           }
         ]

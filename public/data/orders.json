@@ -1,262 +1,221 @@
 [
   {
     "id": 1,
-    "customerId": 5,
-    "offeringId": 4,
-    "stage": "negotiation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00001",
-    "contractStart": "2025-05-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-05-02",
-    "lastModified": "2025-06-01"
+    "customerName": "Acme Inc.",
+    "contractNumber": "ORD-1001",
+    "offeringId": 12,
+    "status": "confirmed",
+    "stage": "review",
+    "dueDate": "2025-08-04",
+    "createdAt": "2025-07-20T12:00:00Z",
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 2,
+        "unitPrice": 1850,
+        "total": 3700
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 4,
+        "unitPrice": 1200,
+        "total": 4800
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 8,
+        "unitPrice": 420,
+        "total": 3360
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 2,
+        "unitPrice": 1650,
+        "total": 3300
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 14,
+        "unitPrice": 180,
+        "total": 2520
+      }
+    ]
   },
   {
     "id": 2,
-    "customerId": 5,
-    "offeringId": 3,
-    "stage": "activation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00002",
-    "contractStart": "2025-05-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-05-02",
-    "lastModified": "2025-06-01"
+    "customerName": "TechStartup Inc.",
+    "contractNumber": "ORD-1002",
+    "offeringId": 20,
+    "status": "staging",
+    "stage": "allocation",
+    "dueDate": "2025-08-05",
+    "createdAt": "2025-07-19T09:00:00Z",
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 1,
+        "unitPrice": 1850,
+        "total": 1850
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 2,
+        "unitPrice": 1200,
+        "total": 2400
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 4,
+        "unitPrice": 420,
+        "total": 1680
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 1,
+        "unitPrice": 1650,
+        "total": 1650
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 8,
+        "unitPrice": 180,
+        "total": 1440
+      }
+    ]
   },
   {
     "id": 3,
-    "customerId": 4,
-    "offeringId": 6,
-    "stage": "closed",
-    "activationIndex": 5,
-    "contractNumber": "ORD-00003",
-    "contractStart": "2024-12-03",
-    "contractEnd": "2024-11-03",
-    "comments": [],
-    "createdAt": "2024-12-03",
-    "lastModified": "2025-04-02"
+    "customerName": "Manufacturing Plus",
+    "contractNumber": "ORD-1003",
+    "offeringId": 30,
+    "status": "ready",
+    "stage": "validation",
+    "dueDate": "2025-08-08",
+    "createdAt": "2025-07-18T11:30:00Z",
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 3,
+        "unitPrice": 1850,
+        "total": 5550
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 6,
+        "unitPrice": 1200,
+        "total": 7200
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 12,
+        "unitPrice": 420,
+        "total": 5040
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 3,
+        "unitPrice": 1650,
+        "total": 4950
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 16,
+        "unitPrice": 180,
+        "total": 2880
+      }
+    ]
   },
   {
     "id": 4,
-    "customerId": 2,
-    "offeringId": 3,
-    "stage": "prospect",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00004",
-    "contractStart": "2025-03-03",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-03-03",
-    "lastModified": "2025-06-01"
+    "customerName": "RetailChain Solutions",
+    "contractNumber": "ORD-1004",
+    "offeringId": 12,
+    "status": "deployed",
+    "stage": "deployment",
+    "dueDate": "2025-08-04",
+    "createdAt": "2025-07-18T15:00:00Z",
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 2,
+        "unitPrice": 1850,
+        "total": 3700
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 4,
+        "unitPrice": 1200,
+        "total": 4800
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 8,
+        "unitPrice": 420,
+        "total": 3360
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 2,
+        "unitPrice": 1650,
+        "total": 3300
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 14,
+        "unitPrice": 180,
+        "total": 2520
+      }
+    ]
   },
   {
     "id": 5,
-    "customerId": 3,
-    "offeringId": 10,
-    "stage": "prospect",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00005",
-    "contractStart": "2024-12-03",
-    "contractEnd": "2024-09-04",
-    "comments": [],
-    "createdAt": "2024-12-03",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 6,
-    "customerId": 4,
-    "offeringId": 4,
-    "stage": "negotiation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00006",
-    "contractStart": "2024-12-03",
-    "contractEnd": "2024-09-04",
-    "comments": [],
-    "createdAt": "2024-12-03",
-    "lastModified": "2025-04-02"
-  },
-  {
-    "id": 7,
-    "customerId": 3,
-    "offeringId": 1,
-    "stage": "closed",
-    "activationIndex": 5,
-    "contractNumber": "ORD-00007",
-    "contractStart": "2024-12-03",
-    "contractEnd": "2024-10-04",
-    "comments": [],
-    "createdAt": "2024-12-03",
-    "lastModified": "2025-01-02"
-  },
-  {
-    "id": 8,
-    "customerId": 5,
-    "offeringId": 9,
-    "stage": "negotiation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00008",
-    "contractStart": "2025-04-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-04-02",
-    "lastModified": "2025-04-02"
-  },
-  {
-    "id": 9,
-    "customerId": 1,
-    "offeringId": 9,
-    "stage": "activation",
-    "activationIndex": 1,
-    "contractNumber": "ORD-00009",
-    "contractStart": "2025-04-02",
-    "contractEnd": "2025-01-02",
-    "comments": [],
-    "createdAt": "2025-04-02",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 10,
-    "customerId": 3,
-    "offeringId": 3,
-    "stage": "prospect",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00010",
-    "contractStart": "2025-04-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-04-02",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 11,
-    "customerId": 4,
-    "offeringId": 4,
-    "stage": "activation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00011",
-    "contractStart": "2025-02-01",
-    "contractEnd": "2024-12-03",
-    "comments": [],
-    "createdAt": "2025-02-01",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 12,
-    "customerId": 5,
-    "offeringId": 9,
-    "stage": "negotiation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00012",
-    "contractStart": "2025-01-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-01-02",
-    "lastModified": "2025-05-02"
-  },
-  {
-    "id": 13,
-    "customerId": 2,
-    "offeringId": 12,
-    "stage": "closed",
-    "activationIndex": 5,
-    "contractNumber": "ORD-00013",
-    "contractStart": "2025-03-03",
-    "contractEnd": "2025-02-01",
-    "comments": [],
-    "createdAt": "2025-03-03",
-    "lastModified": "2025-03-03"
-  },
-  {
-    "id": 14,
-    "customerId": 1,
-    "offeringId": 6,
-    "stage": "activation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00014",
-    "contractStart": "2025-02-01",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-02-01",
-    "lastModified": "2025-05-02"
-  },
-  {
-    "id": 15,
-    "customerId": 3,
-    "offeringId": 5,
-    "stage": "activation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00015",
-    "contractStart": "2025-02-01",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-02-01",
-    "lastModified": "2025-02-01"
-  },
-  {
-    "id": 16,
-    "customerId": 5,
-    "offeringId": 9,
-    "stage": "delivery",
-    "activationIndex": 5,
-    "contractNumber": "ORD-00016",
-    "contractStart": "2025-04-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-04-02",
-    "lastModified": "2025-05-02"
-  },
-  {
-    "id": 17,
-    "customerId": 4,
-    "offeringId": 10,
-    "stage": "activation",
-    "activationIndex": 3,
-    "contractNumber": "ORD-00017",
-    "contractStart": "2025-02-01",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-02-01",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 18,
-    "customerId": 4,
-    "offeringId": 8,
-    "stage": "prospect",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00018",
-    "contractStart": "2025-05-02",
-    "contractEnd": "2025-04-02",
-    "comments": [],
-    "createdAt": "2025-05-02",
-    "lastModified": "2025-06-01"
-  },
-  {
-    "id": 19,
-    "customerId": 5,
-    "offeringId": 5,
-    "stage": "delivery",
-    "activationIndex": 5,
-    "contractNumber": "ORD-00019",
-    "contractStart": "2024-12-03",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2024-12-03",
-    "lastModified": "2025-05-02"
-  },
-  {
-    "id": 20,
-    "customerId": 2,
-    "offeringId": 9,
-    "stage": "negotiation",
-    "activationIndex": 0,
-    "contractNumber": "ORD-00020",
-    "contractStart": "2025-05-02",
-    "contractEnd": "",
-    "comments": [],
-    "createdAt": "2025-05-02",
-    "lastModified": "2025-05-02"
+    "customerName": "Legal Partners LLC",
+    "contractNumber": "ORD-1005",
+    "offeringId": null,
+    "status": "negotiation",
+    "stage": "review",
+    "dueDate": "2025-08-07",
+    "createdAt": "2025-07-17T10:00:00Z",
+    "items": []
   }
 ]

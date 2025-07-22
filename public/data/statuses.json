@@ -1,0 +1,9 @@
+[
+  { "code": "prospect", "label": "Prospect", "color": "gray" },
+  { "code": "negotiation", "label": "Negotiation", "color": "blue" },
+  { "code": "confirmed", "label": "Confirmed", "color": "green" },
+  { "code": "staging", "label": "Staging", "color": "purple" },
+  { "code": "ready", "label": "Ready", "color": "orange" },
+  { "code": "deployed", "label": "Deployed", "color": "teal" },
+  { "code": "closed", "label": "Closed", "color": "gray" }
+]
