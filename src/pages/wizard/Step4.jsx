@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import orderWizardService from '../../services/orderWizardService';
 
-// Step 4 – Testing & Validation
+// Step 4 – Testing & Validation
 //
-// Presents test categories (firewall, network, wireless, security) and
-// allows starting, resetting or retrying tests.  Test statuses are
-// persisted through the service.  A failure note prompts the user
-// to restart a specific test.
-
+// Renders test categories with status indicators and start/reset
+// actions.  Also displays a failure note when provided by the
+// wizard data.  Running and resetting tests updates the wizard
+// state through the service.
 export default function Step4() {
   const [tests, setTests] = useState(null);
   const [failureNote, setFailureNote] = useState(null);
 
-  // Colour classes for statuses
   const statusColors = {
     Passed: 'bg-green-100 text-green-800',
     Running: 'bg-yellow-100 text-yellow-800',
@@ -40,10 +38,7 @@ export default function Step4() {
     };
   }, []);
 
-  // Start a test and refresh local state
-  const handleStart = (categoryKey, testName) => {
-    const serviceKey = categoryKey.toLowerCase().replace(/ /g, '').replace('tests', 'Tests');
-    orderWizardService.startTest(serviceKey, testName);
+  const updateTests = () => {
     const updated = orderWizardService.getCurrentOrder();
     setTests({
       'Firewall Tests': updated.firewallTests,
@@ -53,17 +48,26 @@ export default function Step4() {
     });
   };
 
-  // Reset a test back to Pending
+  const runAll = () => {
+    Object.entries(tests).forEach(([category, list]) => {
+      const serviceKey = category.toLowerCase().replace(/ /g, '').replace('tests', 'Tests');
+      list.forEach((t) => {
+        orderWizardService.startTest(serviceKey, t.test);
+      });
+    });
+    updateTests();
+  };
+
+  const handleStart = (categoryKey, testName) => {
+    const serviceKey = categoryKey.toLowerCase().replace(/ /g, '').replace('tests', 'Tests');
+    orderWizardService.startTest(serviceKey, testName);
+    updateTests();
+  };
+
   const handleReset = (categoryKey, testName) => {
     const serviceKey = categoryKey.toLowerCase().replace(/ /g, '').replace('tests', 'Tests');
     orderWizardService.resetTest(serviceKey, testName);
-    const updated = orderWizardService.getCurrentOrder();
-    setTests({
-      'Firewall Tests': updated.firewallTests,
-      'Network Tests': updated.networkTests,
-      'Wireless Tests': updated.wirelessTests,
-      'Security Tests': updated.securityTests,
-    });
+    updateTests();
   };
 
   if (!tests) {
@@ -71,22 +75,48 @@ export default function Step4() {
   }
 
   return (
-    <div>
+    <div className="bg-white shadow rounded-lg p-6 space-y-6">
+      {/* Action bar */}
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={runAll}
+          className="px-4 py-2 bg-blue-600 text-white rounded shadow text-sm hover:bg-blue-700"
+        >
+          Run All Tests
+        </button>
+        <button className="px-4 py-2 bg-gray-200 rounded shadow text-sm">
+          Test Report
+        </button>
+        <button className="px-4 py-2 bg-green-600 text-white rounded shadow text-sm hover:bg-green-700">
+          Approve Tests
+        </button>
+      </div>
+      {/* Test categories */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {Object.entries(tests).map(([category, list]) => (
-          <div key={category}>
+          <div
+            key={category}
+            className="bg-gray-50 border border-gray-200 rounded-lg p-4"
+          >
             <h3 className="text-lg font-semibold mb-2">{category}</h3>
             <div className="space-y-2 text-sm">
               {list.map((test) => (
-                <div key={test.test} className="flex items-center justify-between p-2 border rounded">
+                <div
+                  key={test.test}
+                  className="flex items-center justify-between p-2 border rounded"
+                >
                   <span>{test.test}</span>
                   <div className="flex items-center space-x-2">
-                    <span className={`px-2 py-1 rounded text-xs ${statusColors[test.status]}`}>
+                    <span
+                      className={`px-2 py-1 rounded text-xs ${
+                        statusColors[test.status]
+                      }`}
+                    >
                       {test.status}
                     </span>
                     {test.status === 'Pending' && (
                       <button
-                        className="px-3 py-1 bg-blue-600 text-white rounded"
+                        className="px-3 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700"
                         onClick={() => handleStart(category, test.test)}
                       >
                         Start
@@ -94,7 +124,7 @@ export default function Step4() {
                     )}
                     {test.status === 'Running' && (
                       <button
-                        className="px-3 py-1 bg-yellow-600 text-white rounded"
+                        className="px-3 py-1 bg-yellow-600 text-white rounded text-xs hover:bg-yellow-700"
                         onClick={() => handleReset(category, test.test)}
                       >
                         Reset
@@ -102,7 +132,7 @@ export default function Step4() {
                     )}
                     {test.status === 'Failed' && (
                       <button
-                        className="px-3 py-1 bg-red-600 text-white rounded"
+                        className="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700"
                         onClick={() => handleReset(category, test.test)}
                       >
                         Retry
@@ -115,14 +145,14 @@ export default function Step4() {
           </div>
         ))}
       </div>
+      {/* Failure note */}
       {failureNote && (
-        <div className="mt-6 bg-red-50 p-4 border border-red-200 rounded">
-          <h4 className="text-red-700 font-semibold">Test Failure Detected</h4>
+        <div className="bg-red-50 border border-red-200 rounded p-4">
+          <h4 className="text-red-700 font-semibold mb-1">Test Failure Detected</h4>
           <p className="text-sm text-red-700">{failureNote.message}</p>
           <button
-            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded"
+            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             onClick={() => {
-              // Default action: restart the failed IPS Signatures test
               handleReset('Security Tests', 'IPS Signatures');
               handleStart('Security Tests', 'IPS Signatures');
             }}

@@ -1,81 +1,87 @@
-// Service to load and retrieve detailed customer information for the
-// Customer Detail Dashboard.  This service stores the fetched data in
-// localStorage under the key "customerDetails" so it can be accessed
-// synchronously by the dashboard component.
+/*
+ * customerDetailsService.js
+ *
+ * Provides functions to load and retrieve customer detail data from
+ * a JSON file in the public/data folder.  The service caches the
+ * data in memory to avoid repeated fetches.  It exposes both named
+ * and default exports so existing code that expects a default
+ * export continues to work.
+ */
 
 /**
- * Load all customer details from the static JSON file located at
- * /public/data/customer_details.json.  Once loaded, the data is cached
- * into localStorage.  Call this function once at application startup
- * (e.g. from App.jsx) or before rendering the CustomerDashboard.
+ * In-memory cache for customer detail objects.  Once loaded from either
+ * localStorage or the JSON file, the data is kept here to avoid
+ * repeated parsing or network requests.  When seeding from localStorage,
+ * we validate JSON parsing errors and gracefully handle missing data.
+ */
+let detailsCache = null;
+
+/**
+ * Load customer details from `/data/customer_details.json`.  If the
+ * cache is already populated, the cached data is returned.  The
+ * JSON file should be structured as an object keyed by customer ID.
  */
 export async function loadCustomerDetails() {
-  try {
-    const response = await fetch('/data/customer_details.json');
-    if (!response.ok) {
-      throw new Error('Failed to fetch customer details');
+  // If we have already loaded the details into memory, return them.
+  if (detailsCache) return detailsCache;
+
+  // First try to read from localStorage.  Some deployments may seed
+  // customer details via localStorage instead of the static JSON file.
+  const stored = localStorage.getItem('customerDetails');
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      // Only set detailsCache if parsed is an object
+      if (parsed && typeof parsed === 'object') {
+        detailsCache = parsed;
+        return detailsCache;
+      }
+    } catch (err) {
+      // Corrupt or invalid JSON in localStorage should be ignored
+      console.warn('Invalid customerDetails in localStorage, ignoring', err);
     }
-    const data = await response.json();
-    localStorage.setItem('customerDetails', JSON.stringify(data));
-  } catch (err) {
-    console.error(err);
+  }
+
+  // If no localStorage entry exists, fetch from the static JSON file.
+  try {
+    const res = await fetch('/data/customer_details.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    // Persist to localStorage for subsequent loads
+    localStorage.setItem('customerDetails', JSON.stringify(json));
+    detailsCache = json;
+    return detailsCache;
+  } catch (e) {
+    console.error('Failed to load customer details', e);
+    // Ensure we return an empty object rather than null
+    detailsCache = {};
+    return detailsCache;
   }
 }
 
 /**
- * Get the detailed information for a single customer by ID.  The ID
- * should match the string keys used in customer_details.json.  If the
- * details have not been loaded into localStorage yet, this function
- * returns undefined.
- *
- * @param {string|number} id - The customer ID
- * @returns {object|undefined} The detail object or undefined
- */
-/**
- * Get the detailed information for a single customer by ID.  This function
- * returns a Promise to align with older code that expected an async API.
- * If the details have not been loaded yet, it will call loadCustomerDetails()
- * automatically before resolving the requested entry.  The promise resolves
- * with the customer detail object or undefined if none is found.
- *
- * @param {string|number} id
- * @returns {Promise<object|undefined>}
+ * Get a single customer detail object by ID.  Returns null if the
+ * ID does not exist in the data.  Always returns a promise.
  */
 export async function getCustomerDetail(id) {
-  let stored = localStorage.getItem('customerDetails');
-  if (!stored) {
-    // Attempt to load details if not already present
-    await loadCustomerDetails();
-    stored = localStorage.getItem('customerDetails');
-    if (!stored) return undefined;
+  const data = await loadCustomerDetails();
+  if (data && Object.prototype.hasOwnProperty.call(data, String(id))) {
+    return data[String(id)];
   }
-  try {
-    const details = JSON.parse(stored);
-    return details[String(id)];
-  } catch (err) {
-    console.error('Failed to parse customer details from localStorage', err);
-    return undefined;
-  }
+  return undefined;
 }
 
 /**
- * Backwards-compatible alias for getCustomerDetail().  Some existing components
- * (e.g. CustomerDashboard.jsx) still call customerDetailsService.getById(),
- * so expose getById as a named export that delegates to getCustomerDetail.
- *
- * @param {string|number} id - The customer ID
- * @returns {object|undefined} The detail object or undefined
+ * Alias for getCustomerDetail() to maintain backward compatibility.
  */
-export function getById(id) {
+export async function getById(id) {
   return getCustomerDetail(id);
 }
 
-// Provide a default export so that existing imports like
-// `import customerDetailsService from './services/customerDetailsService'`
-// continue to work.  The default export exposes the load and get functions.
+// Default export to maintain compatibility with import patterns like
+// `import customerDetailsService from '../services/customerDetailsService'`.
 export default {
   loadCustomerDetails,
   getCustomerDetail,
-  // Also expose getById on the default export for backwards compatibility
   getById,
 };

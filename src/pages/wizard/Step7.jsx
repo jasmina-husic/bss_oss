@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import orderWizardService from '../../services/orderWizardService';
 
-// Step 7 – Go-Live & Customer Handover
+// Step 7 – Go‑Live & Customer Handover
 //
-// Presents a summary of the deployment, a go‑live validation list,
-// details of the handover, training and support items, plus a
-// customer satisfaction survey.  All data is pulled from the
-// wizard store and read only.
-
+// Summarises the deployment, displays validation items with
+// checkmarks and lists handover/training/support details.  Action
+// buttons let the user send the final report or close the order.
 export default function Step7() {
   const [summary, setSummary] = useState(null);
   const [validation, setValidation] = useState(null);
   const [handover, setHandover] = useState(null);
   const [training, setTraining] = useState(null);
   const [support, setSupport] = useState(null);
-  const [survey, setSurvey] = useState(null);
 
   useEffect(() => {
     let mounted = true;
-    async function fetchData() {
+    async function load() {
       const data = await orderWizardService.getWizardData();
       if (mounted && data) {
         setSummary(data.deploymentSummary);
@@ -26,85 +23,79 @@ export default function Step7() {
         setHandover(data.customerHandoverCompleted);
         setTraining(data.trainingCompleted);
         setSupport(data.supportActivated);
-        setSurvey(data.customerSatisfactionSurvey);
       }
     }
-    fetchData();
+    load();
     return () => {
       mounted = false;
     };
   }, []);
 
-  if (!summary || !validation || !handover || !training || !support || !survey) {
-    return <div>Loading...</div>;
-  }
+  if (!summary) return <div>Loading...</div>;
 
   return (
-    <div className="space-y-6">
-      <div className="bg-green-50 p-4 border border-green-200 rounded">
-        <p className="text-green-700 font-semibold">Deployment Successfully Completed!</p>
-        <p className="text-sm">Your network is now live and operational</p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Deployment Summary</h3>
-          <div className="space-y-1">
-            {Object.entries(summary).map(([label, value]) => (
-              <p key={label}>
-                <span className="font-semibold">{label}:</span> {value}
-              </p>
-            ))}
-          </div>
+    <div className="bg-white shadow rounded-lg p-6 space-y-6">
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <h3 className="text-lg font-semibold mb-2">Deployment Summary</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+          {Object.entries(summary).map(([label, value]) => (
+            <div
+              key={label}
+              className="border-l-2 border-blue-600 pl-3"
+            >
+              <p className="font-medium">{label}</p>
+              <p>{value}</p>
+            </div>
+          ))}
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Go-Live Validation</h3>
-          <ul className="list-disc pl-4 space-y-1">
-            {validation.map((obj, idx) => (
-              <li key={idx}>{obj.item}</li>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <h3 className="text-lg font-semibold mb-2">Go‑Live Validation</h3>
+          <ul className="space-y-1 text-sm">
+            {validation.map((item, idx) => (
+              <li
+                key={idx}
+                className="flex items-start space-x-2"
+              >
+                <span className="text-green-600">✔</span>
+                <span>{item.item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <h3 className="text-lg font-semibold mb-2">
+            Customer Handover Completed
+          </h3>
+          <ul className="list-disc pl-4 text-sm space-y-1">
+            {handover.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+          <h3 className="text-lg font-semibold mb-2 mt-4">
+            Training Completed
+          </h3>
+          <ul className="list-disc pl-4 text-sm space-y-1">
+            {training.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+          <h3 className="text-lg font-semibold mb-2 mt-4">Support Activated</h3>
+          <ul className="list-disc pl-4 text-sm space-y-1">
+            {support.map((item, idx) => (
+              <li key={idx}>{item}</li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Customer Handover Completed</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="font-semibold mb-1">Documentation Delivered</h4>
-              <ul className="list-disc pl-4 space-y-1">
-                {handover.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-1">Training Completed</h4>
-              <ul className="list-disc pl-4 space-y-1">
-                {training.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-1">Support Activated</h4>
-              <ul className="list-disc pl-4 space-y-1">
-                {support.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Customer Satisfaction Survey</h3>
-          <div className="bg-gray-100 p-4 rounded">
-            <p className="font-semibold mb-1">
-              {'★'.repeat(survey.rating)}
-            </p>
-            <p className="text-sm italic">"{survey.comment}"</p>
-            <p className="text-sm mt-1">— Customer rated the deployment experience</p>
-          </div>
-        </div>
+      <div className="flex justify-end gap-2">
+        <button className="px-4 py-2 bg-gray-200 rounded shadow text-sm">
+          Send Final Report
+        </button>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded shadow text-sm hover:bg-blue-700">
+          Close Order &amp; Activate Monitoring
+        </button>
       </div>
     </div>
   );

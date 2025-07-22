@@ -1,37 +1,53 @@
+/*
+ * orderService.js
+ *
+ * Provides functions to load, query, and mutate orders stored in
+ * LocalStorage.  This version gracefully handles missing createdAt
+ * timestamps by assigning a default ISO date when seeding data.
+ */
+
 const LS = "bss_orders";
 let cache = null;
 
-/* ① Save helper */
+/* Save helper */
 function save() {
   localStorage.setItem(LS, JSON.stringify(cache));
 }
 
-/* ② NEW – seed from /data/orders.json the first time */
+/* Seed default orders if cache is empty.  Adds createdAt if missing. */
 async function seedIfEmpty() {
-  if (cache.length) return; // already has data
+  if (cache.length) return; // already seeded
   try {
     const res = await fetch("/data/orders.json");
     if (!res.ok) return;
     const seed = await res.json();
     if (Array.isArray(seed) && seed.length) {
+      seed.forEach((o) => {
+        if (!o.createdAt) {
+          // assign a default timestamp if missing
+          o.createdAt = new Date().toISOString();
+        }
+      });
       cache.push(...seed);
-      save(); // persist to LocalStorage for next load
+      save();
     }
   } catch {
-    /* ignore network errors – run with empty cache */
+    // ignore network errors
   }
 }
 
+/* Load orders from LocalStorage and seed if necessary */
 async function load() {
   if (cache) return cache;
   const stored = localStorage.getItem(LS);
   cache = stored ? JSON.parse(stored) : [];
-  await seedIfEmpty();        // ← auto-populate if empty
+  await seedIfEmpty();
   return cache;
 }
-/* ───────── queries ───────── */
+
+/* Queries */
 export async function fetchOrders() {
-  return [...await load()];
+  return [...(await load())];
 }
 
 export async function searchOrders(term = "") {
@@ -48,17 +64,18 @@ export async function getOrderById(id) {
   return cache.find((o) => o.id === id) || null;
 }
 
-/* ───────── mutations ───────── */
+/* Mutations */
 export async function addOrder(o) {
   await load();
   const id = Math.max(0, ...cache.map((x) => x.id)) + 1;
-  cache.push({
+  const newOrder = {
     ...o,
     id,
     comments: [],
     activationIndex: 0,
     createdAt: new Date().toISOString(),
-  });
+  };
+  cache.push(newOrder);
   save();
   return id;
 }
@@ -67,7 +84,11 @@ export async function updateOrder(id, patch) {
   await load();
   const i = cache.findIndex((o) => o.id === id);
   if (i > -1) {
-    cache[i] = { ...cache[i], ...patch, lastModified: new Date().toISOString() };
+    cache[i] = {
+      ...cache[i],
+      ...patch,
+      lastModified: new Date().toISOString(),
+    };
     save();
   }
 }
@@ -80,6 +101,7 @@ export async function addComment(id, text, stage) {
   ord.comments.push({ text, stage, date: new Date().toISOString() });
   save();
 }
+
 export function isBillable(order) {
   return ["delivery", "closed"].includes(order.stage);
 }

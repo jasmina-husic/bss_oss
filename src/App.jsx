@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import AppSwitcher from "./components/AppSwitcher";
 import { useAuth } from "./contexts/AuthContext";
@@ -22,16 +22,18 @@ import CatalogOfferings from "./pages/CatalogOfferings";
 import OfferingSpecForm from "./pages/OfferingSpecForm";
 import CategoryCatalog from "./pages/CategoryCatalog";
 import PriceCatalog from "./pages/PriceCatalog.jsx";
-import Orders from "./pages/Orders";
+import Orders from "./pages/Orders.jsx";
 import OrderNew from "./pages/OrderNew";
-import OrderForm from "./pages/OrderForm";
+import Order from "./pages/OrderForm.jsx";
+import OrderFormDetail from "./pages/OrderForm.jsx";
 import Billing from "./pages/Billing";
 import Portal from "./pages/Portal";
-
 // NEW: import the wizard for Spring Promo Bundle setup
 import Wizard from "./pages/wizard/Wizard";
 
-/* ─── private route helper ─── */
+/*
+ * PrivateRoute component for protecting pages based on user roles.
+ */
 function PrivateRoute({ roles = [], children }) {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
@@ -41,12 +43,20 @@ function PrivateRoute({ roles = [], children }) {
 }
 
 export default function App() {
+  // Determine whether to show the AppSwitcher based on current location
+  const location = useLocation();
+  // Hide the sidebar for customer detail pages (e.g. /crm/5) and wizard pages (/orders/:id/setup)
+  const hideSidebar =
+    /^\/crm\/\d+/.test(location.pathname) ||
+    /^\/orders\/\d+\/setup/.test(location.pathname);
+
   return (
     <div className="h-screen flex">
-      <AppSwitcher />
-
+      {/* Only render AppSwitcher when the sidebar is not hidden */}
+      {!hideSidebar && <AppSwitcher />}
       <main className="flex-1 overflow-y-auto bg-white">
         <Routes>
+          {/* Login route */}
           <Route path="/login" element={<Login />} />
 
           {/* Dashboard */}
@@ -76,7 +86,6 @@ export default function App() {
               </PrivateRoute>
             }
           />
-
           {/* NEW: Customer detailed dashboard */}
           <Route
             path="/crm/:id"
@@ -125,7 +134,7 @@ export default function App() {
             path="/orders/:id"
             element={
               <PrivateRoute roles={["admin"]}>
-                <OrderForm />
+                <OrderFormDetail />
               </PrivateRoute>
             }
           />

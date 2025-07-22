@@ -26,7 +26,8 @@ async function getOrderKpi() {
   orders.forEach((o) => (counts[o.stage] = (counts[o.stage] || 0) + 1));
   // sort by created desc for recent list
   const recent = [...orders]
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .filter((o) => o != null)
+    .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
     .slice(0, 6);
   return { total: orders.length, counts, recent };
 }
@@ -145,7 +146,7 @@ export default function Dashboard() {
 
       {/* recent orders & top customers */}
       <div className="grid md:grid-cols-2 gap-6">
-        <RecentOrdersTable rows={orders.recent} />
+        <RecentOrdersTable rows={orders.recent || []} />
         <TopCustomersTable rows={topCust} />
       </div>
     </div>
@@ -166,8 +167,8 @@ function Tile({ label, value, gradient }) {
 }
 
 function BarCard({ title, data, barColor }) {
-  const max = Math.max(...data.map(([, n]) => n), 1);
-
+  const values = data.map(([, n]) => n);
+  const max = Math.max(...values, 1);
   return (
     <div className="border rounded-xl p-4 bg-white shadow">
       <p className="text-sm text-gray-700 mb-2 font-medium">{title}</p>
@@ -179,7 +180,7 @@ function BarCard({ title, data, barColor }) {
               style={{
                 height: `${Math.max(12, (n / max) * 100)}px`,
                 minHeight: n ? "4px" : 0,
-                width: "56px", // a bit wider
+                width: "56px",
               }}
             />
             <p className="text-[11px] mt-1 capitalize">{key}</p>
@@ -204,23 +205,27 @@ function RecentOrdersTable({ rows }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((r) => (
-            <tr key={r.id} className="border-t">
-              <td className="py-1 px-2">
-                <a
-                  href={`/orders/${r.id}`}
-                  className="text-blue-600"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  #{r.id}
-                </a>
-              </td>
-              <td className="py-1 px-2 capitalize">{r.stage}</td>
-              <td className="py-1 px-2">{r.createdAt.slice(0, 10)}</td>
-            </tr>
-          ))}
-          {!rows.length && (
+          {Array.isArray(rows) && rows.length > 0 ? (
+            rows.map((r) => (
+              <tr key={r.id} className="border-t">
+                <td className="py-1 px-2">
+                  <a
+                    href={`/orders/${r.id}`}
+                    className="text-blue-600"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    #{r.id}
+                  </a>
+                </td>
+                <td className="py-1 px-2 capitalize">{r.stage}</td>
+                <td className="py-1 px-2">
+                  {/* Guard against undefined createdAt */}
+                  {r.createdAt ? r.createdAt.slice(0, 10) : "—"}
+                </td>
+              </tr>
+            ))
+          ) : (
             <tr>
               <td colSpan={3} className="py-4 text-center text-gray-500">
                 —
@@ -236,9 +241,7 @@ function RecentOrdersTable({ rows }) {
 function TopCustomersTable({ rows }) {
   return (
     <div className="border rounded-xl p-4 bg-white shadow overflow-x-auto">
-      <p className="text-sm font-medium mb-2">
-        Top Customers (by active orders)
-      </p>
+      <p className="text-sm font-medium mb-2">Top Customers (by active orders)</p>
       <table className="min-w-full text-xs">
         <thead>
           <tr className="text-gray-500">
@@ -247,13 +250,14 @@ function TopCustomersTable({ rows }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map(([custId, cnt]) => (
-            <tr key={custId} className="border-t">
-              <td className="py-1 px-2">{custId}</td>
-              <td className="py-1 px-2">{cnt}</td>
-            </tr>
-          ))}
-          {!rows.length && (
+          {Array.isArray(rows) && rows.length > 0 ? (
+            rows.map(([custId, cnt]) => (
+              <tr key={custId} className="border-t">
+                <td className="py-1 px-2">{custId}</td>
+                <td className="py-1 px-2">{cnt}</td>
+              </tr>
+            ))
+          ) : (
             <tr>
               <td colSpan={2} className="py-4 text-center text-gray-500">
                 —
