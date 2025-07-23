@@ -1,0 +1,37 @@
+[
+  {
+    "id": "FG100F",
+    "name": "FortiGate 100F",
+    "sku": "FG-100F-BDL-950-12",
+    "unitPrice": 1850,
+    "description": "Next-gen firewall appliance"
+  },
+  {
+    "id": "FS124EPOE",
+    "name": "FortiSwitch 124E-POE",
+    "sku": "FS-124E-POE",
+    "unitPrice": 1200,
+    "description": "24-port PoE switch"
+  },
+  {
+    "id": "FAP231E",
+    "name": "FortiAP 231E",
+    "sku": "FAP-231E-US",
+    "unitPrice": 420,
+    "description": "WiFi 6 access point"
+  },
+  {
+    "id": "UTMBUNDLE",
+    "name": "UTM Bundle License",
+    "sku": "FC-10-00100-950-02",
+    "unitPrice": 1650,
+    "description": "Three-year UTM license"
+  },
+  {
+    "id": "FORTICARE",
+    "name": "FortiCare Support",
+    "sku": "FC-10-FCARE-24X7",
+    "unitPrice": 180,
+    "description": "24x7 premium support"
+  }
+]
