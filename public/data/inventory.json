@@ -9,4 +9,8 @@
   { "sku": "FAP-231G", "name": "FortiAP 231G", "stock": 50 },
   { "sku": "LICENCE-BUNDLE", "name": "License Bundle", "stock": 80 },
   { "sku": "FAZ-200F", "name": "FortiAnalyzer 200F", "stock": 25 }
+
+  ,{ "sku": "FG-200F-BDL-950-24", "name": "FortiGate 200F", "stock": 20 }
+  ,{ "sku": "FS-248E-POE", "name": "FortiSwitch 48E-POE", "stock": 30 }
+  ,{ "sku": "FAP-421E-US", "name": "FortiAP 421E", "stock": 40 }
 ]

@@ -118,4 +118,24 @@
     "usage": 0,
     "currency": "USD"
   }
+
+  ,{
+    "priceId": 18,
+    "oneOff": 3800,
+    "monthly": 150,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 19,
+    "oneOff": 2200,
+    "monthly": 120,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 20,
+    "oneOff": 600,
+    "monthly": 40,
+    "usage": 0,
+    "currency": "USD"
+  }
 ]

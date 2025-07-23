@@ -74,4 +74,68 @@
       }
     ]
   }
+  ,{
+    "id": 4,
+    "name": "Firewall Appliance",
+    "category": "security",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "hardware",
+    "provider": "OnPrem",
+    "unit": "device",
+    "provisioning": {
+      "type": "manual",
+      "endpoint": "",
+      "script": ""
+    },
+    "characteristics": [
+      {
+        "name": "model",
+        "valueType": "string",
+        "configurable": true
+      }
+    ]
+  },{
+    "id": 5,
+    "name": "Ethernet Switch",
+    "category": "networking",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "hardware",
+    "provider": "OnPrem",
+    "unit": "device",
+    "provisioning": {
+      "type": "manual",
+      "endpoint": "",
+      "script": ""
+    },
+    "characteristics": [
+      {
+        "name": "ports",
+        "valueType": "number",
+        "configurable": true
+      }
+    ]
+  },{
+    "id": 6,
+    "name": "Wireless Access Point",
+    "category": "wireless",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "resourceType": "hardware",
+    "provider": "OnPrem",
+    "unit": "device",
+    "provisioning": {
+      "type": "manual",
+      "endpoint": "",
+      "script": ""
+    },
+    "characteristics": [
+      {
+        "name": "ssid",
+        "valueType": "string",
+        "configurable": true
+      }
+    ]
+  }
 ]

@@ -43,28 +43,53 @@ export default function OrderNew() {
 
   const save = async (e) => {
     e.preventDefault();
+    // Prepare customerName and dynamic items from catalog
+    const customerIdNum = Number(form.customerId);
+    const offeringIdNum = Number(form.offeringId);
+    let customerName = '';
+    try {
+      // load all customers once; then find the one selected
+      const allCust = await fetchCustomersPage(0, 9999, '', []);
+      const match = allCust.records.find((c) => c.id === customerIdNum);
+      customerName = match?.name || '';
+    } catch {
+      customerName = '';
+    }
+    // Generate wizard data (equipment breakdown) for the selected offering
+    let wiz = null;
+    try {
+      wiz = await generateWizardData(offeringIdNum);
+    } catch (err) {
+      console.error('Failed to generate wizard data', err);
+    }
+    // Map equipment breakdown to order items
+    let items = [];
+    if (wiz && Array.isArray(wiz.equipmentBreakdown)) {
+      items = wiz.equipmentBreakdown.map((eq) => ({
+        resourceId: eq.resourceId,
+        name: eq.item,
+        sku: eq.sku,
+        qty: eq.qty,
+        unitPrice: eq.unitPrice,
+        total: eq.total,
+      }));
+    }
+    // Create the order record with customerName and items so the list shows totals
     const newId = await addOrder({
       ...form,
-      customerId: Number(form.customerId),
-      offeringId: Number(form.offeringId),
-      stage: "prospect",
+      customerId: customerIdNum,
+      customerName,
+      offeringId: offeringIdNum,
+      stage: 'prospect',
+      items,
     });
-    if (Number(form.offeringId) === 12) {
-      // initialise wizard data for this order
+    // If wizard data exists, store it and launch wizard for complex bundles
+    if (wiz) {
       await initWizardForOrder(newId);
-      // generate dynamic wizard data based on offering
-      try {
-        const wiz = await generateWizardData(form.offeringId);
-        if (wiz) {
-          setWizardData(newId, wiz);
-        }
-      } catch (err) {
-        // ignore errors – fallback to template
-        console.error('Failed to generate wizard data', err);
-      }
+      setWizardData(newId, wiz);
       nav(`/orders/${newId}/setup`);
     } else {
-      nav("/orders");
+      nav('/orders');
     }
   };
 

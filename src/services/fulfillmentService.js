@@ -137,11 +137,17 @@ export async function generateWizardData(offeringId) {
   for (const eq of equipmentBreakdown) {
     const rid = eq.resourceId;
     if (!rid) continue;
+    const qty = eq.qty || 1;
     const tpl = templates[rid];
-    if (tpl) {
-      deviceConfigs[rid] = JSON.parse(JSON.stringify(tpl));
-    } else {
-      deviceConfigs[rid] = { type: 'unknown', displayName: eq.item, sections: [] };
+    for (let idx = 1; idx <= qty; idx++) {
+      const key = qty > 1 ? `${rid}-${idx}` : rid;
+      if (tpl) {
+        // deep clone template and optionally attach instance index
+        const clone = JSON.parse(JSON.stringify(tpl));
+        deviceConfigs[key] = clone;
+      } else {
+        deviceConfigs[key] = { type: 'unknown', displayName: eq.item, sections: [] };
+      }
     }
   }
 

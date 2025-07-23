@@ -179,4 +179,39 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
+
+  ,{
+    "id": 12,
+    "sku": "FG-200F-BDL-950-24",
+    "name": "FortiGate 200F",
+    "category": "security",
+    "description": "Next-gen firewall (200F) product",
+    "priceId": 18,
+    "sequence": ["procure", "install"],
+    "cfsIds": [5],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },{
+    "id": 13,
+    "sku": "FS-248E-POE",
+    "name": "FortiSwitch 48E-POE",
+    "category": "networking",
+    "description": "48-port PoE switch",
+    "priceId": 19,
+    "sequence": ["procure", "install"],
+    "cfsIds": [6],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },{
+    "id": 14,
+    "sku": "FAP-421E-US",
+    "name": "FortiAP 421E",
+    "category": "networking",
+    "description": "High-capacity access point",
+    "priceId": 20,
+    "sequence": ["procure", "install"],
+    "cfsIds": [7],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  }
 ]

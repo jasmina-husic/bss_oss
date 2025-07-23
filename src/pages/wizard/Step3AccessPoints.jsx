@@ -39,9 +39,13 @@ export default function Step3AccessPoints() {
         {apEntries.length === 0 && (
           <p className="text-sm text-gray-600">No access points in this order.</p>
         )}
-        {apEntries.map(([rid, cfg]) => (
+        {apEntries.map(([rid, cfg]) => {
+          const parts = rid.split('-');
+          const suffix = parts.length > 1 ? parts[1] : '';
+          const name = suffix ? `${cfg.displayName} #${suffix}` : cfg.displayName;
+          return (
           <div key={rid} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-6">
-            <h3 className="text-lg font-semibold mb-3">{cfg.displayName}</h3>
+            <h3 className="text-lg font-semibold mb-3">{name}</h3>
             {cfg.sections?.map((section, secIdx) => (
               <div key={secIdx} className="mb-4">
                 <h4 className="font-medium mb-2 text-sm">{section.title}</h4>
@@ -64,7 +68,8 @@ export default function Step3AccessPoints() {
               </div>
             ))}
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

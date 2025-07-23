@@ -23,7 +23,7 @@
       }
     ]
   },
-  "FS124EPOE": {
+  "FS124E": {
     "type": "switch",
     "displayName": "FortiSwitch 124E‑POE",
     "sections": [
@@ -56,6 +56,87 @@
         "fields": [
           { "label": "Serial Number", "value": "" },
           { "label": "Model", "value": "231E" },
+          { "label": "Location", "value": "" },
+          { "label": "Tx Power", "value": "" }
+        ]
+      },
+      {
+        "title": "Radio 1",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      },
+      {
+        "title": "Radio 2",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      }
+    ]
+  },
+  "FG200F": {
+    "type": "firewall",
+    "displayName": "FortiGate 200F",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "License", "value": "" },
+          { "label": "Model", "value": "200F" },
+          { "label": "HA Mode", "value": "Active/Passive" }
+        ]
+      },
+      {
+        "title": "Network Settings",
+        "fields": [
+          { "label": "WAN IP", "value": "" },
+          { "label": "LAN IP", "value": "" },
+          { "label": "DHCP Range", "value": "" },
+          { "label": "Policy", "value": "" }
+        ]
+      }
+    ]
+  },
+  "FS248E": {
+    "type": "switch",
+    "displayName": "FortiSwitch 48E‑POE",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "Model", "value": "48E-POE" },
+          { "label": "Ports", "value": "48" },
+          { "label": "PoE Support", "value": "Yes" }
+        ]
+      },
+      {
+        "title": "VLAN Configuration",
+        "fields": [
+          { "label": "Default VLAN ID", "value": "" },
+          { "label": "Management VLAN", "value": "" },
+          { "label": "Trunk Ports", "value": "" },
+          { "label": "Access Ports", "value": "" }
+        ]
+      }
+    ]
+  },
+  "FAP421E": {
+    "type": "accessPoint",
+    "displayName": "FortiAP 421E",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "Model", "value": "421E" },
           { "label": "Location", "value": "" },
           { "label": "Tx Power", "value": "" }
         ]

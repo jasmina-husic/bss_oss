@@ -528,4 +528,37 @@
     "createdAt": "2025-05-30T06:38:04.085108Z",
     "lastModified": "2025-05-30T06:38:04.085108Z"
   }
+
+  ,{
+    "id": 13,
+    "name": "Enterprise SecNet",
+    "status": "active",
+    "description": "Integrated security and networking bundle: two firewalls, four switches and eight access points with license and support",
+    "components": [
+      { "productId": 12, "qty": 2, "billing": "oneOff" },
+      { "productId": 13, "qty": 4, "billing": "oneOff" },
+      { "productId": 14, "qty": 8, "billing": "oneOff" },
+      { "productId": 6,  "qty": 1, "billing": "monthly" },
+      { "productId": 8,  "qty": 1, "billing": "oneOff" },
+      { "productId": 7,  "qty": 14, "billing": "usage" }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 1299,
+      "monthlyFee": 0,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": { "24": 20 },
+      "loyaltyPercentPerYear": 1.5
+    },
+    "activationSequence": [
+      "Allocate hardware",
+      "Configure devices",
+      "Ship & install",
+      "Commission network"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  }
 ]

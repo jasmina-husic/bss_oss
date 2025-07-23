@@ -82,4 +82,62 @@
       "Enable ticket queue"
     ]
   }
+  ,{
+    "id": 5,
+    "name": "Firewall Management",
+    "category": "security",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "model",
+        "valueType": "string",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Install device",
+      "Configure firewall policies",
+      "Enable UTM features"
+    ]
+  },{
+    "id": 6,
+    "name": "Switch Management",
+    "category": "networking",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "portCount",
+        "valueType": "number",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Rack switch",
+      "Configure VLANs",
+      "Enable PoE"
+    ]
+  },{
+    "id": 7,
+    "name": "Wireless AP Service",
+    "category": "networking",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "ssid",
+        "valueType": "string",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Install AP",
+      "Broadcast SSID",
+      "Join controllers"
+    ]
+  }
 ]
