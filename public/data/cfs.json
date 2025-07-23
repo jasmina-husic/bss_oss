@@ -139,5 +139,45 @@
       "Broadcast SSID",
       "Join controllers"
     ]
+  },
+  {
+    "id": 8,
+    "name": "UTM License Service",
+    "category": "security",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "licenseTerm",
+        "valueType": "string",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Activate license",
+      "Update signatures",
+      "Notify customer"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "FortiCare Support Service",
+    "category": "service",
+    "lifecycleState": "active",
+    "version": "1.0",
+    "serviceSpecs": [],
+    "characteristics": [
+      {
+        "name": "supportLevel",
+        "valueType": "string",
+        "configurable": true
+      }
+    ],
+    "activationSequence": [
+      "Register support contract",
+      "Provide contact details",
+      "Enable 24x7 support"
+    ]
   }
 ]

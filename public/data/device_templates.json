@@ -161,4 +161,38 @@
       }
     ]
   }
+
+  ,"FAP321E": {
+    "type": "accessPoint",
+    "displayName": "FortiAP 321E",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "Model", "value": "321E" },
+          { "label": "Location", "value": "" },
+          { "label": "Tx Power", "value": "" }
+        ]
+      },
+      {
+        "title": "Radio 1",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      },
+      {
+        "title": "Radio 2",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      }
+    ]
+  }
 }

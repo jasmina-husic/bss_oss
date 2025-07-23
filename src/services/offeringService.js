@@ -91,8 +91,11 @@ export async function updateOffering(id, rec) {
   }
 }
 
-export async function deleteOffering(idx) {
+export async function deleteOffering(id) {
   await load();
-  cache.splice(idx, 1);
-  save();
+  const index = cache.findIndex((o) => o.id === id);
+  if (index > -1) {
+    cache.splice(index, 1);
+    save();
+  }
 }

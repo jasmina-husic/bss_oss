@@ -138,4 +138,35 @@
     "usage": 0,
     "currency": "USD"
   }
+  ,{
+    "priceId": 21,
+    "oneOff": 1850,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 22,
+    "oneOff": 1200,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 23,
+    "oneOff": 420,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 24,
+    "oneOff": 1650,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  },{
+    "priceId": 25,
+    "oneOff": 180,
+    "monthly": 0,
+    "usage": 0,
+    "currency": "USD"
+  }
 ]

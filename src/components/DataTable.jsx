@@ -15,6 +15,7 @@ export default function DataTable({
   state,
   onStateChange,
   onDeleteRow,
+  hideSearch = false,
 }) {
   /* ── make state safe for tanstack ───────────────── */
   const safeState = {
@@ -56,14 +57,16 @@ export default function DataTable({
   return (
     <div className="space-y-4">
       {/* search */}
-      <input
-        className="border rounded p-1 w-full focus:outline-none focus:ring"
-        placeholder="Search…"
-        value={safeState.globalFilter ?? ""}
-        onChange={(e) =>
-          onStateChange({ ...safeState, globalFilter: e.target.value })
-        }
-      />
+      {!hideSearch && (
+        <input
+          className="border rounded p-1 w-full focus:outline-none focus:ring"
+          placeholder="Search…"
+          value={safeState.globalFilter ?? ""}
+          onChange={(e) =>
+            onStateChange({ ...safeState, globalFilter: e.target.value })
+          }
+        />
+      )}
 
       {/* table */}
       <div className="overflow-x-auto border rounded">

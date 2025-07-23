@@ -107,7 +107,8 @@ export default function CatalogOfferings() {
         rowCount={total}
         state={tableState}
         onStateChange={setTableState}
-        onDeleteRow={(idx) => deleteOffering(idx).then(load)}
+        onDeleteRow={(id) => deleteOffering(id).then(load)}
+        hideSearch={true}
       />
     </div>
   );

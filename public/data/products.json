@@ -217,4 +217,62 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
+  ,{
+    "id": 15,
+    "sku": "FG-100F-BDL-950-12",
+    "name": "FortiGate 100F",
+    "category": "security",
+    "description": "Next-gen firewall (100F) product",
+    "priceId": 21,
+    "sequence": ["procure", "install"],
+    "cfsIds": [5],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },{
+    "id": 16,
+    "sku": "FS-124E-POE",
+    "name": "FortiSwitch 124E-POE",
+    "category": "networking",
+    "description": "24-port PoE switch",
+    "priceId": 22,
+    "sequence": ["procure", "install"],
+    "cfsIds": [6],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },{
+    "id": 17,
+    "sku": "FAP-321E-US",
+    "name": "FortiAP 321E",
+    "category": "networking",
+    "description": "WiFi 6 access point",
+    "priceId": 23,
+    "sequence": ["procure", "install"],
+    "cfsIds": [7],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },{
+    "id": 18,
+    "sku": "FC-10-01000-950-02",
+    "name": "UTM Bundle License",
+    "category": "service",
+    "description": "3-year UTM license subscription",
+    "priceId": 24,
+    "sequence": ["enable"],
+    "cfsIds": [8],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z",
+    "inventory": false
+  },{
+    "id": 19,
+    "sku": "FC-10-FCARE-24X7",
+    "name": "FortiCare Support",
+    "category": "service",
+    "description": "24/7 premium support",
+    "priceId": 25,
+    "sequence": ["enable"],
+    "cfsIds": [9],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z",
+    "inventory": false
+  }
 ]
