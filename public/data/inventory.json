@@ -13,4 +13,8 @@
   ,{ "sku": "FG-200F-BDL-950-24", "name": "FortiGate 200F", "stock": 50 }
   ,{ "sku": "FS-248E-POE", "name": "FortiSwitch 48E-POE", "stock": 50 }
   ,{ "sku": "FAP-421E-US", "name": "FortiAP 421E", "stock": 60 }
+
+  ,{ "sku": "CAM-4K-EXT", "name": "4K Outdoor Camera", "stock": 30 }
+  ,{ "sku": "EDGE-GW", "name": "Edge Gateway", "stock": 20 }
+  ,{ "sku": "SW-SEC-24", "name": "Secure Switch 24P", "stock": 20 }
 ]

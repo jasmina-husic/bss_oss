@@ -97,6 +97,24 @@ export async function generateWizardData(offeringId) {
         const base = (parts[0] || '') + (parts[1] || '');
         resourceId = base.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
       }
+      // Determine if this product requires inventory allocation.  Products
+      // categorised as "service", "itsm" or other non-hardware (e.g. "ai")
+      // do not consume physical stock and therefore should not appear in the
+      // Required Equipment list.  We include a flag on each breakdown item
+      // so downstream logic can filter appropriately.
+      // Determine if this product requires inventory allocation.  Use
+      // explicit `inventory` flag on the product if provided; fall
+      // back to category heuristics for legacy data.  Products
+      // categorised as "service", "itsm" or "ai" are considered
+      // non-allocatable by default.
+      let allocatable = true;
+      if (Object.prototype.hasOwnProperty.call(product, 'inventory')) {
+        allocatable = Boolean(product.inventory);
+      } else {
+        allocatable = !['service', 'itsm', 'ai'].includes(
+          (product.category || '').toLowerCase()
+        );
+      }
       equipmentBreakdown.push({
         item: product.name,
         sku: product.sku,
@@ -104,25 +122,28 @@ export async function generateWizardData(offeringId) {
         unitPrice,
         total,
         resourceId,
+        allocatable,
       });
       equipmentSubtotal += total;
     }
   }
 
   // Compute required equipment based on inventory
-  const requiredEquipment = equipmentBreakdown.map((it) => {
-    const stock = inventoryService.getAvailableStock(it.item);
-    let status;
-    if (stock === undefined) status = 'Not Available';
-    else if (stock >= it.qty) status = 'Available';
-    else status = 'Low Stock';
-    return {
-      name: it.item,
-      need: it.qty,
-      stock: stock ?? 0,
-      status,
-    };
-  });
+  const requiredEquipment = equipmentBreakdown
+    .filter((it) => it.allocatable)
+    .map((it) => {
+      const stock = inventoryService.getAvailableStock(it.item);
+      let status;
+      if (stock === undefined) status = 'Not Available';
+      else if (stock >= it.qty) status = 'Available';
+      else status = 'Low Stock';
+      return {
+        name: it.item,
+        need: it.qty,
+        stock: stock ?? 0,
+        status,
+      };
+    });
 
   // Load device templates so we can prefill configuration
   let templates = {};
@@ -135,6 +156,8 @@ export async function generateWizardData(offeringId) {
   // Build device configuration entries by copying the template for each
   // resource.  If a template is missing, create an empty placeholder.
   for (const eq of equipmentBreakdown) {
+    // Skip non-allocatable (service/itsm/ai) products when building device configs.
+    if (!eq.allocatable) continue;
     const rid = eq.resourceId;
     if (!rid) continue;
     const qty = eq.qty || 1;
