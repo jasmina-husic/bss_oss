@@ -63,4 +63,33 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
+
+  ,{
+    "id": 14,
+    "name": "Basic Support Package",
+    "status": "active",
+    "description": "Includes UTM license and premium support; no hardware required",
+    "components": [
+      { "productId": 18, "qty": 1, "billing": "monthly" },
+      { "productId": 19, "qty": 5, "billing": "usage" },
+      { "productId": 6,  "qty": 1, "billing": "monthly" }
+    ],
+    "pricePlan": {
+      "currency": "USD",
+      "setupFee": 0,
+      "monthlyFee": 499,
+      "billingCycle": "calendarMonthly"
+    },
+    "discountRules": {
+      "contractMonths": { "24": 10 },
+      "loyaltyPercentPerYear": 1
+    },
+    "activationSequence": [
+      "Activate license",
+      "Register support",
+      "Go live"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  }
 ]

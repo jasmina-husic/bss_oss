@@ -30,6 +30,8 @@ export default function OfferingSpecForm() {
     name: "",
     status: "active",
     description: "",
+    // components array holds objects { productId, qty, billing }
+    components: [],
     productIds: [],
     priceId: null,
     pricePlan: { setupFee: 0, monthlyFee: 0, currency: "USD" },
@@ -50,6 +52,18 @@ export default function OfferingSpecForm() {
             name: off.name,
             status: off.status,
             description: off.description,
+            // if components exist use them, else derive from productIds
+            components: Array.isArray(off.components)
+              ? off.components.map((c) => ({
+                  productId: c.productId,
+                  qty: c.qty || 1,
+                  billing: c.billing || "oneOff",
+                }))
+              : (off.productIds || []).map((pid) => ({
+                  productId: pid,
+                  qty: 1,
+                  billing: "oneOff",
+                })),
             productIds: off.productIds || [],
             priceId: off.priceId ?? null,
             pricePlan: off.pricePlan ?? {
@@ -73,6 +87,7 @@ export default function OfferingSpecForm() {
   }, [editing, id]);
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  // Toggle product selection for legacy productIds list (unused when using components)
   const toggle = (pid) =>
     setForm((f) => ({
       ...f,
@@ -80,6 +95,28 @@ export default function OfferingSpecForm() {
         ? f.productIds.filter((x) => x !== pid)
         : [...f.productIds, pid],
     }));
+
+  // Component helpers: add, update and remove product rows
+  const addComp = () =>
+    setForm((f) => ({
+      ...f,
+      components: [
+        ...(f.components ?? []),
+        { productId: "", qty: 1, billing: "oneOff" },
+      ],
+    }));
+  const updateComp = (idx, field, value) =>
+    setForm((f) => {
+      const comps = (f.components ?? []).map((c, i) =>
+        i === idx ? { ...c, [field]: value } : c
+      );
+      return { ...f, components: comps };
+    });
+  const removeComp = (idx) =>
+    setForm((f) => {
+      const comps = (f.components ?? []).filter((_, i) => i !== idx);
+      return { ...f, components: comps };
+    });
   const setDisc = (path, val) => {
     const next = JSON.parse(JSON.stringify(form.discountRules));
     let ref = next;
@@ -90,9 +127,18 @@ export default function OfferingSpecForm() {
 
   const save = (e) => {
     e.preventDefault();
+    // When saving, derive productIds from components for backward compatibility
+    const payload = {
+      ...form,
+      productIds: form.components
+        ? form.components
+            .map((c) => c.productId)
+            .filter((pid) => pid != null && pid !== '')
+        : form.productIds,
+    };
     const target = editing
-      ? () => updateOffering(parseInt(id, 10), form)
-      : () => addOffering(form);
+      ? () => updateOffering(parseInt(id, 10), payload)
+      : () => addOffering(payload);
     target().then(() => nav("/catalog/offerings"));
   };
 
@@ -149,22 +195,66 @@ export default function OfferingSpecForm() {
           />
         </label>
 
-        {/* products */}
-        <fieldset className="border rounded p-3">
-          <legend className="text-sm">Products</legend>
-          <div className="grid sm:grid-cols-2 gap-2">
-            {products.map((p) => (
-              <label key={p.id} className="block">
+        {/* components: configurable product list with qty and billing */}
+        <fieldset className="border rounded p-3 space-y-2">
+          <legend className="text-sm">Components</legend>
+          {form.components && form.components.length ? (
+            form.components.map((comp, idx) => (
+              <div
+                key={idx}
+                className="flex flex-wrap items-center gap-2 border-b py-1"
+              >
+                <select
+                  className="border rounded p-1"
+                  value={comp.productId || ""}
+                  onChange={(e) =>
+                    updateComp(idx, "productId", e.target.value ? Number(e.target.value) : "")
+                  }
+                >
+                  <option value="">— pick —</option>
+                  {products.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
                 <input
-                  type="checkbox"
-                  className="mr-2"
-                  checked={form.productIds.includes(p.id)}
-                  onChange={() => toggle(p.id)}
-                />{" "}
-                {p.name}
-              </label>
-            ))}
-          </div>
+                  type="number"
+                  min="1"
+                  className="w-20 border rounded p-1"
+                  value={comp.qty}
+                  onChange={(e) =>
+                    updateComp(idx, "qty", parseInt(e.target.value, 10) || 1)
+                  }
+                />
+                <select
+                  className="border rounded p-1"
+                  value={comp.billing}
+                  onChange={(e) => updateComp(idx, "billing", e.target.value)}
+                >
+                  <option value="oneOff">oneOff</option>
+                  <option value="monthly">monthly</option>
+                  <option value="usage">usage</option>
+                </select>
+                <button
+                  type="button"
+                  onClick={() => removeComp(idx)}
+                  className="text-red-600 text-xs px-2"
+                >
+                  Delete
+                </button>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm text-gray-500">No components added.</p>
+          )}
+          <button
+            type="button"
+            onClick={addComp}
+            className="px-2 py-1 bg-gray-200 rounded text-xs mt-2"
+          >
+            + Add Component
+          </button>
         </fieldset>
 
         {/* price attach */}
