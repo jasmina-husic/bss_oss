@@ -250,7 +250,8 @@ export default function Orders() {
                 <button
                   onClick={() => {
                     // Navigate to wizard if offering 12 and stage applies
-                    if (o.offeringId === 12) {
+                    // Offerings 12 and 13 use the device configuration wizard
+                    if (o.offeringId === 12 || o.offeringId === 13) {
                       nav(`/orders/${o.id}/setup`);
                     } else {
                       nav(`/orders/${o.id}`);

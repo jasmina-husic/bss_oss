@@ -218,4 +218,65 @@
     "createdAt": "2025-07-17T10:00:00Z",
     "items": []
   }
+
+  ,{
+    "id": 6,
+    "customerName": "Beta Enterprises",
+    "contractNumber": "ORD-1006",
+    "offeringId": 13,
+    "status": "prospect",
+    "stage": "review",
+    "dueDate": "2025-08-10",
+    "createdAt": "2025-07-23T09:30:00Z",
+    "items": [
+      {
+        "resourceId": "FG200F",
+        "name": "FortiGate 200F",
+        "sku": "FG-200F-BDL-950-24",
+        "qty": 2,
+        "unitPrice": 3800,
+        "total": 7600
+      },
+      {
+        "resourceId": "FS248EPOE",
+        "name": "FortiSwitch 48E-POE",
+        "sku": "FS-248E-POE",
+        "qty": 4,
+        "unitPrice": 2200,
+        "total": 8800
+      },
+      {
+        "resourceId": "FAP421E",
+        "name": "FortiAP 421E",
+        "sku": "FAP-421E-US",
+        "qty": 8,
+        "unitPrice": 600,
+        "total": 4800
+      },
+      {
+        "resourceId": "ITSM524",
+        "name": "ITSM 5 tickets",
+        "sku": "ITSM-5-24",
+        "qty": 1,
+        "unitPrice": 0,
+        "total": 0
+      },
+      {
+        "resourceId": "INSTFEE",
+        "name": "Installation Fee",
+        "sku": "INST-FEE",
+        "qty": 1,
+        "unitPrice": 200,
+        "total": 200
+      },
+      {
+        "resourceId": "SUPHOUR",
+        "name": "Support Hour",
+        "sku": "SUP-HOUR",
+        "qty": 14,
+        "unitPrice": 0,
+        "total": 0
+      }
+    ]
+  }
 ]

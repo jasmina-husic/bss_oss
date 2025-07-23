@@ -12,6 +12,7 @@ import CustomerForm from "./pages/CustomerForm";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import Tickets from "./pages/Tickets";
 import TicketForm from "./pages/TicketForm";
+import Inventory from "./pages/Inventory";
 import CatalogProducts from "./pages/CatalogProducts";
 import ProductSpecForm from "./pages/ProductSpecForm";
 import ServiceCatalog from "./pages/ServiceCatalog.jsx";
@@ -171,6 +172,16 @@ export default function App() {
             element={
               <PrivateRoute roles={["admin"]}>
                 <TicketForm />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Inventory management */}
+          <Route
+            path="/inventory"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <Inventory />
               </PrivateRoute>
             }
           />

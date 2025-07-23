@@ -17,6 +17,13 @@ export default function OrderForm() {
   const [status, setStatus] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [comment, setComment] = useState("");
+  // Toggle for showing the raw order and wizard JSON.  Many
+  // administrators need to inspect the underlying data when
+  // troubleshooting provisioning issues or validating that the
+  // wizard has captured all necessary details.  When true, a
+  // prettified JSON dump of the order and wizard state will be
+  // displayed at the bottom of the page.
+  const [showJson, setShowJson] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -265,6 +272,24 @@ export default function OrderForm() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Debug: raw order/wizard JSON */}
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <div className="bg-blue-800 text-white uppercase text-xs font-semibold px-4 py-2 flex items-center justify-between">
+          <span>Order Data (JSON)</span>
+          <button
+            className="text-xs underline text-gray-200 hover:text-white focus:outline-none"
+            onClick={() => setShowJson(!showJson)}
+          >
+            {showJson ? 'Hide' : 'Show'}
+          </button>
+        </div>
+        {showJson && (
+          <pre className="p-4 text-xs overflow-x-auto bg-gray-50">
+            {JSON.stringify({ order, wizard }, null, 2)}
+          </pre>
+        )}
       </div>
     </div>
   );

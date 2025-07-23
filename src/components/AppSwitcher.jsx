@@ -32,6 +32,12 @@ const links = [
     roles: ["admin"],
   },
   {
+    to: "/inventory",
+    label: "Inventory",
+    icon: <PackageIcon size={18} />,
+    roles: ["admin"],
+  },
+  {
     to: "/billing",
     label: "Billing",
     icon: <CreditCard size={18} />,

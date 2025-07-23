@@ -80,6 +80,56 @@ export function releaseItem(name, qty) {
   localStorage.setItem('inventory', JSON.stringify(inv));
 }
 
+/**
+ * Add a new inventory item or update stock for an existing SKU.
+ * Accepts an object with `sku`, `name` and `stock` fields.  If
+ * an entry with the same SKU already exists its name and stock
+ * will be overwritten.  Persists the updated list to localStorage.
+ * @param {{sku:string,name:string,stock:number}} item
+ */
+export function addInventoryItem(item) {
+  if (!item || !item.sku) return;
+  const inv = getInventory() || [];
+  const idx = inv.findIndex((i) => i.sku === item.sku);
+  if (idx > -1) {
+    inv[idx] = { ...inv[idx], ...item };
+  } else {
+    inv.push({ sku: item.sku, name: item.name || '', stock: item.stock || 0 });
+  }
+  localStorage.setItem('inventory', JSON.stringify(inv));
+}
+
+/**
+ * Update an existing inventory record identified by SKU.  Only
+ * provided fields are modified.  Persists changes to localStorage.
+ * @param {string} sku
+ * @param {{name?:string,stock?:number,sku?:string}} changes
+ */
+export function updateInventoryItem(sku, changes) {
+  const inv = getInventory();
+  if (!inv) return;
+  const idx = inv.findIndex((i) => i.sku === sku);
+  if (idx > -1) {
+    inv[idx] = { ...inv[idx], ...changes };
+    localStorage.setItem('inventory', JSON.stringify(inv));
+  }
+}
+
+/**
+ * Delete an inventory record by SKU.  Persists the updated list.
+ * @param {string} sku
+ */
+export function deleteInventoryItem(sku) {
+  const inv = getInventory();
+  if (!inv) return;
+  const idx = inv.findIndex((i) => i.sku === sku);
+  if (idx > -1) {
+    inv.splice(idx, 1);
+    localStorage.setItem('inventory', JSON.stringify(inv));
+  }
+}
+
+
 // Default export combining helpers for convenience
 export default {
   loadInventory,
@@ -87,4 +137,7 @@ export default {
   getAvailableStock,
   allocateItem,
   releaseItem,
+  addInventoryItem,
+  updateInventoryItem,
+  deleteInventoryItem,
 };

@@ -66,7 +66,16 @@ export async function fetchOrders() {
     if (Array.isArray(o.items) && o.items.length) {
       totalValue = o.items.reduce((sum, it) => sum + (it.total || 0), 0);
     }
-    return { ...o, totalValue };
+    // Compute days remaining until due date, if a dueDate is defined
+    let daysRemaining;
+    if (o.dueDate) {
+      const due = new Date(o.dueDate);
+      if (!Number.isNaN(due.getTime())) {
+        const diffMs = due.getTime() - Date.now();
+        daysRemaining = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      }
+    }
+    return { ...o, totalValue, daysRemaining };
   });
 }
 
