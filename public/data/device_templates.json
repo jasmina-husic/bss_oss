@@ -1,0 +1,83 @@
+{
+  "FG100F": {
+    "type": "firewall",
+    "displayName": "FortiGate 100F",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "License", "value": "" },
+          { "label": "Model", "value": "100F" },
+          { "label": "HA Mode", "value": "Active/Passive" }
+        ]
+      },
+      {
+        "title": "Network Settings",
+        "fields": [
+          { "label": "WAN IP", "value": "" },
+          { "label": "LAN IP", "value": "" },
+          { "label": "DHCP Range", "value": "" },
+          { "label": "Policy", "value": "" }
+        ]
+      }
+    ]
+  },
+  "FS124EPOE": {
+    "type": "switch",
+    "displayName": "FortiSwitch 124E‑POE",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "Model", "value": "124E-POE" },
+          { "label": "Ports", "value": "24" },
+          { "label": "PoE Support", "value": "Yes" }
+        ]
+      },
+      {
+        "title": "VLAN Configuration",
+        "fields": [
+          { "label": "Default VLAN ID", "value": "" },
+          { "label": "Management VLAN", "value": "" },
+          { "label": "Trunk Ports", "value": "" },
+          { "label": "Access Ports", "value": "" }
+        ]
+      }
+    ]
+  },
+  "FAP231E": {
+    "type": "accessPoint",
+    "displayName": "FortiAP 231E",
+    "sections": [
+      {
+        "title": "General",
+        "fields": [
+          { "label": "Serial Number", "value": "" },
+          { "label": "Model", "value": "231E" },
+          { "label": "Location", "value": "" },
+          { "label": "Tx Power", "value": "" }
+        ]
+      },
+      {
+        "title": "Radio 1",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      },
+      {
+        "title": "Radio 2",
+        "fields": [
+          { "label": "SSID", "value": "" },
+          { "label": "Channel", "value": "" },
+          { "label": "Mode", "value": "" },
+          { "label": "Security", "value": "WPA2" }
+        ]
+      }
+    ]
+  }
+}

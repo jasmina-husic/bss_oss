@@ -84,6 +84,20 @@ function saveCurrentOrder(data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
+/**
+ * Overwrite wizard data for a specific order id.  This function is
+ * useful when generating wizard data dynamically (e.g. via the
+ * fulfillmentService).  It sets the current order id and then
+ * persists the provided data under the appropriate key.
+ * @param {number|string} id
+ * @param {object} data
+ */
+export function setWizardData(id, data) {
+  const key = keyFor(id);
+  currentOrderId = id;
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
 // ----- Generic update helpers -----
 
 export function updateDeploymentLocation(key, value) {
@@ -166,6 +180,31 @@ export function updateTimelineStage(index, status) {
   }
 }
 
+/**
+ * Update a nested device configuration field.  Device configs are
+ * stored under wizardData.deviceConfigs[resourceId]. Each config
+ * contains an array of sections, and each section has an array of
+ * fields.  This function updates the value of a particular field
+ * given its indices.
+ *
+ * @param {string} resourceId Normalised resource identifier
+ * @param {number} sectionIndex Index of the section in the template
+ * @param {number} fieldIndex Index of the field within the section
+ * @param {string} value New value for the field
+ */
+export function updateDeviceConfig(resourceId, sectionIndex, fieldIndex, value) {
+  const data = getCurrentOrder();
+  if (!data || !data.deviceConfigs) return;
+  const cfg = data.deviceConfigs[resourceId];
+  if (!cfg || !Array.isArray(cfg.sections)) return;
+  const sect = cfg.sections[sectionIndex];
+  if (!sect || !Array.isArray(sect.fields)) return;
+  const fld = sect.fields[fieldIndex];
+  if (!fld) return;
+  fld.value = value;
+  saveCurrentOrder(data);
+}
+
 export function updateValidationStatus(section, index, status) {
   const data = getCurrentOrder();
   if (!data || !Array.isArray(data[section])) return;
@@ -194,4 +233,5 @@ export default {
   resetTest,
   updateTimelineStage,
   updateValidationStatus,
+  setWizardData,
 };

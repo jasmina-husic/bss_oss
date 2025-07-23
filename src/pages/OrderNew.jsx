@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { addOrder } from "../services/orderService";
 import { fetchCustomersPage } from "../services/customerService";
 import { fetchOfferingsPage, getOfferingById } from "../services/offeringService";
-import { initWizardForOrder } from "../services/orderWizardService";
+import { initWizardForOrder, setWizardData } from "../services/orderWizardService";
+import { generateWizardData } from "../services/fulfillmentService.js";
 
 function contractNum() {
   return "ORD-" + Date.now().toString().slice(-6);
@@ -51,6 +52,16 @@ export default function OrderNew() {
     if (Number(form.offeringId) === 12) {
       // initialise wizard data for this order
       await initWizardForOrder(newId);
+      // generate dynamic wizard data based on offering
+      try {
+        const wiz = await generateWizardData(form.offeringId);
+        if (wiz) {
+          setWizardData(newId, wiz);
+        }
+      } catch (err) {
+        // ignore errors – fallback to template
+        console.error('Failed to generate wizard data', err);
+      }
       nav(`/orders/${newId}/setup`);
     } else {
       nav("/orders");

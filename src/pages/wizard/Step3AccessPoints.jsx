@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getWizardData, updateDeviceConfig } from '../../services/orderWizardService.js';
 
-// Step 3 – Device setup and configuration for access points
+// Step 3 – Access point configuration
 //
-// Provides forms for managing FortiAPs and their groups.  All
-// sections are wrapped in cards and use simple grid layouts.
+// Displays configuration forms for all access point resources tied to the
+// order.  Each AP shows its own sections and editable fields.  User
+// input is saved via updateDeviceConfig and reflected in the wizard
+// data stored in localStorage.
 export default function Step3AccessPoints() {
+  const [wizard, setWizard] = useState(null);
+
+  useEffect(() => {
+    async function load() {
+      const data = await getWizardData();
+      setWizard(data || null);
+    }
+    load();
+  }, []);
+
+  if (!wizard) {
+    return <div className="p-4">Loading…</div>;
+  }
+
+  const configs = wizard.deviceConfigs || {};
+  const apEntries = Object.entries(configs).filter(([, cfg]) => cfg?.type === 'accessPoint');
+
   return (
     <div className="space-y-6">
-      {/* Action bar */}
       <div className="flex justify-end space-x-2">
         <button className="px-3 py-1 bg-blue-100 text-blue-700 rounded">Templates</button>
         <button className="px-3 py-1 bg-blue-200 text-blue-800 rounded">Save Progress</button>
@@ -17,71 +36,35 @@ export default function Step3AccessPoints() {
         <h2 className="text-xl font-semibold mb-4">
           Device Setup &amp; Configuration – Access Points
         </h2>
-        {/* Access point manager */}
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-3">Access Point Manager</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <label className="block font-medium mb-1">Managed FortiAPs</label>
-              <input
-                className="w-full border border-gray-300 rounded p-1"
-                placeholder="Select"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Managed AP configuration */}
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-3">Managed AP</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <label className="block font-medium mb-1">FortiGate</label>
-              <input
-                className="w-full border border-gray-300 rounded p-1"
-                placeholder="Select"
-              />
-            </div>
-            <div>
-              <label className="block font-medium mb-1">Serial Number</label>
-              <input
-                className="w-full border border-gray-300 rounded p-1"
-                placeholder="FAP-12345"
-              />
-            </div>
-            <div>
-              <label className="block font-medium mb-1">Name</label>
-              <input
-                className="w-full border border-gray-300 rounded p-1"
-                placeholder="AP Name"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Managed AP group */}
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-3">Managed AP Group</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <label className="block font-medium mb-1">Name</label>
-              <input className="w-full border border-gray-300 rounded p-1" placeholder="Group Name" />
-            </div>
-            <div>
-              <label className="block font-medium mb-1">FortiGate</label>
-              <input className="w-full border border-gray-300 rounded p-1" placeholder="Select" />
-            </div>
-            <div className="md:col-span-2">
-              <label className="block font-medium mb-1">FortiAP</label>
-              <div className="flex flex-wrap gap-4">
-                {['FAP 001','FAP 002','FAP 003','FAP 004','FAP 005','FAP 006'].map((ap) => (
-                  <label key={ap} className="inline-flex items-center space-x-2">
-                    <input type="checkbox" className="border-gray-300" />
-                    <span>{ap}</span>
-                  </label>
-                ))}
+        {apEntries.length === 0 && (
+          <p className="text-sm text-gray-600">No access points in this order.</p>
+        )}
+        {apEntries.map(([rid, cfg]) => (
+          <div key={rid} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-6">
+            <h3 className="text-lg font-semibold mb-3">{cfg.displayName}</h3>
+            {cfg.sections?.map((section, secIdx) => (
+              <div key={secIdx} className="mb-4">
+                <h4 className="font-medium mb-2 text-sm">{section.title}</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                  {section.fields?.map((field, fldIdx) => (
+                    <div key={fldIdx}>
+                      <label className="block font-medium mb-1">{field.label}</label>
+                      <input
+                        className="w-full border border-gray-300 rounded p-1"
+                        value={field.value || ''}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          updateDeviceConfig(rid, secIdx, fldIdx, val);
+                          setWizard({ ...wizard });
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

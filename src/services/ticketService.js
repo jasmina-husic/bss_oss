@@ -93,8 +93,19 @@ export async function updateTicket(id, rec) {
   }
 }
 
-export async function deleteTicket(idx) {
+/**
+ * Delete a ticket by its identifier.  The previous implementation
+ * accepted an index and removed that position from the cache,
+ * which caused deletion to fail when row IDs were passed in from
+ * the UI.  This function now finds the ticket by id and removes
+ * it safely.
+ * @param {number} id Ticket identifier
+ */
+export async function deleteTicket(id) {
   await load();
-  cache.splice(idx, 1);
-  save();
+  const idx = cache.findIndex((t) => t.id === id);
+  if (idx > -1) {
+    cache.splice(idx, 1);
+    save();
+  }
 }
