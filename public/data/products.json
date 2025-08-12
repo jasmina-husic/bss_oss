@@ -13,6 +13,10 @@
     "cfsIds": [
       1
     ],
+    "internalWorkflow": [
+      "procure",
+      "install"
+    ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -29,6 +33,10 @@
     ],
     "cfsIds": [
       1
+    ],
+    "internalWorkflow": [
+      "procure",
+      "install"
     ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
@@ -47,6 +55,10 @@
     "cfsIds": [
       2
     ],
+    "internalWorkflow": [
+      "procure",
+      "install"
+    ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -63,6 +75,10 @@
     ],
     "cfsIds": [
       2
+    ],
+    "internalWorkflow": [
+      "procure",
+      "install"
     ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
@@ -81,6 +97,10 @@
     "cfsIds": [
       2
     ],
+    "internalWorkflow": [
+      "procure",
+      "install"
+    ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -96,6 +116,9 @@
     ],
     "cfsIds": [
       4
+    ],
+    "internalWorkflow": [
+      "enable"
     ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
@@ -114,6 +137,9 @@
     "cfsIds": [
       4
     ],
+    "internalWorkflow": [
+      "enable"
+    ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"inventory": false
@@ -130,6 +156,10 @@
       "install"
     ],
     "cfsIds": [],
+    "internalWorkflow": [
+      "procure",
+      "install"
+    ],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"inventory": false
@@ -147,6 +177,10 @@
     "cfsIds": [
       3
     ],
+    "internalWorkflow": [
+      "enable"
+    ],
+    "inventory": false,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -163,6 +197,10 @@
     "cfsIds": [
       3
     ],
+    "internalWorkflow": [
+      "enable"
+    ],
+    "inventory": false,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -179,6 +217,10 @@
     "cfsIds": [
       3
     ],
+    "internalWorkflow": [
+      "enable"
+    ],
+    "inventory": false,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
@@ -192,6 +234,7 @@
     "priceId": 18,
     "sequence": ["procure", "install"],
     "cfsIds": [5],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },{
@@ -203,6 +246,7 @@
     "priceId": 19,
     "sequence": ["procure", "install"],
     "cfsIds": [6],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },{
@@ -214,6 +258,7 @@
     "priceId": 20,
     "sequence": ["procure", "install"],
     "cfsIds": [7],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
@@ -226,6 +271,7 @@
     "priceId": 21,
     "sequence": ["procure", "install"],
     "cfsIds": [5],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },{
@@ -237,6 +283,7 @@
     "priceId": 22,
     "sequence": ["procure", "install"],
     "cfsIds": [6],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },{
@@ -248,6 +295,7 @@
     "priceId": 23,
     "sequence": ["procure", "install"],
     "cfsIds": [7],
+    "internalWorkflow": ["procure", "install"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },{
@@ -259,6 +307,7 @@
     "priceId": 24,
     "sequence": ["enable"],
     "cfsIds": [8],
+    "internalWorkflow": ["enable"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z",
     "inventory": false
@@ -271,6 +320,7 @@
     "priceId": 25,
     "sequence": ["enable"],
     "cfsIds": [9],
+    "internalWorkflow": ["enable"],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z",
     "inventory": false

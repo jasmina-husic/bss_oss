@@ -28,6 +28,7 @@
       "Install on site",
       "Commission network"
     ],
+    "workflowId": 1,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   },
@@ -60,6 +61,7 @@
       "Ship & install",
       "Commission network"
     ],
+    "workflowId": 2,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }
@@ -89,6 +91,7 @@
       "Register support",
       "Go live"
     ],
+    "workflowId": 3,
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
   }

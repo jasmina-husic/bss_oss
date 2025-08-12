@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "SMB Security Provisioning",
+    "steps": [
+      "Allocate hardware",
+      "Configure devices",
+      "Install on site",
+      "Commission network"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 2,
+    "name": "Enterprise SecNet Provisioning",
+    "steps": [
+      "Allocate hardware",
+      "Configure devices",
+      "Ship & install",
+      "Commission network"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  },
+  {
+    "id": 3,
+    "name": "Basic Support Provisioning",
+    "steps": [
+      "Activate license",
+      "Register support",
+      "Go live"
+    ],
+    "createdAt": "2025-05-29T22:52:07.434637Z",
+    "lastModified": "2025-05-29T22:52:07.434637Z"
+  }
+]
