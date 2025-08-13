@@ -9,6 +9,22 @@ import {
 } from "../services/offeringService";
 import StepsEditor from "../components/StepsEditor";
 
+// Predefined activation steps: the maximum workflow (offering 12) includes all these steps.
+// Other offerings should use a subset of these values.  Providing this list to StepsEditor
+// enables a drop‑down selection for each step.  These steps are hard‑coded based on the
+// available workflows in the product catalog and should only be updated when the catalog
+// itself changes.
+const ACTIVATION_STEP_OPTIONS = [
+  "Allocate hardware",
+  "Configure devices",
+  "Install on site",
+  "Ship & install",
+  "Commission network",
+  "Activate license",
+  "Register support",
+  "Go live",
+];
+
 const makeDisc = () => ({
   contractMonths: { 24: 0 },
   loyaltyPercentPerYear: 0,
@@ -133,7 +149,7 @@ export default function OfferingSpecForm() {
       productIds: form.components
         ? form.components
             .map((c) => c.productId)
-            .filter((pid) => pid != null && pid !== '')
+            .filter((pid) => pid != null && pid !== "")
         : form.productIds,
     };
     const target = editing
@@ -208,7 +224,11 @@ export default function OfferingSpecForm() {
                   className="border rounded p-1"
                   value={comp.productId || ""}
                   onChange={(e) =>
-                    updateComp(idx, "productId", e.target.value ? Number(e.target.value) : "")
+                    updateComp(
+                      idx,
+                      "productId",
+                      e.target.value ? Number(e.target.value) : ""
+                    )
                   }
                 >
                   <option value="">— pick —</option>
@@ -224,7 +244,11 @@ export default function OfferingSpecForm() {
                   className="w-20 border rounded p-1"
                   value={comp.qty}
                   onChange={(e) =>
-                    updateComp(idx, "qty", parseInt(e.target.value, 10) || 1)
+                    updateComp(
+                      idx,
+                      "qty",
+                      parseInt(e.target.value, 10) || 1
+                    )
                   }
                 />
                 <select
@@ -388,6 +412,7 @@ export default function OfferingSpecForm() {
           <StepsEditor
             steps={form.activationSequence}
             onChange={(seq) => setForm({ ...form, activationSequence: seq })}
+            options={ACTIVATION_STEP_OPTIONS}
           />
         </label>
 

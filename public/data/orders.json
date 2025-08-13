@@ -1,13 +1,15 @@
 [
   {
     "id": 1,
-    "customerId": 1,
-    "contractNumber": "ORD-0001",
+    "customerName": "Acme Inc.",
+    "contractNumber": "ORD-1001",
     "offeringId": 12,
     "workflowId": 1,
-    "status": "pending",
-    "stage": "provisioning",
-    "createdAt": "2025-07-28T00:00:00Z",
+    "status": "confirmed",
+    "stage": "review",
+    "dueDate": "2025-08-04",
+    "createdAt": "2025-07-20T12:00:00Z",
+    
     "provisioning": [
       { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "procure", "sequence": 1, "status": "pending" },
       { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "install", "sequence": 2, "status": "pending" },
@@ -19,6 +21,307 @@
       { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
       { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
       { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
+    ],
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 2,
+        "unitPrice": 1850,
+        "total": 3700
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 4,
+        "unitPrice": 1200,
+        "total": 4800
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 8,
+        "unitPrice": 420,
+        "total": 3360
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 2,
+        "unitPrice": 1650,
+        "total": 3300
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 14,
+        "unitPrice": 180,
+        "total": 2520
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "customerName": "TechStartup Inc.",
+    "contractNumber": "ORD-1002",
+    "offeringId": 20,
+    "workflowId": null,
+    "status": "staging",
+    "stage": "allocation",
+    "dueDate": "2025-08-05",
+    "createdAt": "2025-07-19T09:00:00Z",
+    "provisioning": [],
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 1,
+        "unitPrice": 1850,
+        "total": 1850
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 2,
+        "unitPrice": 1200,
+        "total": 2400
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 4,
+        "unitPrice": 420,
+        "total": 1680
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 1,
+        "unitPrice": 1650,
+        "total": 1650
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 8,
+        "unitPrice": 180,
+        "total": 1440
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "customerName": "Manufacturing Plus",
+    "contractNumber": "ORD-1003",
+    "offeringId": 30,
+    "workflowId": null,
+    "status": "ready",
+    "stage": "validation",
+    "dueDate": "2025-08-08",
+    "createdAt": "2025-07-18T11:30:00Z",
+    "provisioning": [],
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 3,
+        "unitPrice": 1850,
+        "total": 5550
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 6,
+        "unitPrice": 1200,
+        "total": 7200
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 12,
+        "unitPrice": 420,
+        "total": 5040
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 3,
+        "unitPrice": 1650,
+        "total": 4950
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 16,
+        "unitPrice": 180,
+        "total": 2880
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "customerName": "RetailChain Solutions",
+    "contractNumber": "ORD-1004",
+    "offeringId": 12,
+    "workflowId": 1,
+    "status": "deployed",
+    "stage": "deployment",
+    "dueDate": "2025-08-04",
+    "createdAt": "2025-07-18T15:00:00Z",
+    "provisioning": [
+      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 18, "sku": "FC-10-01000-950-02",  "stepName": "enable",  "sequence": 1, "status": "pending" },
+      { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
+      { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
+    ],
+    "items": [
+      {
+        "resourceId": "FG100F",
+        "name": "FortiGate 100F",
+        "sku": "FG-100F-BDL-950-12",
+        "qty": 2,
+        "unitPrice": 1850,
+        "total": 3700
+      },
+      {
+        "resourceId": "FS124EPOE",
+        "name": "FortiSwitch 124E-POE",
+        "sku": "FS-124E-POE",
+        "qty": 4,
+        "unitPrice": 1200,
+        "total": 4800
+      },
+      {
+        "resourceId": "FAP231E",
+        "name": "FortiAP 231E",
+        "sku": "FAP-231E-US",
+        "qty": 8,
+        "unitPrice": 420,
+        "total": 3360
+      },
+      {
+        "resourceId": "UTMBUNDLE",
+        "name": "UTM Bundle License",
+        "sku": "FC-10-00100-950-02",
+        "qty": 2,
+        "unitPrice": 1650,
+        "total": 3300
+      },
+      {
+        "resourceId": "FORTICARE",
+        "name": "FortiCare Support",
+        "sku": "FC-10-FCARE-24X7",
+        "qty": 14,
+        "unitPrice": 180,
+        "total": 2520
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "customerName": "Legal Partners LLC",
+    "contractNumber": "ORD-1005",
+    "offeringId": null,
+    "workflowId": null,
+    "status": "negotiation",
+    "stage": "review",
+    "dueDate": "2025-08-07",
+    "createdAt": "2025-07-17T10:00:00Z",
+    "provisioning": [],
+    "items": []
+  },
+  {
+    "id": 6,
+    "customerName": "Beta Enterprises",
+    "contractNumber": "ORD-1006",
+    "offeringId": 13,
+    "workflowId": 2,
+    "status": "prospect",
+    "stage": "review",
+    "dueDate": "2025-08-10",
+    "createdAt": "2025-07-23T09:30:00Z",
+    "provisioning": [
+      { "productId": 12, "sku": "FG-200F-BDL-950-24", "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 12, "sku": "FG-200F-BDL-950-24", "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 13, "sku": "FS-248E-POE",        "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 13, "sku": "FS-248E-POE",        "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 14, "sku": "FAP-421E-US",        "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 14, "sku": "FAP-421E-US",        "stepName": "install", "sequence": 2, "status": "pending" },
+      { "productId": 18, "sku": "FC-10-01000-950-02",  "stepName": "enable",  "sequence": 1, "status": "pending" },
+      { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
+      { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
+      { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
+    ],
+    "items": [
+      {
+        "resourceId": "FG200F",
+        "name": "FortiGate 200F",
+        "sku": "FG-200F-BDL-950-24",
+        "qty": 2,
+        "unitPrice": 3800,
+        "total": 7600
+      },
+      {
+        "resourceId": "FS248EPOE",
+        "name": "FortiSwitch 48E-POE",
+        "sku": "FS-248E-POE",
+        "qty": 4,
+        "unitPrice": 2200,
+        "total": 8800
+      },
+      {
+        "resourceId": "FAP421E",
+        "name": "FortiAP 421E",
+        "sku": "FAP-421E-US",
+        "qty": 8,
+        "unitPrice": 600,
+        "total": 4800
+      },
+      {
+        "resourceId": "ITSM524",
+        "name": "ITSM 5 tickets",
+        "sku": "ITSM-5-24",
+        "qty": 1,
+        "unitPrice": 0,
+        "total": 0
+      },
+      {
+        "resourceId": "INSTFEE",
+        "name": "Installation Fee",
+        "sku": "INST-FEE",
+        "qty": 1,
+        "unitPrice": 200,
+        "total": 200
+      },
+      {
+        "resourceId": "SUPHOUR",
+        "name": "Support Hour",
+        "sku": "SUP-HOUR",
+        "qty": 14,
+        "unitPrice": 0,
+        "total": 0
+      }
     ]
   }
 ]
