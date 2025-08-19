@@ -50,16 +50,17 @@ If you want to learn more about creating good readme files then refer the follow
 
 ## Order Provisioning Workflow
 
-The provisioning wizard guides users through configuring and deploying orders derived from catalogue offers.  Each offer contains an **activation sequence**—an ordered list of high‑level workflow steps such as “Allocate hardware,” “Configure devices,” “Install on site” or “Ship & install,” and “Commission network.”  When a new order is created from an offer, the wizard now builds its steps dynamically from this sequence:
+The provisioning wizard guides users through configuring and deploying orders derived from catalogue offers.  Each offer defines a **provisioning workflow**—an ordered list of high‑level steps that map directly onto the wizard pages.  When you create an order, the wizard assembles its pages from this workflow:
 
-- **Order Review & Confirmation** – always the first step.  Users can review equipment, customer details and project timeline.
-- **Inventory Allocation** – shown only if the offer’s activation sequence includes **Allocate hardware**.  This step lets users assign devices from stock and capture allocation notes.
-- **Device Setup & Configuration** – shown only if **Configure devices** is present.  Separate tabs are displayed for firewalls, switches and access points; each device’s template fields can be edited.  The wizard will skip this step entirely for discount‑only offers that do not require device configuration.
-- **Testing & Validation** and **Final Validation Checklist** – always included.  These pages allow users to run automated tests, reset or retry failed tests, and complete checklists for hardware, configuration, licensing and documentation.
-- **Deployment Planning & Scheduling** – included when the activation sequence contains **Install on site** or **Ship & install**.  Users can schedule installation, view the installation team and ensure the deployment kit is ready.  This step is omitted for purely cloud‑based or licence‑only offers.
-- **Go‑Live & Customer Handover** – always the final step.  Users can review deployment summary information, validate that the network is up and handover documentation and training details to the customer.
+1. **Order Review & Confirmation** – always the first step.  Users review equipment, customer details and the project timeline.
+2. **Inventory Allocation** – appears if the offer’s workflow includes **Inventory Allocation**.  Users assign devices from stock and capture allocation notes.  This step is hidden for service‑only offers that don’t require hardware.
+3. **Device Setup & Configuration** – appears if **Device Setup & Configuration** is selected.  The wizard shows separate tabs for firewalls, switches and access points based on the products in the order.  If no devices need configuration, the step is skipped.
+4. **Testing & Validation** – always included.  This page allows users to run automated tests and validate that configured devices are functioning correctly.
+5. **Final Validation Checklist** – always included.  Users complete checklists for hardware, configuration, licensing and documentation before deployment.
+6. **Deployment Planning & Scheduling** – appears if the workflow includes **Deployment Planning & Scheduling**.  Users schedule the installation, view the installation team and confirm the deployment kit is ready.  This step is omitted for cloud‑only or licence‑only offers.
+7. **Go‑Live & Customer Handover** – always the final step.  Users review the deployment summary, verify network uptime and hand over documentation and training to the customer.
 
-Once an order has been instantiated from an offer its workflow is **immutable**—the wizard derives its steps from the activation sequence at the moment of creation and stores them in the order record.  If you edit an offer’s workflow afterwards, existing orders are unaffected.
+Once an order has been instantiated from an offer its workflow is **immutable**—the wizard derives its pages from the workflow when the order is created and stores them in the order record.  Editing an offer’s workflow does not affect orders that have already been created.
 
 Each product in the catalogue can optionally reference a **device template** via a `deviceTemplateId`.  When an order is generated the fulfilment service uses this identifier to look up a template in `device_templates.json` and builds a per‑device configuration form.  Templates group fields into sections and assign a **type** (e.g. `firewall`, `switch`, `accessPoint`), which determines which sub‑page under **Device Setup & Configuration** the form appears on.  If a product lacks a template or the template is missing, the wizard falls back to a simple free‑text **Custom Configuration** field.
 
@@ -74,13 +75,12 @@ To speed up testing, the wizard header includes two utility actions:
 
 ### Adding New Workflow Steps
 
-If you introduce additional steps to an activation sequence (for example, a “Ship & install” step), you can map them to existing wizard pages or create new ones.  The dynamic step calculation in `Wizard.jsx` looks for specific keywords in the order’s `activationSequence` array:
+If you introduce additional steps to a workflow (for example, a “Ship & install” option), you can map them to existing wizard pages or create new ones.  The dynamic step calculation in `Wizard.jsx` looks for specific keywords in the order’s workflow array:
 
 ```
-Allocate hardware     → Inventory Allocation
-Configure devices     → Device Setup & Configuration (tabs for each device type)
-Install on site / Ship & install → Deployment Planning & Scheduling
-Commission network    → Go‑Live & Customer Handover
+allocate hardware     → Inventory Allocation
+configure devices     → Device Setup & Configuration (tabs for each device family)
+install on site / ship & install → Deployment Planning & Scheduling
 ```
 
-Any activation step that doesn’t match these keywords is currently ignored.  Mandatory steps (review, testing, validation and go‑live) are always present.
+Any custom workflow entry that doesn’t match these keywords is currently ignored.  Mandatory pages—Order Review & Confirmation, Testing & Validation, Final Validation Checklist and Go‑Live & Customer Handover—are always present.

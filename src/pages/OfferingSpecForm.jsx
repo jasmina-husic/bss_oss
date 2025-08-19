@@ -17,20 +17,30 @@ const makeDisc = () => ({
 
 const BLANK_PRICE = { oneOff: 0, monthly: 0, usage: 0, currency: "USD" };
 
-// Ordered list of possible activation steps.  When editing an offer you can
-// include or exclude steps by ticking the corresponding boxes.  The
-// sequence is fixed and determines how orders derived from this offer
-// will flow through the provisioning wizard.  Do not change the order
-// of these strings unless you update the wizard step mapping.
-const ACTIVATION_STEP_OPTIONS = [
-  "Allocate hardware",
-  "Configure devices",
-  "Install on site",
-  "Ship & install",
-  "Commission network",
-  "Activate license",
-  "Register support",
-  "Go live",
+// Ordered list of optional activation steps.  Each entry has a
+// user‑facing label that corresponds to a wizard page and an
+// internal value used to drive the provisioning logic.  The order
+// here is fixed and determines the sequence in which optional
+// steps will appear in the provisioning wizard.  You may add
+// additional entries but do not change the order without also
+// updating the wizard’s step mapping.  Mandatory steps such as
+// Testing & Validation, Final Validation and Go‑Live are always
+// included automatically and therefore are not selectable here.
+// Full list of workflow steps in the order they will appear in the wizard.
+// Each entry has a user‑facing label (matching the wizard page), a
+// machine‑readable value used by the provisioning logic and a flag
+// indicating whether the step is mandatory.  Mandatory steps are
+// always included and cannot be deselected.  Optional steps may be
+// toggled on or off; the activation sequence stored with the offer
+// will only include the values of optional steps.
+const FULL_FLOW_STEPS = [
+  { label: 'Order Review & Confirmation', value: 'order review', mandatory: true },
+  { label: 'Inventory Allocation', value: 'allocate hardware', mandatory: false },
+  { label: 'Device Setup & Configuration', value: 'configure devices', mandatory: false },
+  { label: 'Testing & Validation', value: 'testing & validation', mandatory: true },
+  { label: 'Final Validation Checklist', value: 'final validation checklist', mandatory: true },
+  { label: 'Deployment Planning & Scheduling', value: 'install on site', mandatory: false },
+  { label: 'Go‑Live & Customer Handover', value: 'go live', mandatory: true },
 ];
 
 export default function OfferingSpecForm() {
@@ -400,33 +410,45 @@ export default function OfferingSpecForm() {
 
         {/* activation */}
         <fieldset className="border rounded p-3">
-          <legend className="text-sm">Activation sequence</legend>
+          <legend className="text-sm">Provisioning workflow</legend>
           <p className="text-xs text-gray-500 mb-2">
-            Select the workflow steps to include in this offer.  The order is
-            fixed; steps earlier in the list will occur before later steps.
+            Select which optional workflow steps apply to this offer.  The
+            overall sequence is fixed and matches the wizard pages exactly.
+            Mandatory steps are always included and cannot be deselected.
           </p>
-          {ACTIVATION_STEP_OPTIONS.map((stepName) => {
-            const checked = form.activationSequence?.some(
-              (s) => s.toLowerCase() === stepName.toLowerCase()
-            );
+          {FULL_FLOW_STEPS.map((step) => {
+            const isChecked = step.mandatory || (Array.isArray(form.activationSequence)
+              ? form.activationSequence.some(
+                  (s) => String(s).toLowerCase() === step.value.toLowerCase()
+                )
+              : false);
             return (
-              <label key={stepName} className="block text-sm">
+              <label key={step.value} className="block text-sm">
                 <input
                   type="checkbox"
                   className="mr-2"
-                  checked={checked}
+                  checked={isChecked}
+                  disabled={step.mandatory}
                   onChange={(e) => {
-                    const newSeq = ACTIVATION_STEP_OPTIONS.filter((s) => {
-                      // Determine which steps are selected after the toggle
-                      if (s === stepName) return e.target.checked;
-                      return form.activationSequence?.some(
-                        (x) => x.toLowerCase() === s.toLowerCase()
-                      );
-                    });
+                    // Only update the activation sequence for optional steps
+                    const newSeq = FULL_FLOW_STEPS.filter((opt) => {
+                      if (opt.mandatory) return false; // mandatory steps are not stored
+                      if (opt.value === step.value) return e.target.checked;
+                      return Array.isArray(form.activationSequence)
+                        ? form.activationSequence.some(
+                            (x) =>
+                              String(x).toLowerCase() ===
+                              opt.value.toLowerCase()
+                          )
+                        : false;
+                    }).map((opt) => opt.value);
                     setForm({ ...form, activationSequence: newSeq });
                   }}
                 />
-                {stepName}
+                {step.label}
+                {step.mandatory && (
+                  <span className="text-xs text-gray-500 ml-1">(mandatory)</span>
+                )}
               </label>
             );
           })}
