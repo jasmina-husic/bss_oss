@@ -7,13 +7,14 @@ import {
   updateOffering,
   getOfferingById,
 } from "../services/offeringService";
-import StepsEditor from "../components/StepsEditor";
+// StepsEditor is still used by other pages (e.g. product spec) but not in this form.
+import SequenceSelector from "../components/SequenceSelector";
 
 // Predefined activation steps: the maximum workflow (offering 12) includes all these steps.
-// Other offerings should use a subset of these values.  Providing this list to StepsEditor
-// enables a drop‑down selection for each step.  These steps are hard‑coded based on the
-// available workflows in the product catalog and should only be updated when the catalog
-// itself changes.
+// Other offerings should use a subset of these values.  Providing this list to the
+// SequenceSelector component allows users to toggle each step on or off while preserving
+// the order.  These steps are hard‑coded based on the available workflows in the product
+// catalog and should only be updated when the catalog itself changes.
 const ACTIVATION_STEP_OPTIONS = [
   "Allocate hardware",
   "Configure devices",
@@ -409,10 +410,10 @@ export default function OfferingSpecForm() {
         {/* activation */}
         <label className="block">
           <span className="text-sm">Activation sequence</span>
-          <StepsEditor
+          <SequenceSelector
+            options={ACTIVATION_STEP_OPTIONS}
             steps={form.activationSequence}
             onChange={(seq) => setForm({ ...form, activationSequence: seq })}
-            options={ACTIVATION_STEP_OPTIONS}
           />
         </label>
 
