@@ -194,6 +194,7 @@
     "cfsIds": [5],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FG200F"
   },{
     "id": 13,
     "sku": "FS-248E-POE",
@@ -205,6 +206,7 @@
     "cfsIds": [6],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FS248E"
   },{
     "id": 14,
     "sku": "FAP-421E-US",
@@ -216,6 +218,7 @@
     "cfsIds": [7],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FAP421E"
   }
   ,{
     "id": 15,
@@ -228,6 +231,7 @@
     "cfsIds": [5],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FG100F"
   },{
     "id": 16,
     "sku": "FS-124E-POE",
@@ -239,6 +243,7 @@
     "cfsIds": [6],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FS124E"
   },{
     "id": 17,
     "sku": "FAP-321E-US",
@@ -250,6 +255,7 @@
     "cfsIds": [7],
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
+    ,"deviceTemplateId": "FAP321E"
   },{
     "id": 18,
     "sku": "FC-10-01000-950-02",

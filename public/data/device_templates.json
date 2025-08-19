@@ -6,19 +6,51 @@
       {
         "title": "General",
         "fields": [
-          { "label": "Serial Number", "value": "" },
-          { "label": "License", "value": "" },
+          { "label": "Device Name", "value": "" },
           { "label": "Model", "value": "100F" },
-          { "label": "HA Mode", "value": "Active/Passive" }
+          { "label": "Serial Number", "value": "" },
+          { "label": "Location", "value": "" }
         ]
       },
       {
         "title": "Network Settings",
         "fields": [
-          { "label": "WAN IP", "value": "" },
-          { "label": "LAN IP", "value": "" },
-          { "label": "DHCP Range", "value": "" },
-          { "label": "Policy", "value": "" }
+          { "label": "Management IP", "value": "" },
+          { "label": "HA Mode", "value": "Active/Passive" },
+          { "label": "WAN Interface", "value": "" },
+          { "label": "LAN Interface", "value": "" }
+        ]
+      },
+      {
+        "title": "VLAN Interfaces",
+        "fields": [
+          { "label": "Name", "value": "" },
+          { "label": "VLAN ID", "value": "" },
+          { "label": "Interface", "value": "" },
+          { "label": "Address Range", "value": "" }
+        ]
+      },
+      {
+        "title": "Site‑to‑Site Tunnel",
+        "fields": [
+          { "label": "Tunnel Name", "value": "" },
+          { "label": "Remote IP", "value": "" },
+          { "label": "Outgoing Interface", "value": "" },
+          { "label": "Pre‑shared Key", "value": "" },
+          { "label": "Local Subnet", "value": "" }
+        ]
+      },
+      {
+        "title": "Policy & Objects",
+        "fields": [
+          { "label": "Policy Name", "value": "" },
+          { "label": "Incoming Interface", "value": "" },
+          { "label": "Outgoing Interface", "value": "" },
+          { "label": "Source", "value": "" },
+          { "label": "Destination", "value": "" },
+          { "label": "Action", "value": "Allow" },
+          { "label": "NAT", "value": "Enabled" },
+          { "label": "Security Profile", "value": "" }
         ]
       }
     ]
@@ -30,17 +62,24 @@
       {
         "title": "General",
         "fields": [
-          { "label": "Serial Number", "value": "" },
+          { "label": "Switch Name", "value": "" },
           { "label": "Model", "value": "124E-POE" },
-          { "label": "Ports", "value": "24" },
-          { "label": "PoE Support", "value": "Yes" }
+          { "label": "Serial Number", "value": "" },
+          { "label": "Description", "value": "" }
         ]
       },
       {
-        "title": "VLAN Configuration",
+        "title": "Connection",
         "fields": [
-          { "label": "Default VLAN ID", "value": "" },
-          { "label": "Management VLAN", "value": "" },
+          { "label": "FortiGate", "value": "" },
+          { "label": "Switch FortiLink", "value": "" },
+          { "label": "Uplink Ports", "value": "" }
+        ]
+      },
+      {
+        "title": "VLAN Assignment",
+        "fields": [
+          { "label": "Native VLAN", "value": "" },
           { "label": "Trunk Ports", "value": "" },
           { "label": "Access Ports", "value": "" }
         ]
@@ -87,19 +126,51 @@
       {
         "title": "General",
         "fields": [
-          { "label": "Serial Number", "value": "" },
-          { "label": "License", "value": "" },
+          { "label": "Device Name", "value": "" },
           { "label": "Model", "value": "200F" },
-          { "label": "HA Mode", "value": "Active/Passive" }
+          { "label": "Serial Number", "value": "" },
+          { "label": "Location", "value": "" }
         ]
       },
       {
         "title": "Network Settings",
         "fields": [
-          { "label": "WAN IP", "value": "" },
-          { "label": "LAN IP", "value": "" },
-          { "label": "DHCP Range", "value": "" },
-          { "label": "Policy", "value": "" }
+          { "label": "Management IP", "value": "" },
+          { "label": "HA Mode", "value": "Active/Passive" },
+          { "label": "WAN Interface", "value": "" },
+          { "label": "LAN Interface", "value": "" }
+        ]
+      },
+      {
+        "title": "VLAN Interfaces",
+        "fields": [
+          { "label": "Name", "value": "" },
+          { "label": "VLAN ID", "value": "" },
+          { "label": "Interface", "value": "" },
+          { "label": "Address Range", "value": "" }
+        ]
+      },
+      {
+        "title": "Site‑to‑Site Tunnel",
+        "fields": [
+          { "label": "Tunnel Name", "value": "" },
+          { "label": "Remote IP", "value": "" },
+          { "label": "Outgoing Interface", "value": "" },
+          { "label": "Pre‑shared Key", "value": "" },
+          { "label": "Local Subnet", "value": "" }
+        ]
+      },
+      {
+        "title": "Policy & Objects",
+        "fields": [
+          { "label": "Policy Name", "value": "" },
+          { "label": "Incoming Interface", "value": "" },
+          { "label": "Outgoing Interface", "value": "" },
+          { "label": "Source", "value": "" },
+          { "label": "Destination", "value": "" },
+          { "label": "Action", "value": "Allow" },
+          { "label": "NAT", "value": "Enabled" },
+          { "label": "Security Profile", "value": "" }
         ]
       }
     ]
@@ -111,17 +182,24 @@
       {
         "title": "General",
         "fields": [
-          { "label": "Serial Number", "value": "" },
+          { "label": "Switch Name", "value": "" },
           { "label": "Model", "value": "48E-POE" },
-          { "label": "Ports", "value": "48" },
-          { "label": "PoE Support", "value": "Yes" }
+          { "label": "Serial Number", "value": "" },
+          { "label": "Description", "value": "" }
         ]
       },
       {
-        "title": "VLAN Configuration",
+        "title": "Connection",
         "fields": [
-          { "label": "Default VLAN ID", "value": "" },
-          { "label": "Management VLAN", "value": "" },
+          { "label": "FortiGate", "value": "" },
+          { "label": "Switch FortiLink", "value": "" },
+          { "label": "Uplink Ports", "value": "" }
+        ]
+      },
+      {
+        "title": "VLAN Assignment",
+        "fields": [
+          { "label": "Native VLAN", "value": "" },
           { "label": "Trunk Ports", "value": "" },
           { "label": "Access Ports", "value": "" }
         ]
@@ -133,30 +211,24 @@
     "displayName": "FortiAP 421E",
     "sections": [
       {
-        "title": "General",
+        "title": "Managed AP",
         "fields": [
+          { "label": "FortiGate", "value": "" },
           { "label": "Serial Number", "value": "" },
-          { "label": "Model", "value": "421E" },
-          { "label": "Location", "value": "" },
-          { "label": "Tx Power", "value": "" }
+          { "label": "Name", "value": "" }
         ]
       },
       {
-        "title": "Radio 1",
+        "title": "AP Group",
         "fields": [
-          { "label": "SSID", "value": "" },
-          { "label": "Channel", "value": "" },
-          { "label": "Mode", "value": "" },
-          { "label": "Security", "value": "WPA2" }
+          { "label": "Group Name", "value": "" },
+          { "label": "FortiGate", "value": "" }
         ]
       },
       {
-        "title": "Radio 2",
+        "title": "Access Points",
         "fields": [
-          { "label": "SSID", "value": "" },
-          { "label": "Channel", "value": "" },
-          { "label": "Mode", "value": "" },
-          { "label": "Security", "value": "WPA2" }
+          { "label": "Access Points", "value": "" }
         ]
       }
     ]
@@ -167,30 +239,24 @@
     "displayName": "FortiAP 321E",
     "sections": [
       {
-        "title": "General",
+        "title": "Managed AP",
         "fields": [
+          { "label": "FortiGate", "value": "" },
           { "label": "Serial Number", "value": "" },
-          { "label": "Model", "value": "321E" },
-          { "label": "Location", "value": "" },
-          { "label": "Tx Power", "value": "" }
+          { "label": "Name", "value": "" }
         ]
       },
       {
-        "title": "Radio 1",
+        "title": "AP Group",
         "fields": [
-          { "label": "SSID", "value": "" },
-          { "label": "Channel", "value": "" },
-          { "label": "Mode", "value": "" },
-          { "label": "Security", "value": "WPA2" }
+          { "label": "Group Name", "value": "" },
+          { "label": "FortiGate", "value": "" }
         ]
       },
       {
-        "title": "Radio 2",
+        "title": "Access Points",
         "fields": [
-          { "label": "SSID", "value": "" },
-          { "label": "Channel", "value": "" },
-          { "label": "Mode", "value": "" },
-          { "label": "Security", "value": "WPA2" }
+          { "label": "Access Points", "value": "" }
         ]
       }
     ]

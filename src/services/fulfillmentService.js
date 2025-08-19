@@ -88,11 +88,15 @@ export async function generateWizardData(offeringId) {
         // ignore pricing errors; use zero
       }
       const total = unitPrice * qty;
-      // derive a normalised resourceId from the SKU.  Use the
-      // first two segments split by dash and remove any non-alphanumeric
-      // characters.
+      // derive a normalised resourceId from the product.  Prefer
+      // the explicit deviceTemplateId field (if present), falling
+      // back to the SKU-based derivation.  The SKU-based approach
+      // takes the first two segments split by dash and removes
+      // any non-alphanumeric characters.
       let resourceId = '';
-      if (product.sku) {
+      if (Object.prototype.hasOwnProperty.call(product, 'deviceTemplateId') && product.deviceTemplateId) {
+        resourceId = product.deviceTemplateId.toUpperCase();
+      } else if (product.sku) {
         const parts = product.sku.split('-');
         const base = (parts[0] || '') + (parts[1] || '');
         resourceId = base.replace(/[^A-Za-z0-9]/g, '').toUpperCase();

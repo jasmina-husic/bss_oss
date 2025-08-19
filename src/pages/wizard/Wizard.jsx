@@ -4,6 +4,7 @@ import {
   initWizardForOrder,
   setCurrentOrderId,
   getWizardData,
+  setWizardData as persistWizardData,
   updateAllocationNotes,
   allocateEquipmentItem,
   startTest,
@@ -11,6 +12,9 @@ import {
   updateTimelineStage,
 } from "../../services/orderWizardService";
 import { updateDeviceConfig } from "../../services/orderWizardService.js";
+// Generate wizard data for an offering.  This is used to
+// regenerate device configuration pages if missing.
+import { generateWizardData } from "../../services/fulfillmentService.js";
 import { getOrderById, updateOrder } from "../../services/orderService";
 import dolphinService from "../../services/dolphinService";
 
@@ -61,12 +65,36 @@ export default function Wizard() {
       await initWizardForOrder(id);
       setCurrentOrderId(id);
       // load wizard data
-      const data = await getWizardData();
-      setWizardData(data);
+      let data = await getWizardData();
       // load order details to compute workflow
       // Convert the id param to a number when fetching order details
       const ord = await getOrderById(isNaN(Number(id)) ? id : Number(id));
       setOrderData(ord);
+      // If the order has an activation sequence that includes
+      // "configure devices" but the wizard data lacks deviceConfigs,
+      // regenerate the wizard data using fulfillmentService.  This
+      // ensures Step 3 pages are shown for orders created before
+      // dynamic wizard generation was introduced.
+      if (
+        ord &&
+        Array.isArray(ord.activationSequence) &&
+        ord.activationSequence.map((s) => s.toLowerCase()).includes("configure devices") &&
+        (!data || !data.deviceConfigs || Object.keys(data.deviceConfigs).length === 0)
+      ) {
+        try {
+          const newData = await generateWizardData(ord.offeringId);
+          if (newData) {
+            // Persist the regenerated data and use it
+            setWizardData(newData);
+            persistWizardData(id, newData);
+            data = newData;
+          }
+        } catch (err) {
+          console.error("Wizard: failed to regenerate wizard data", err);
+        }
+      }
+      // assign wizardData after regeneration or loaded
+      setWizardData(data);
       setLoaded(true);
     }
     init();
@@ -79,7 +107,11 @@ export default function Wizard() {
     const seq = Array.isArray(orderData.activationSequence)
       ? orderData.activationSequence.map((s) => s.toLowerCase())
       : [];
-    const hasAllocate = seq.includes("allocate hardware");
+    // Determine if inventory allocation step is needed.  It is
+    // explicitly enabled via the activation sequence or implied
+    // when the wizard data lists any required equipment items.
+    const hasAllocate = seq.includes("allocate hardware") ||
+      (Array.isArray(wizardData?.requiredEquipment) && wizardData.requiredEquipment.some((i) => i.need > 0));
     const hasConfigure = seq.includes("configure devices");
     const hasInstall = seq.includes("install on site") || seq.includes("ship & install");
     // Build the dynamic steps array
@@ -89,7 +121,11 @@ export default function Wizard() {
     if (hasAllocate) {
       dynamicSteps.push({ title: "Inventory Allocation", content: <Step2 /> });
     }
-    // Device configuration step
+    // Device configuration steps: include all device pages when the
+    // activation sequence includes "configure devices".  Each page will
+    // display its own message if no devices of that type exist.  This
+    // mirrors the original hard‑coded behaviour where Step 3 tabs were
+    // always present for configured offers.
     if (hasConfigure) {
       dynamicSteps.push({
         title: "Device Setup & Configuration (Firewalls)",
