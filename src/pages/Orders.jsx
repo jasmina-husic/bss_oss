@@ -249,10 +249,9 @@ export default function Orders() {
               <div>
                 <button
                   onClick={() => {
-                    // Determine whether this order has a workflow configured.  If it does, open the setup wizard;
-                    // otherwise show the summary page.  This replaces the previous hard-coded check for offerings 12 and 13.
-                    const hasWorkflow = (Array.isArray(o.activationSequence) && o.activationSequence.length > 0) || o.workflowId != null;
-                    if (hasWorkflow) {
+                    // Navigate to wizard if offering 12 and stage applies
+                    // Offerings 12 and 13 use the device configuration wizard
+                    if (o.offeringId === 12 || o.offeringId === 13) {
                       nav(`/orders/${o.id}/setup`);
                     } else {
                       nav(`/orders/${o.id}`);

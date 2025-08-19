@@ -4,7 +4,14 @@ import {
   initWizardForOrder,
   setCurrentOrderId,
   getWizardData,
+  updateAllocationNotes,
+  allocateEquipmentItem,
+  startTest,
+  updateValidationStatus,
+  updateTimelineStage,
 } from "../../services/orderWizardService";
+import { updateDeviceConfig } from "../../services/orderWizardService.js";
+import { getOrderById, updateOrder } from "../../services/orderService";
 import dolphinService from "../../services/dolphinService";
 
 // Step components
@@ -36,45 +43,87 @@ export default function Wizard() {
   const [step, setStep] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [wizardData, setWizardData] = useState(null);
+  // Cache the order record to determine which wizard steps to show
+  const [orderData, setOrderData] = useState(null);
+  // Steps to display for this order.  Computed dynamically based on the
+  // order's activationSequence.  See useEffect below for details.
+  const [wizardSteps, setWizardSteps] = useState([]);
   const [activeKey, setActiveKey] = useState("overview");
   // Whether the Dolphin sidebar is collapsed; users may toggle this
   const [collapsed, setCollapsed] = useState(false);
   // Page content for fake pages (guests, network services, etc.)
   const [pageData, setPageData] = useState([]);
 
-  // Initialise wizard data on mount/ID change
+  // Initialise wizard and order data on mount/ID change
   useEffect(() => {
     async function init() {
+      // initialise wizard data from template if missing
       await initWizardForOrder(id);
       setCurrentOrderId(id);
+      // load wizard data
       const data = await getWizardData();
       setWizardData(data);
+      // load order details to compute workflow
+      // Convert the id param to a number when fetching order details
+      const ord = await getOrderById(isNaN(Number(id)) ? id : Number(id));
+      setOrderData(ord);
       setLoaded(true);
     }
     init();
   }, [id]);
 
-  // Step definitions
-  const steps = [
-    { title: "Order Review & Confirmation", content: <Step1 /> },
-    { title: "Inventory Allocation", content: <Step2 /> },
-    {
-      title: "Device Setup & Configuration (Firewalls)",
-      content: <Step3Firewall />,
-    },
-    {
-      title: "Device Setup & Configuration (Switches)",
-      content: <Step3Switch />,
-    },
-    {
-      title: "Device Setup & Configuration (Access Points)",
-      content: <Step3AccessPoints />,
-    },
-    { title: "Testing & Validation", content: <Step4 /> },
-    { title: "Final Validation Checklist", content: <Step5 /> },
-    { title: "Deployment Planning & Scheduling", content: <Step6 /> },
-    { title: "Go‑Live & Customer Handover", content: <Step7 /> },
-  ];
+  // Compute wizard steps once both wizard data and order data are loaded
+  useEffect(() => {
+    if (!wizardData || !orderData) return;
+    // Determine which activation steps are enabled for this order
+    const seq = Array.isArray(orderData.activationSequence)
+      ? orderData.activationSequence.map((s) => s.toLowerCase())
+      : [];
+    const hasAllocate = seq.includes("allocate hardware");
+    const hasConfigure = seq.includes("configure devices");
+    const hasInstall = seq.includes("install on site") || seq.includes("ship & install");
+    // Build the dynamic steps array
+    const dynamicSteps = [];
+    dynamicSteps.push({ title: "Order Review & Confirmation", content: <Step1 /> });
+    // Inventory allocation corresponds to Allocate hardware
+    if (hasAllocate) {
+      dynamicSteps.push({ title: "Inventory Allocation", content: <Step2 /> });
+    }
+    // Device configuration step
+    if (hasConfigure) {
+      dynamicSteps.push({
+        title: "Device Setup & Configuration (Firewalls)",
+        content: <Step3Firewall />,
+      });
+      dynamicSteps.push({
+        title: "Device Setup & Configuration (Switches)",
+        content: <Step3Switch />,
+      });
+      dynamicSteps.push({
+        title: "Device Setup & Configuration (Access Points)",
+        content: <Step3AccessPoints />,
+      });
+    }
+    // Always include testing and validation
+    dynamicSteps.push({ title: "Testing & Validation", content: <Step4 /> });
+    dynamicSteps.push({ title: "Final Validation Checklist", content: <Step5 /> });
+    // Deployment planning corresponds to install/ship step
+    if (hasInstall) {
+      dynamicSteps.push({
+        title: "Deployment Planning & Scheduling",
+        content: <Step6 />,
+      });
+    }
+    // Always include go live
+    dynamicSteps.push({ title: "Go‑Live & Customer Handover", content: <Step7 /> });
+    setWizardSteps(dynamicSteps);
+    // Reset current step to 0 when recomputing
+    setStep(0);
+  }, [wizardData, orderData]);
+
+  // Step definitions were previously static.  Now they are computed
+  // dynamically based on the order's activation sequence (see
+  // wizardSteps state).
 
   // Navigation configuration
   const navSections = [
@@ -103,8 +152,95 @@ export default function Wizard() {
     },
   ];
 
+  /**
+   * Cancel the current order.  Marks the order status as
+   * cancelled via orderService and navigates back to the
+   * orders list.  If no order data is available the action
+   * silently does nothing.
+   */
+  async function cancelCurrentOrder() {
+    if (!orderData || !orderData.id) return;
+    try {
+      await updateOrder(orderData.id, { status: "cancelled" });
+    } catch (err) {
+      console.error("Failed to cancel order", err);
+    }
+    nav("/orders");
+  }
+
+  /**
+   * Fill in all wizard inputs with fake/sample data.  This helper
+   * allocates all required equipment, adds placeholder allocation
+   * notes, populates every device configuration field with a sample
+   * value, runs all tests, marks all validation checklist items as
+   * checked and sets all deployment timeline stages to Completed.
+   * It does not progress the wizard; users must still click through
+   * each step manually.
+   */
+  async function fillFakeData() {
+    const data = await getWizardData();
+    if (!data) return;
+    // Allocate all equipment
+    if (Array.isArray(data.requiredEquipment)) {
+      data.requiredEquipment.forEach((item) => {
+        allocateEquipmentItem(item.name);
+      });
+    }
+    // Add placeholder allocation notes
+    updateAllocationNotes(["Auto‑allocated all items", "Sample note"]);
+    // Populate device configuration fields
+    const cfgs = data.deviceConfigs || {};
+    Object.entries(cfgs).forEach(([rid, cfg]) => {
+      cfg.sections?.forEach((section, sIdx) => {
+        section.fields?.forEach((field, fIdx) => {
+          const val = field.value || "Sample";
+          updateDeviceConfig(rid, sIdx, fIdx, val);
+        });
+      });
+    });
+    // Run all tests
+    const categories = [
+      "firewallTests",
+      "networkTests",
+      "wirelessTests",
+      "securityTests",
+    ];
+    categories.forEach((cat) => {
+      const list = data[cat];
+      if (Array.isArray(list)) {
+        list.forEach((t) => {
+          // serviceKey equals category name as stored in wizardData
+          startTest(cat, t.test);
+        });
+      }
+    });
+    // Mark validation checklists
+    [
+      "hardwareValidation",
+      "configurationValidation",
+      "licenseValidation",
+      "documentationChecks",
+    ].forEach((sec) => {
+      const items = data[sec];
+      if (Array.isArray(items)) {
+        items.forEach((_, idx) => {
+          updateValidationStatus(sec, idx, "Checked");
+        });
+      }
+    });
+    // Mark deployment timeline stages as Completed
+    if (Array.isArray(data.deploymentTimeline)) {
+      data.deploymentTimeline.forEach((_, idx) => {
+        updateTimelineStage(idx, "Completed");
+      });
+    }
+    // Reload wizard data into state to reflect changes
+    const updated = await getWizardData();
+    setWizardData(updated);
+  }
+
   // Step navigation
-  const next = () => setStep((s) => Math.min(s + 1, steps.length - 1));
+  const next = () => setStep((s) => Math.min(s + 1, wizardSteps.length - 1));
   const prev = () => setStep((s) => Math.max(s - 1, 0));
 
   // Handle nav clicks: update active key and auto-collapse when
@@ -120,7 +256,7 @@ export default function Wizard() {
 
   // Determine if we are viewing the wizard (overview)
   const isOverview = activeKey === "overview";
-  const currentStep = steps[step];
+  const currentStep = wizardSteps[step];
 
   // Placeholder page component
   function FakePage({ sectionKey }) {
@@ -325,9 +461,21 @@ export default function Wizard() {
             {/* Wizard header */}
             <div className="flex justify-between items-center mb-4">
               <div className="text-sm text-gray-600">
-                Step {step + 1} of {steps.length}: {currentStep.title}
+                Step {step + 1} of {wizardSteps.length}: {currentStep?.title}
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={fillFakeData}
+                  className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm"
+                >
+                  Fill Fake Data
+                </button>
+                <button
+                  onClick={cancelCurrentOrder}
+                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                >
+                  Cancel Order
+                </button>
                 <button
                   onClick={() => window.alert("Notify customer clicked")}
                   className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 text-sm"
@@ -351,7 +499,10 @@ export default function Wizard() {
             </div>
             {/* Current step */}
             <div className="bg-white shadow rounded-lg p-4">
-              {currentStep.content}
+              {/* Render the current step's content once it exists.  Until the
+                  dynamic steps have been computed, display a placeholder
+                  to avoid accessing properties of undefined. */}
+              {currentStep ? currentStep.content : <div>Loading…</div>}
             </div>
             {/* Wizard navigation buttons */}
             <div className="flex justify-between mt-4">
@@ -362,7 +513,7 @@ export default function Wizard() {
               >
                 Back
               </button>
-              {step < steps.length - 1 ? (
+              {step < wizardSteps.length - 1 ? (
                 <button
                   onClick={next}
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"

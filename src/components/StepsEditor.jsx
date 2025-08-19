@@ -37,7 +37,7 @@ const ALL_STEPS = [
   "Go live",
 ];
 
-export default function StepsEditor({ steps, onChange, options }) {
+export default function StepsEditor({ steps, onChange }) {
   // Notify parent with updated sequence
   const update = (newSteps) => onChange(newSteps);
   // Move a step up or down by swapping indices
@@ -54,11 +54,8 @@ export default function StepsEditor({ steps, onChange, options }) {
     ns.splice(idx, 1);
     update(ns);
   };
-  // Append a new step.  If options are provided, use the first option as default; otherwise use an empty string.
-  const add = () => {
-    const next = options && options.length ? options[0] : "";
-    update([...steps, next]);
-  };
+  // Append a new step; default to the first option in the list
+  const add = () => update([...steps, ALL_STEPS[0]]);
   // Replace the value of an existing step
   const edit = (idx, val) => {
     const ns = [...steps];
@@ -70,28 +67,19 @@ export default function StepsEditor({ steps, onChange, options }) {
     <div className="space-y-1">
       {steps.map((s, i) => (
         <div key={i} className="flex items-center gap-1">
-          {options && options.length ? (
-            // If options are provided, render a select drop‑down for each step.  An empty option allows clearing the step.
-            <select
-              value={s}
-              onChange={(e) => edit(i, e.target.value)}
-              className="flex-1 border rounded p-1 text-xs"
-            >
-              <option value="">— pick —</option>
-              {options.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          ) : (
-            // When no options are supplied, fall back to a free‑text input as in the original component.
-            <input
-              value={s}
-              onChange={(e) => edit(i, e.target.value)}
-              className="flex-1 border rounded p-1 text-xs"
-            />
-          )}
+          {/* Render a drop‑down select instead of a text input.  An empty option allows clearing the step. */}
+          <select
+            value={s}
+            onChange={(e) => edit(i, e.target.value)}
+            className="flex-1 border rounded p-1 text-xs"
+          >
+            <option value="">— pick —</option>
+            {ALL_STEPS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
           <button
             type="button"
             onClick={() => move(i, -1)}

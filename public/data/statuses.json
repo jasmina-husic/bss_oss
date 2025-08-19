@@ -5,5 +5,6 @@
   { "code": "staging", "label": "Staging", "color": "purple" },
   { "code": "ready", "label": "Ready", "color": "orange" },
   { "code": "deployed", "label": "Deployed", "color": "teal" },
-  { "code": "closed", "label": "Closed", "color": "gray" }
+  { "code": "closed", "label": "Closed", "color": "gray" },
+  { "code": "cancelled", "label": "Cancelled", "color": "red" }
 ]

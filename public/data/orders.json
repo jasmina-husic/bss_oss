@@ -4,24 +4,10 @@
     "customerName": "Acme Inc.",
     "contractNumber": "ORD-1001",
     "offeringId": 12,
-    "workflowId": 1,
     "status": "confirmed",
     "stage": "review",
     "dueDate": "2025-08-04",
     "createdAt": "2025-07-20T12:00:00Z",
-    
-    "provisioning": [
-      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 18, "sku": "FC-10-01000-950-02",  "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
-    ],
     "items": [
       {
         "resourceId": "FG100F",
@@ -70,12 +56,10 @@
     "customerName": "TechStartup Inc.",
     "contractNumber": "ORD-1002",
     "offeringId": 20,
-    "workflowId": null,
     "status": "staging",
     "stage": "allocation",
     "dueDate": "2025-08-05",
     "createdAt": "2025-07-19T09:00:00Z",
-    "provisioning": [],
     "items": [
       {
         "resourceId": "FG100F",
@@ -124,12 +108,10 @@
     "customerName": "Manufacturing Plus",
     "contractNumber": "ORD-1003",
     "offeringId": 30,
-    "workflowId": null,
     "status": "ready",
     "stage": "validation",
     "dueDate": "2025-08-08",
     "createdAt": "2025-07-18T11:30:00Z",
-    "provisioning": [],
     "items": [
       {
         "resourceId": "FG100F",
@@ -178,23 +160,10 @@
     "customerName": "RetailChain Solutions",
     "contractNumber": "ORD-1004",
     "offeringId": 12,
-    "workflowId": 1,
     "status": "deployed",
     "stage": "deployment",
     "dueDate": "2025-08-04",
     "createdAt": "2025-07-18T15:00:00Z",
-    "provisioning": [
-      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 15, "sku": "FG-100F-BDL-950-12", "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 16, "sku": "FS-124E-POE",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 17, "sku": "FAP-321E-US",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 18, "sku": "FC-10-01000-950-02",  "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
-    ],
     "items": [
       {
         "resourceId": "FG100F",
@@ -243,36 +212,22 @@
     "customerName": "Legal Partners LLC",
     "contractNumber": "ORD-1005",
     "offeringId": null,
-    "workflowId": null,
     "status": "negotiation",
     "stage": "review",
     "dueDate": "2025-08-07",
     "createdAt": "2025-07-17T10:00:00Z",
-    "provisioning": [],
     "items": []
-  },
-  {
+  }
+
+  ,{
     "id": 6,
     "customerName": "Beta Enterprises",
     "contractNumber": "ORD-1006",
     "offeringId": 13,
-    "workflowId": 2,
     "status": "prospect",
     "stage": "review",
     "dueDate": "2025-08-10",
     "createdAt": "2025-07-23T09:30:00Z",
-    "provisioning": [
-      { "productId": 12, "sku": "FG-200F-BDL-950-24", "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 12, "sku": "FG-200F-BDL-950-24", "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 13, "sku": "FS-248E-POE",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 13, "sku": "FS-248E-POE",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 14, "sku": "FAP-421E-US",        "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 14, "sku": "FAP-421E-US",        "stepName": "install", "sequence": 2, "status": "pending" },
-      { "productId": 18, "sku": "FC-10-01000-950-02",  "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 19, "sku": "FC-10-FCARE-24X7",     "stepName": "enable",  "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "procure", "sequence": 1, "status": "pending" },
-      { "productId": 8,  "sku": "INST-FEE",            "stepName": "install", "sequence": 2, "status": "pending" }
-    ],
     "items": [
       {
         "resourceId": "FG200F",
