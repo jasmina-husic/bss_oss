@@ -8,6 +8,7 @@ import {
 import { fetchCfsPage } from "../services/cfsService";
 import { fetchCategories } from "../services/categoryService";
 import StepsEditor from "../components/StepsEditor";
+import { loadDeviceTemplates } from "../services/deviceTemplateService";
 
 const REQUIRED = ["sku", "name", "category"];
 
@@ -19,6 +20,13 @@ export default function ProductSpecForm() {
   const [categories, setCategories] = useState([]);
   const [cfsAll, setCfsAll] = useState([]);
 
+  // List of available device templates for selection in the form.
+  const [availableTemplates, setAvailableTemplates] = useState([]);
+
+  // Map of templateId -> template definition (sections/fields).  Used
+  // to render a preview of the selected template.
+  const [templateMap, setTemplateMap] = useState({});
+
   const [form, setForm] = useState({
     sku: "",
     name: "",
@@ -28,6 +36,7 @@ export default function ProductSpecForm() {
     priceMonthly: 0,
     sequence: [],
     cfsIds: [],
+    deviceTemplateId: "",
   });
 
   /* preload categories + cfs + existing product */
@@ -36,6 +45,17 @@ export default function ProductSpecForm() {
       setCategories(await fetchCategories());
       const cfsRes = await fetchCfsPage(0, 9999, "", []);
       setCfsAll(cfsRes.records);
+      // Load device templates for selection.  We flatten the
+      // returned object into an array of { id, name } for the
+      // dropdown.  If loading fails, leave the list empty.
+      try {
+        const templates = await loadDeviceTemplates();
+        const arr = Object.entries(templates).map(([key, tpl]) => ({ id: key, name: tpl.displayName || key }));
+        setAvailableTemplates(arr);
+        setTemplateMap(templates);
+      } catch (err) {
+        console.error("Failed to load device templates", err);
+      }
 
       if (editing) {
         const prod = getProductById(parseInt(id, 10));
@@ -49,6 +69,7 @@ export default function ProductSpecForm() {
             priceMonthly: prod.priceMonthly ?? 0,
             sequence: prod.sequence || [],
             cfsIds: prod.cfsIds || [],
+            deviceTemplateId: prod.deviceTemplateId || "",
           });
         }
       }
@@ -186,6 +207,41 @@ export default function ProductSpecForm() {
             onChange={(seq) => setForm({ ...form, sequence: seq })}
           />
         </label>
+
+        {/* device template selection */}
+        <label className="block">
+          <span className="text-sm">Device template</span>
+          <select
+            name="deviceTemplateId"
+            className="mt-1 w-full border rounded p-2"
+            value={form.deviceTemplateId || ""}
+            onChange={(e) => setForm({ ...form, deviceTemplateId: e.target.value })}
+          >
+            <option value="">— none —</option>
+            {availableTemplates.map((tpl) => (
+              <option key={tpl.id} value={tpl.id}>
+                {tpl.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {/* Template preview shows the sections and fields of the selected template. */}
+        {form.deviceTemplateId && templateMap[form.deviceTemplateId] && (
+          <div className="mt-3 p-3 border rounded bg-gray-50">
+            <p className="text-sm font-semibold mb-1">Template Preview</p>
+            {templateMap[form.deviceTemplateId].sections?.map((section, idx) => (
+              <div key={idx} className="mb-2">
+                <p className="font-medium text-sm">{section.title}</p>
+                <ul className="list-disc list-inside text-sm ml-4">
+                  {section.fields?.map((field, fIdx) => (
+                    <li key={fIdx}>{field.label}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="flex gap-2">
           <button className="px-4 py-2 bg-black text-white rounded">
