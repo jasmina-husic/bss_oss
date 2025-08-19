@@ -74,7 +74,21 @@ export default function OrderNew() {
         total: eq.total,
       }));
     }
-    // Create the order record with customerName and items so the list shows totals
+
+    // Determine the activation sequence for this order based on the selected offering.
+    // Many offers define an activationSequence (e.g. 'Allocate hardware', 'Configure devices').
+    // Copy it into the order so that the wizard can build its steps consistently.
+    let activationSequence = [];
+    try {
+      const offRec = getOfferingById(offeringIdNum);
+      if (offRec && Array.isArray(offRec.activationSequence)) {
+        activationSequence = [...offRec.activationSequence];
+      }
+    } catch {
+      activationSequence = [];
+    }
+    // Create the order record with customerName and items so the list shows totals.
+    // Also attach the activationSequence so the wizard knows which steps to include.
     const newId = await addOrder({
       ...form,
       customerId: customerIdNum,
@@ -82,6 +96,7 @@ export default function OrderNew() {
       offeringId: offeringIdNum,
       stage: 'prospect',
       items,
+      activationSequence,
     });
     // If wizard data exists, store it and launch wizard for complex bundles
     if (wiz) {

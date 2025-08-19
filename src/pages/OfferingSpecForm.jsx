@@ -17,6 +17,22 @@ const makeDisc = () => ({
 
 const BLANK_PRICE = { oneOff: 0, monthly: 0, usage: 0, currency: "USD" };
 
+// Ordered list of possible activation steps.  When editing an offer you can
+// include or exclude steps by ticking the corresponding boxes.  The
+// sequence is fixed and determines how orders derived from this offer
+// will flow through the provisioning wizard.  Do not change the order
+// of these strings unless you update the wizard step mapping.
+const ACTIVATION_STEP_OPTIONS = [
+  "Allocate hardware",
+  "Configure devices",
+  "Install on site",
+  "Ship & install",
+  "Commission network",
+  "Activate license",
+  "Register support",
+  "Go live",
+];
+
 export default function OfferingSpecForm() {
   const nav = useNavigate();
   const { id } = useParams();
@@ -383,13 +399,38 @@ export default function OfferingSpecForm() {
         </fieldset>
 
         {/* activation */}
-        <label className="block">
-          <span className="text-sm">Activation sequence</span>
-          <StepsEditor
-            steps={form.activationSequence}
-            onChange={(seq) => setForm({ ...form, activationSequence: seq })}
-          />
-        </label>
+        <fieldset className="border rounded p-3">
+          <legend className="text-sm">Activation sequence</legend>
+          <p className="text-xs text-gray-500 mb-2">
+            Select the workflow steps to include in this offer.  The order is
+            fixed; steps earlier in the list will occur before later steps.
+          </p>
+          {ACTIVATION_STEP_OPTIONS.map((stepName) => {
+            const checked = form.activationSequence?.some(
+              (s) => s.toLowerCase() === stepName.toLowerCase()
+            );
+            return (
+              <label key={stepName} className="block text-sm">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={checked}
+                  onChange={(e) => {
+                    const newSeq = ACTIVATION_STEP_OPTIONS.filter((s) => {
+                      // Determine which steps are selected after the toggle
+                      if (s === stepName) return e.target.checked;
+                      return form.activationSequence?.some(
+                        (x) => x.toLowerCase() === s.toLowerCase()
+                      );
+                    });
+                    setForm({ ...form, activationSequence: newSeq });
+                  }}
+                />
+                {stepName}
+              </label>
+            );
+          })}
+        </fieldset>
 
         <div className="flex gap-2">
           <button className="px-4 py-2 bg-black text-white rounded">

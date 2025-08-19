@@ -195,6 +195,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FG200F"
+    ,"deviceFamily": "firewall"
   },{
     "id": 13,
     "sku": "FS-248E-POE",
@@ -207,6 +208,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FS248E"
+    ,"deviceFamily": "switch"
   },{
     "id": 14,
     "sku": "FAP-421E-US",
@@ -219,6 +221,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FAP421E"
+    ,"deviceFamily": "accessPoint"
   }
   ,{
     "id": 15,
@@ -232,6 +235,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FG100F"
+    ,"deviceFamily": "firewall"
   },{
     "id": 16,
     "sku": "FS-124E-POE",
@@ -244,6 +248,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FS124E"
+    ,"deviceFamily": "switch"
   },{
     "id": 17,
     "sku": "FAP-321E-US",
@@ -256,6 +261,7 @@
     "createdAt": "2025-05-29T22:52:07.434637Z",
     "lastModified": "2025-05-29T22:52:07.434637Z"
     ,"deviceTemplateId": "FAP321E"
+    ,"deviceFamily": "accessPoint"
   },{
     "id": 18,
     "sku": "FC-10-01000-950-02",

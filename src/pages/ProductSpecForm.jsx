@@ -37,6 +37,7 @@ export default function ProductSpecForm() {
     sequence: [],
     cfsIds: [],
     deviceTemplateId: "",
+    deviceFamily: "",
   });
 
   /* preload categories + cfs + existing product */
@@ -70,6 +71,7 @@ export default function ProductSpecForm() {
             sequence: prod.sequence || [],
             cfsIds: prod.cfsIds || [],
             deviceTemplateId: prod.deviceTemplateId || "",
+            deviceFamily: prod.deviceFamily || "",
           });
         }
       }
@@ -223,6 +225,22 @@ export default function ProductSpecForm() {
                 {tpl.name}
               </option>
             ))}
+          </select>
+        </label>
+
+        {/* device family selection */}
+        <label className="block">
+          <span className="text-sm">Device family</span>
+          <select
+            name="deviceFamily"
+            className="mt-1 w-full border rounded p-2"
+            value={form.deviceFamily || ""}
+            onChange={(e) => setForm({ ...form, deviceFamily: e.target.value })}
+          >
+            <option value="">— none —</option>
+            <option value="firewall">Firewall</option>
+            <option value="switch">Switch</option>
+            <option value="accessPoint">Access Point</option>
           </select>
         </label>
 

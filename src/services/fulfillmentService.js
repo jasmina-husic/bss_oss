@@ -65,6 +65,8 @@ export async function generateWizardData(offeringId) {
 
   // Build equipment breakdown based on offering components
   const equipmentBreakdown = [];
+  // We'll also collect device metadata (resourceId, qty, displayName, deviceFamily)
+  const deviceInfoList = [];
   let equipmentSubtotal = 0;
   // We'll also build device configuration objects keyed by a normalised
   // resource id (e.g. FG100F).  The normalisation rules strip
@@ -129,6 +131,15 @@ export async function generateWizardData(offeringId) {
         allocatable,
       });
       equipmentSubtotal += total;
+      // If allocatable, store device metadata for later template lookup.
+      if (allocatable) {
+        deviceInfoList.push({
+          resourceId,
+          qty,
+          displayName: product.name,
+          deviceFamily: product.deviceFamily || '',
+        });
+      }
     }
   }
 
@@ -157,23 +168,43 @@ export async function generateWizardData(offeringId) {
     console.warn('fulfillmentService: could not load device templates', err);
   }
 
-  // Build device configuration entries by copying the template for each
-  // resource.  If a template is missing, create an empty placeholder.
-  for (const eq of equipmentBreakdown) {
-    // Skip non-allocatable (service/itsm/ai) products when building device configs.
-    if (!eq.allocatable) continue;
-    const rid = eq.resourceId;
-    if (!rid) continue;
-    const qty = eq.qty || 1;
+  // Build device configuration entries by using templates and/or product family.
+  // We iterate over the collected deviceInfoList, which includes only
+  // allocatable products.  For each device we look up a template by
+  // resourceId and derive its type from either the template or the
+  // product's deviceFamily.  Devices without a type or template are
+  // ignored.  When a template is absent we create a simple free‑form
+  // configuration section.
+  for (const info of deviceInfoList) {
+    const rid = info.resourceId;
+    const qty = info.qty || 1;
     const tpl = templates[rid];
+    // Determine device type: prefer template.type, else product's family
+    const baseType = tpl?.type || (info.deviceFamily || '').toLowerCase();
+    if (!baseType) {
+      continue; // cannot classify device, skip creating config
+    }
     for (let idx = 1; idx <= qty; idx++) {
       const key = qty > 1 ? `${rid}-${idx}` : rid;
       if (tpl) {
-        // deep clone template and optionally attach instance index
         const clone = JSON.parse(JSON.stringify(tpl));
+        clone.type = baseType;
+        clone.displayName = info.displayName;
         deviceConfigs[key] = clone;
       } else {
-        deviceConfigs[key] = { type: 'unknown', displayName: eq.item, sections: [] };
+        // create placeholder configuration for devices without a template
+        deviceConfigs[key] = {
+          type: baseType,
+          displayName: info.displayName,
+          sections: [
+            {
+              title: 'Custom Configuration',
+              fields: [
+                { label: 'Configuration', value: '' },
+              ],
+            },
+          ],
+        };
       }
     }
   }

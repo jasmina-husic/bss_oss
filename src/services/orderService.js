@@ -1,23 +1,10 @@
 /*
- * Extended orderService.js
+ * orderService.js
  *
- * This version enhances the existing order service with support for
- * per-offering workflows and per-product provisioning tasks.  Each
- * offering references a workflow via `workflowId`, and products
- * define their own `sequence` of realisation steps (e.g. procure,
- * install, enable).  When creating a new order via `addOrder`, the
- * service looks up the selected offering, copies its workflow id and
- * activation sequence, and generates a `provisioning` array.  The
- * provisioning array contains one entry per product step with a
- * status of `pending`.  Seeded orders loaded from `orders.json` may
- * already include workflowId and provisioning arrays and are
- * preserved.  For backwards compatibility the activationSequence and
- * activationIndex fields remain on the order record but may be
- * unused by newer UI components.
+ * Provides functions to load, query, and mutate orders stored in
+ * LocalStorage.  This version gracefully handles missing createdAt
+ * timestamps by assigning a default ISO date when seeding data.
  */
-
-import { fetchOfferingsPage, getOfferingById } from "./offeringService.js";
-import { fetchProductsPage, getProductById } from "./productService.js";
 
 const LS = "bss_orders";
 let cache = null;
@@ -28,10 +15,14 @@ function save() {
 }
 
 /*
- * Seed default orders if cache is empty.  We preserve any
- * activationSequence defined in the JSON seed to allow orders to
- * carry their configured workflow.  Missing createdAt timestamps
- * are assigned a default ISO value.
+ * Seed default orders if cache is empty.
+ *
+ * Orders stored in `public/data/orders.json` contain rich fields such as
+ * customerName, status, dueDate and an array of item lines.  When
+ * seeding we preserve these fields and assign sensible defaults for
+ * missing timestamps.  We do **not** mutate or strip any properties
+ * provided by the seed to allow downstream code to access them (e.g.
+ * for provisioning queue rendering).
  */
 async function seedIfEmpty() {
   if (cache.length) return; // already seeded
@@ -45,6 +36,8 @@ async function seedIfEmpty() {
         if (!o.createdAt) {
           o.createdAt = new Date().toISOString();
         }
+        // When seeding we do not compute derived values; these will
+        // be calculated on demand in fetchOrders().
         cache.push({ ...o });
       });
       save();
@@ -106,62 +99,18 @@ export async function getOrderById(id) {
 export async function addOrder(o) {
   await load();
   const id = Math.max(0, ...cache.map((x) => x.id)) + 1;
-  // Determine workflow, activation sequence and provisioning based on the selected offering.
-  let activationSequence = [];
-  let workflowId = null;
-  let provisioning = [];
-  try {
-    // prime caches so lookup functions return data
-    await fetchOfferingsPage(0, 1);
-    await fetchProductsPage(0, 1);
-    const offId = Number(o.offeringId);
-    if (!Number.isNaN(offId) && offId > 0) {
-      const offering = getOfferingById(offId);
-      if (offering) {
-        // copy activation sequence if defined on the offering
-        if (Array.isArray(offering.activationSequence)) {
-          activationSequence = [...offering.activationSequence];
-        }
-        // copy workflow id if present
-        if (offering.workflowId !== undefined) {
-          workflowId = offering.workflowId;
-        }
-        // generate provisioning tasks for each component/product
-        if (Array.isArray(offering.components)) {
-          offering.components.forEach((comp) => {
-            const pid = comp.productId;
-            const product = getProductById(pid);
-            if (!product) return;
-            const seq = Array.isArray(product.sequence) ? product.sequence : [];
-            seq.forEach((stepName, idx) => {
-              provisioning.push({
-                productId: pid,
-                sku: product.sku,
-                stepName,
-                sequence: idx + 1,
-                status: 'pending',
-              });
-            });
-          });
-        }
-      }
-    }
-  } catch {
-    // leave values at defaults if lookups fail
-  }
-  // Build the new order with derived workflow and provisioning.  Attach
-  // activationSequence and activationIndex for backward compatibility.
+  // Preserve explicit fields passed in; assign createdAt and default
+  // status/dueDate if not provided.
   const newOrder = {
     ...o,
     id,
     comments: [],
-    workflowId,
-    provisioning,
-    activationSequence,
     activationIndex: 0,
     createdAt: new Date().toISOString(),
   };
-  if (!newOrder.status) newOrder.status = 'draft';
+  // If a customerId is provided but no customerName, leave blank – UI
+  // can look up names.
+  if (!newOrder.status) newOrder.status = "draft";
   cache.push(newOrder);
   save();
   return id;

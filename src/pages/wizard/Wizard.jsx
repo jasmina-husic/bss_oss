@@ -127,18 +127,38 @@ export default function Wizard() {
     // mirrors the original hard‑coded behaviour where Step 3 tabs were
     // always present for configured offers.
     if (hasConfigure) {
-      dynamicSteps.push({
-        title: "Device Setup & Configuration (Firewalls)",
-        content: <Step3Firewall />,
-      });
-      dynamicSteps.push({
-        title: "Device Setup & Configuration (Switches)",
-        content: <Step3Switch />,
-      });
-      dynamicSteps.push({
-        title: "Device Setup & Configuration (Access Points)",
-        content: <Step3AccessPoints />,
-      });
+      // Determine which device families exist in this order.  We look
+      // at the type field on each device configuration entry.  Only
+      // families present in the deviceConfigs object will have a
+      // configuration page.
+      const families = new Set();
+      if (wizardData && wizardData.deviceConfigs) {
+        Object.values(wizardData.deviceConfigs).forEach((cfg) => {
+          if (cfg && cfg.type) {
+            families.add(String(cfg.type).toLowerCase());
+          }
+        });
+      }
+      // Conditionally include sub-pages for each detected family
+      if (families.has('firewall')) {
+        dynamicSteps.push({
+          title: 'Device Setup & Configuration (Firewalls)',
+          content: <Step3Firewall />,
+        });
+      }
+      if (families.has('switch')) {
+        dynamicSteps.push({
+          title: 'Device Setup & Configuration (Switches)',
+          content: <Step3Switch />,
+        });
+      }
+      if (families.has('accesspoint')) {
+        dynamicSteps.push({
+          title: 'Device Setup & Configuration (Access Points)',
+          content: <Step3AccessPoints />,
+        });
+      }
+      // If no recognised families are present, skip device setup altogether.
     }
     // Always include testing and validation
     dynamicSteps.push({ title: "Testing & Validation", content: <Step4 /> });
